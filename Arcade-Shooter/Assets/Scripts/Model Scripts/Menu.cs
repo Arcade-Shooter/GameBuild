@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Menu : MonoBehaviour
+public class Menu
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private State MenuState; 
+    
+    public void ChangeState(State ChangeTo)
     {
-        
+        MenuState = ChangeTo;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+}
+
+
+public enum State
+{
+    Start,
+    Menu,
+    Settings,
+    Scoreboard
 }

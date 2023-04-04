@@ -12,17 +12,4 @@ public class Controller
     private ScoreboardController ScoreboardController { get; set; }
     private GameController GameController { get; set; }
     private EnemyController EnemyController { get; set; }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

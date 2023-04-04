@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scoreboard : MonoBehaviour
+public class Scoreboard
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private List<int> Scores; //Temporary placeholder. Will probably have a score record class
+
+
+    public void ReadFromFile()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void WritetoFile()
     {
-        
+
     }
 }
