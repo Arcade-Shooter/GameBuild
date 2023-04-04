@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreboardController : MonoBehaviour
+public class ScoreboardController
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public void InsertCurrentScore(int score)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

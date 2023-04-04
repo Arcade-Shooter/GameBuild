@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettingsController : MonoBehaviour
+public class SettingsController
 {
-    // Start is called before the first frame update
-    void Start()
+    public void AdjustSoundEffectLevel()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AdjustMusicLevel()
     {
-        
+
+    }
+
+    public void AdjustUIScale()
+    {
+
+    }
+
+    public void Back()
+    {
+        //Return to the menu screen
     }
 }

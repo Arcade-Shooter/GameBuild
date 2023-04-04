@@ -13,6 +13,8 @@ public class GameView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Check if manu state is State.Game
+
+        //Update GUI
     }
 }

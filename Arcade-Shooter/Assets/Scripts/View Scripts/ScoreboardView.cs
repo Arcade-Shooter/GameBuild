@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ScoreboardView : MonoBehaviour
 {
+
+    //Maybe a canvas
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +16,6 @@ public class ScoreboardView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Check if menu state is State.Scoreboard
     }
 }

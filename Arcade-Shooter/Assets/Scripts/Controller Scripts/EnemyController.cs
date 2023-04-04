@@ -13,6 +13,9 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Move and shoot all enemies depending on their patterns
+        //Add new enemies
     }
+
+
 }

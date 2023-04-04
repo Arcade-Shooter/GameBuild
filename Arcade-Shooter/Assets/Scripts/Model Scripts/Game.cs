@@ -2,24 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : MonoBehaviour
+
+public class Game
 {
 
     private Ship Player;
     private int Score;
-    private float TimeAlive;
+    private float TimeAlive; //Possible change this to a time component
     private List<Enemy> EnemyList;
     private int Energy;
+    private int MaxEnergy;
 
-    // Start is called before the first frame update
-    void Start()
+    public Game()
     {
-        
+        this.Player = new Ship();
+        this.Score = 0;
+        this.TimeAlive = 0;
+        this.EnemyList = new List<Enemy>();
+        this.Energy = 0;
+        this.MaxEnergy = 500;// Magic number
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IncrementTime()
     {
-        
+        //Increment time
+    }
+
+    public void IncreaseScore(int score)
+    {
+        this.Score += score;
     }
 }

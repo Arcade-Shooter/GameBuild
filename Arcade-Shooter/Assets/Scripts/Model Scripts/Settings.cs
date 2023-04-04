@@ -9,7 +9,12 @@ public class Settings
     private int MusicLevel;
     private float UIScale;
 
-
+    public Settings()
+    {
+        SoundEffetLevel = 50; // Out of 100
+        MusicLevel = 50; // Out of 100
+        UIScale = 1.0f;
+    }
 
     public void ReadFromFile()
     {

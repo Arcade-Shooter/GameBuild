@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PauseView : MonoBehaviour
 {
+
+    //maybe a canvas
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +16,6 @@ public class PauseView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Check if menu state is State.Pause
     }
 }
