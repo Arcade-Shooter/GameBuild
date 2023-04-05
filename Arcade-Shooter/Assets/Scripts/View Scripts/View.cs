@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class View
+public class View : MonoBehaviour
 {
 
     private Controller Controller { get; set; }

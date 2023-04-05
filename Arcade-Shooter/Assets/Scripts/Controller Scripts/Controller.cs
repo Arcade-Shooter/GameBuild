@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller
+public class Controller : MonoBehaviour
 {
 
     private Model Model { get; set; }
