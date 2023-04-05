@@ -6,9 +6,9 @@ public class Ship : MonoBehaviour
 {
 
 
-    private int ShipHP;
+    [SerializeField] private int ShipHP;
     [SerializeField] private List<Snappable> SnapPoints; 
-    private int ThrusterBoost; //An integer
+    [SerializeField] private int ThrusterBoost; //An integer
 
     
     

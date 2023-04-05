@@ -5,15 +5,15 @@ using UnityEngine;
 public abstract class Module : MonoBehaviour
 {
 
-    
 
-    private int Healh;
-    private int MaxHealth;
-    private int Power;
-    private int MaxPower;
-    private Classification classification;
-    private bool PauseState;
-    private bool Disabled;
+    
+    [SerializeField] private int Healh;
+    [SerializeField] private int MaxHealth;
+    [SerializeField] private int Power;
+    [SerializeField] private int MaxPower;
+    [SerializeField] private Classification classification;
+    [SerializeField] private bool PauseState;
+    [SerializeField] private bool Disabled;
     [SerializeField] private List<Snappable> snappables;
 
 
@@ -28,18 +28,18 @@ public abstract class Module : MonoBehaviour
         this.PauseState = false;
         this.Disabled = false;
     }
-
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -76,6 +76,9 @@ public abstract class Module : MonoBehaviour
 
 
 
+    /******************************************
+     This Section is for the dragable functionality
+    ******************************************/
 
 
 
@@ -88,20 +91,24 @@ public abstract class Module : MonoBehaviour
     public delegate void DragStartedDelegate();
     public DragStartedDelegate dragStartedCallback;
 
+    [SerializeField] private bool isDraggable = true;
     private bool isDragged = false;
     private Vector3 mouseDragStartPosition;
     private Vector3 spriteDragStartPosition;
 
     private void OnMouseDown()
     {
-        if (dragStartedCallback != null) 
+        if (dragStartedCallback != null)
         {
             dragStartedCallback();
         }
 
-        isDragged = true;
-        mouseDragStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        spriteDragStartPosition = transform.localPosition;
+        if (isDraggable) 
+        {
+            isDragged = true;
+            mouseDragStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            spriteDragStartPosition = transform.localPosition;
+        } 
     }
 
     private void OnMouseDrag()
@@ -118,6 +125,27 @@ public abstract class Module : MonoBehaviour
         dragEndedCallback(this);
     }
 
+    public void DisableSnapNode(SnappableOrientation orientation)
+    {
+        foreach (Snappable snap in snappables)
+        {
+            if (snap.GetOrientation() == orientation) 
+            {
+                snap.Disable();
+            }
+        }
+    }
+
+    public void EnableSnapNode(SnappableOrientation orientation)
+    {
+        foreach (Snappable snap in snappables)
+        {
+            if (snap.GetOrientation() == orientation)
+            {
+                snap.Enable();
+            }
+        }
+    }
 
 }
 

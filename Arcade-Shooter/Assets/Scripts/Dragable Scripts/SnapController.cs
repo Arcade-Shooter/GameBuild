@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SnapController : MonoBehaviour
@@ -12,6 +13,19 @@ public class SnapController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Snappable");
+        foreach (GameObject go in gos)
+        {
+            snapPoints.Add((Snappable) go.GetComponent(typeof(Snappable)));
+        }
+
+        gos = GameObject.FindGameObjectsWithTag("PlayerDraggable");
+        foreach (GameObject go in gos)
+        {
+            moduleObjects.Add((Module)go.GetComponent(typeof(Module)));
+        }
+
         foreach (Module module in moduleObjects)
         {
             module.dragEndedCallback = OnDragEnded;

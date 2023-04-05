@@ -5,9 +5,9 @@ using UnityEngine;
 public class Weapon : Module
 {
 
-    private string WeaponName;
-    private Projectile Projectile;
-    private float FireRate;
+    [SerializeField] private string WeaponName;
+    [SerializeField] private Projectile Projectile;
+    [SerializeField] private float FireRate;
 
     public Weapon(int Health, int Power, string Name, Projectile Projectile, float FireRate)
         : base(Health, Power, Classification.Weapon)
