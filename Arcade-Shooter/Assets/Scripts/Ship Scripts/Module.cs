@@ -14,6 +14,7 @@ public abstract class Module : MonoBehaviour
     private Classification classification;
     private bool PauseState;
     private bool Disabled;
+    [SerializeField] private List<Snappable> snappables;
 
 
 
@@ -71,6 +72,53 @@ public abstract class Module : MonoBehaviour
     {
 
     }
+
+
+
+
+
+
+
+
+    // Delegate for snapping to a Snappable point and occupying it
+    public delegate void DragEndedDelegate(Module module);
+    public DragEndedDelegate dragEndedCallback;
+
+    // Delegate for releasing a Snappable point
+    public delegate void DragStartedDelegate();
+    public DragStartedDelegate dragStartedCallback;
+
+    private bool isDragged = false;
+    private Vector3 mouseDragStartPosition;
+    private Vector3 spriteDragStartPosition;
+
+    private void OnMouseDown()
+    {
+        if (dragStartedCallback != null) 
+        {
+            dragStartedCallback();
+        }
+
+        isDragged = true;
+        mouseDragStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        spriteDragStartPosition = transform.localPosition;
+    }
+
+    private void OnMouseDrag()
+    {
+        if (isDragged)
+        {
+            transform.localPosition = spriteDragStartPosition + Camera.main.ScreenToWorldPoint(Input.mousePosition) - mouseDragStartPosition;
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        isDragged = false;
+        dragEndedCallback(this);
+    }
+
+
 }
 
 public enum Classification

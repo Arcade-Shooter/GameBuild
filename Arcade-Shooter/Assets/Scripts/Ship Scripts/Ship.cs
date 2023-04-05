@@ -7,7 +7,7 @@ public class Ship : MonoBehaviour
 
 
     private int ShipHP;
-    private List<Module> ModuleList; //Array List of modules
+    [SerializeField] private List<Snappable> SnapPoints; 
     private int ThrusterBoost; //An integer
 
     

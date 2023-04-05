@@ -5,37 +5,39 @@ using UnityEngine;
 public class SnapController : MonoBehaviour
 {
 
-    public List<Transform> snapPoints;
-    public List<Draggable> draggableObjects;
+    public List<Snappable> snapPoints;
+    public List<Module> moduleObjects;
     public float snapRange = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Draggable draggable in draggableObjects)
+        foreach (Module module in moduleObjects)
         {
-            draggable.dragEndedCallback = OnDragEnded;
+            module.dragEndedCallback = OnDragEnded;
         }
     }
 
-    private void OnDragEnded(Draggable draggable)
+    private void OnDragEnded(Module module)
     {
         float closestDistance = -1;
-        Transform ClosestSnapPoint = null;
+        Snappable ClosestSnapPoint = null;
 
-        foreach (Transform snapPoint in snapPoints)
+        foreach (Snappable snapPoint in snapPoints)
         {
-            float currentDistance = Vector2.Distance(draggable.transform.localPosition, snapPoint.localPosition);
-            if (ClosestSnapPoint == null || currentDistance < closestDistance)
+            float currentDistance = Vector2.Distance(module.transform.position, snapPoint.transform.position);
+            if ((ClosestSnapPoint == null && snapPoint.GetDisabledState() == false)|| (currentDistance < closestDistance && snapPoint.GetDisabledState() == false))
             {
                 ClosestSnapPoint = snapPoint;
                 closestDistance = currentDistance;
             }
         }
 
+
         if (ClosestSnapPoint != null && closestDistance <= snapRange) 
         {
-            draggable.transform.localPosition = ClosestSnapPoint.localPosition;
+            module.transform.position = ClosestSnapPoint.transform.position;
+            ClosestSnapPoint.Occupy(module);
         }
     }
 }

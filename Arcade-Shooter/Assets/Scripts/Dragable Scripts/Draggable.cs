@@ -30,5 +30,6 @@ public class Draggable : MonoBehaviour
     private void OnMouseUp() 
     {
         isDragged = false;
+        dragEndedCallback(this);
     }
 }
