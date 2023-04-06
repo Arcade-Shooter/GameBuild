@@ -9,7 +9,7 @@ public class Snappable : MonoBehaviour, IComparable<Snappable>
     [SerializeField] private SnappableOrientation orientation;
     [SerializeField] private bool IsDisabled;
     [SerializeField] private bool IsOccupied;
-    [SerializeField] private Module module;
+    [SerializeField] private Module module = null;
 
 
 

@@ -108,20 +108,39 @@ public abstract class Module : MonoBehaviour
     private Vector3 mouseDragStartPosition;
     private Vector3 spriteDragStartPosition;
 
+    [SerializeField]  private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer2;
+
     private void OnMouseDown()
     {
-        if (HeldSnappables != null)
+        if (HeldSnappables.Count != 0)
         {
             foreach (Snappable heldSnappable in  HeldSnappables)
             {
                 heldSnappable.Vacate();
             }
-            HeldSnappables = null;
+            HeldSnappables.Clear();
         }
 
-        if (isDraggable) 
+        foreach (Snappable child in SnapPoints)
+        {
+            if (child.GetModule() != null)
+            {
+                isDraggable = false;
+                break;
+            }
+            else
+            {
+                isDraggable = true;
+            }
+        }
+
+        if (isDraggable == true) 
         {
             isDragged = true;
+            spriteRenderer.sortingOrder = 5;
+            spriteRenderer2.sortingOrder = 6;
+            
             mouseDragStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             spriteDragStartPosition = transform.localPosition;
         } 
@@ -129,7 +148,7 @@ public abstract class Module : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (isDragged)
+        if (isDraggable == true)
         {
             transform.localPosition = spriteDragStartPosition + Camera.main.ScreenToWorldPoint(Input.mousePosition) - mouseDragStartPosition;
         }
@@ -137,8 +156,12 @@ public abstract class Module : MonoBehaviour
 
     private void OnMouseUp()
     {
-        isDragged = false;
-        dragEndedCallback(this);
+        if (isDraggable == true) {
+            isDragged = false;
+            spriteRenderer.sortingOrder = 0;
+            spriteRenderer2.sortingOrder = 1;
+            dragEndedCallback(this);
+        }
     }
 
     public void DisableSnapNode(SnappableOrientation orientation)
