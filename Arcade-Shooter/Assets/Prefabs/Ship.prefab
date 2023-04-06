@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3889542074173061183}
   - component: {fileID: 3889542074173061181}
   - component: {fileID: 3889542074173061182}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SnapPoint B
   m_TagString: Snappable
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 3889542074713064387}
   - component: {fileID: 3889542074713064385}
   - component: {fileID: 3889542074713064384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 3889542075471115109}
   - component: {fileID: 3889542075471115110}
   - component: {fileID: 3889542075471115108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SnapPoint L
   m_TagString: Snappable
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 3889542075588583046}
   - component: {fileID: 3889542075588583044}
   - component: {fileID: 3889542075588583045}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SnapPoint R
   m_TagString: Snappable
   m_Icon: {fileID: 0}

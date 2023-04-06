@@ -34,16 +34,29 @@ public class Ship : MonoBehaviour
 
     public void FireWeapons()
     {
-
-    }
-
-    public void TogglePause()
-    {
-
+        foreach (Snappable snappable in SnapPoints)
+        {
+            Module module = snappable.GetModule();
+            if ( module != null)
+            {
+                module.FireWeapons();
+            }
+        }
     }
 
     private int DetectThrusters()
     {
-        return 0;
+        int thrusters = 0;
+        foreach (Snappable snappable in SnapPoints)
+        {
+            Module module = snappable.GetModule();
+            if (module != null)
+            {
+                thrusters += module.DetectThrusters();
+            }
+        }
+
+        return thrusters;
+
     }
 }

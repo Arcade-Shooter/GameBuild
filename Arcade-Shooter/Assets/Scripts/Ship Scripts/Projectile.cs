@@ -8,14 +8,16 @@ public class Projectile : MonoBehaviour
     {
         Bullet,
         EnergyBullet,
+        Missile,
         Lazer
     }
 
-    private string ProjectileName;
-    private ProjectileType Type;
-    private int Damage;
-    private float Speed;
-    private bool Paused;
+    [SerializeField] private string ProjectileName;
+    [SerializeField] private ProjectileType Type;
+    [SerializeField] private int Damage;
+    [SerializeField] private float Speed;
+    [SerializeField] private bool Paused;
+    [SerializeField] private Rigidbody2D rigidbody;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,14 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!Paused)
+        {
+            transform.position += (Vector3.up * this.Speed) * Time.deltaTime;
+
+            if (transform.position.y > 5.5)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

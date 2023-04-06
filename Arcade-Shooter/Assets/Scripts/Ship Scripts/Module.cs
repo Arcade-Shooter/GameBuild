@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,21 +8,21 @@ public abstract class Module : MonoBehaviour
 
 
     
-    [SerializeField] private int Healh;
+    [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
     [SerializeField] private int Power;
     [SerializeField] private int MaxPower;
-    [SerializeField] private Classification classification;
-    [SerializeField] private bool PauseState;
-    [SerializeField] private bool Disabled;
-    [SerializeField] private List<Snappable> snappables;
+    private Classification classification;
+    private bool PauseState;
+    private bool Disabled;
+    [SerializeField] protected List<Snappable> SnapPoints;
 
 
 
     protected Module(int Health, int Power, Classification classification)
     {
-        this.Healh = Health;
-        this.MaxHealth = Healh;
+        this.Health = Health;
+        this.MaxHealth = Health;
         this.Power = Power;
         this.MaxPower = Power;
         this.classification = classification;
@@ -45,32 +46,40 @@ public abstract class Module : MonoBehaviour
 
     public void TakeDamadge(int Damage)
     {
-
+        this.Health -= Damage;
+        if(this.Health <= 0.1*this.MaxHealth) //Disable if lower then n% health
+        {
+            this.Disabled = true;
+        }
     }
 
     public void HealDamadge(int Damage)
     {
-
+        this.Health += Damage;
+        if (this.Health <= 0.1 * this.MaxHealth) //Disable if lower then n% health
+        {
+            this.Disabled = true;
+        }
     }
 
     public void IncreasePower(int Power)
     {
-
+        this.Power += Power;
     }
 
     public void DecreasePower(int Power)
     {
-
+        this.Power -= Power;
     }
 
     public void Enable()
     {
-
+        this.Disabled = false;
     }
 
     public void Disable()
     {
-
+        this.Disabled = true;
     }
 
 
@@ -91,6 +100,9 @@ public abstract class Module : MonoBehaviour
     public delegate void DragStartedDelegate();
     public DragStartedDelegate dragStartedCallback;
 
+    public List<Snappable> HeldSnappables;
+
+
     [SerializeField] private bool isDraggable = true;
     private bool isDragged = false;
     private Vector3 mouseDragStartPosition;
@@ -98,9 +110,13 @@ public abstract class Module : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (dragStartedCallback != null)
+        if (HeldSnappables != null)
         {
-            dragStartedCallback();
+            foreach (Snappable heldSnappable in  HeldSnappables)
+            {
+                heldSnappable.Vacate();
+            }
+            HeldSnappables = null;
         }
 
         if (isDraggable) 
@@ -127,7 +143,7 @@ public abstract class Module : MonoBehaviour
 
     public void DisableSnapNode(SnappableOrientation orientation)
     {
-        foreach (Snappable snap in snappables)
+        foreach (Snappable snap in SnapPoints)
         {
             if (snap.GetOrientation() == orientation) 
             {
@@ -138,7 +154,7 @@ public abstract class Module : MonoBehaviour
 
     public void EnableSnapNode(SnappableOrientation orientation)
     {
-        foreach (Snappable snap in snappables)
+        foreach (Snappable snap in SnapPoints)
         {
             if (snap.GetOrientation() == orientation)
             {
@@ -147,6 +163,25 @@ public abstract class Module : MonoBehaviour
         }
     }
 
+    public abstract void FireWeapons();
+
+    internal int DetectThrusters()
+    {
+        int thrusters = 0;
+        foreach (Snappable snappable in SnapPoints)
+        {
+            Module module = snappable.GetModule();
+            if (module != null)
+            {
+                thrusters += module.DetectThrusters();
+            }
+        }
+        if (this.classification == Classification.Thruster)
+        {
+            return thrusters++;
+        }
+        return thrusters;
+    }
 }
 
 public enum Classification

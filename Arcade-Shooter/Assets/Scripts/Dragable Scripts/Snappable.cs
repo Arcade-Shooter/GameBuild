@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Module;
 
-public class Snappable : MonoBehaviour
+public class Snappable : MonoBehaviour, IComparable<Snappable> 
 {
     [SerializeField] private SnappableOrientation orientation;
     [SerializeField] private bool IsDisabled;
@@ -30,6 +31,11 @@ public class Snappable : MonoBehaviour
         return this.orientation;
     }
 
+    public Module GetModule()
+    {
+        return module;
+    }
+
 
 
     /********************
@@ -54,7 +60,6 @@ public class Snappable : MonoBehaviour
         this.IsDisabled = true;
         this.IsOccupied = true;
         this.module = module;
-        module.dragStartedCallback = Vacate;
 
         if(this.orientation == SnappableOrientation.L)
         {
@@ -73,7 +78,7 @@ public class Snappable : MonoBehaviour
     }
 
 
-    private void Vacate()
+    public void Vacate()
     {
         this.IsOccupied = false;
         this.IsDisabled = false;
@@ -107,6 +112,11 @@ public class Snappable : MonoBehaviour
         {
             module.transform.position = this.transform.position;
         }
+    }
+
+    public int CompareTo(Snappable other)
+    {
+        return this.orientation.CompareTo(other.orientation);
     }
 }
 
