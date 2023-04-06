@@ -9,7 +9,7 @@ public class Ship : MonoBehaviour
     [SerializeField] private int ShipHP;
     [SerializeField] private List<Snappable> SnapPoints; 
     [SerializeField] private int ThrusterBoost; //An integer
-
+    [SerializeField] private bool shoot = false;
     
     
     
@@ -29,7 +29,11 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (shoot)
+        {
+            FireWeapons();
+            shoot = false;
+        }
     }
 
     public void FireWeapons()
