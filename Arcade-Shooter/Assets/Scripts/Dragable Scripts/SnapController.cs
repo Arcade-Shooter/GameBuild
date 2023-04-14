@@ -42,39 +42,19 @@ public class SnapController : MonoBehaviour
         foreach (Snappable snapPoint in snapPoints)
         {
             float currentDistance = Vector2.Distance(module.transform.position, snapPoint.transform.position);
-            if ((ClosestSnapPoint == null && snapPoint.GetDisabledState() == false)|| (currentDistance < closestDistance && snapPoint.GetDisabledState() == false))
+            if ((ClosestSnapPoint == null && snapPoint.GetDisabledState() == false) || (currentDistance < closestDistance && snapPoint.GetDisabledState() == false))
             {
                 ClosestSnapPoint = snapPoint;
                 closestDistance = currentDistance;
             }
         }
 
-
-        // Find any other snap points in the exact same position
-        if (ClosestSnapPoint != null && closestDistance <= snapRange) 
+        if (ClosestSnapPoint != null && closestDistance <= snapRange)
         {
-
-            List<Snappable> SimilarSnapPoints = new List<Snappable>();
-
-            foreach(Snappable snapPoint in snapPoints)
-            {
-                if (snapPoint.transform.position == ClosestSnapPoint.transform.position)
-                {
-                    SimilarSnapPoints.Add(snapPoint);
-                }
-            } 
-
-            if (SimilarSnapPoints.Count > 1) // Sort the multiple points
-            {
-                SimilarSnapPoints.Sort();
-            }
-            
-            foreach (Snappable snappable in SimilarSnapPoints)
-            {
-                snappable.Occupy(module);
-            }
-
-            module.HeldSnappables = SimilarSnapPoints;
+            module.transform.position = ClosestSnapPoint.transform.position;
+            ClosestSnapPoint.Occupy(module);
+            module.HeldSnappable = ClosestSnapPoint;
         }
+
     }
 }

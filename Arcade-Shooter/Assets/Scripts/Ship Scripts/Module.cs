@@ -7,7 +7,7 @@ public abstract class Module : MonoBehaviour
 {
 
 
-    
+
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
     [SerializeField] private int Power;
@@ -29,7 +29,7 @@ public abstract class Module : MonoBehaviour
         this.PauseState = false;
         this.Disabled = false;
     }
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +47,7 @@ public abstract class Module : MonoBehaviour
     public void TakeDamadge(int Damage)
     {
         this.Health -= Damage;
-        if(this.Health <= 0.1*this.MaxHealth) //Disable if lower then n% health
+        if (this.Health <= 0.1 * this.MaxHealth) //Disable if lower then n% health
         {
             this.Disabled = true;
         }
@@ -96,11 +96,7 @@ public abstract class Module : MonoBehaviour
     public delegate void DragEndedDelegate(Module module);
     public DragEndedDelegate dragEndedCallback;
 
-    // Delegate for releasing a Snappable point
-    public delegate void DragStartedDelegate();
-    public DragStartedDelegate dragStartedCallback;
-
-    public List<Snappable> HeldSnappables;
+    public Snappable HeldSnappable;
 
 
     [SerializeField] private bool isDraggable = true;
@@ -108,42 +104,26 @@ public abstract class Module : MonoBehaviour
     private Vector3 mouseDragStartPosition;
     private Vector3 spriteDragStartPosition;
 
-    [SerializeField]  private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer spriteRenderer2;
 
     private void OnMouseDown()
     {
-        if (HeldSnappables.Count != 0)
+        if (HeldSnappable)
         {
-            foreach (Snappable heldSnappable in  HeldSnappables)
-            {
-                heldSnappable.Vacate();
-            }
-            HeldSnappables.Clear();
+            HeldSnappable.Vacate();
+            HeldSnappable = null;
         }
 
-        foreach (Snappable child in SnapPoints)
-        {
-            if (child.GetModule() != null)
-            {
-                isDraggable = false;
-                break;
-            }
-            else
-            {
-                isDraggable = true;
-            }
-        }
-
-        if (isDraggable == true) 
+        if (isDraggable == true)
         {
             isDragged = true;
             spriteRenderer.sortingOrder = 5;
             spriteRenderer2.sortingOrder = 6;
-            
+
             mouseDragStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             spriteDragStartPosition = transform.localPosition;
-        } 
+        }
     }
 
     private void OnMouseDrag()
@@ -156,7 +136,8 @@ public abstract class Module : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (isDraggable == true) {
+        if (isDraggable == true)
+        {
             isDragged = false;
             spriteRenderer.sortingOrder = 0;
             spriteRenderer2.sortingOrder = 1;
@@ -164,46 +145,11 @@ public abstract class Module : MonoBehaviour
         }
     }
 
-    public void DisableSnapNode(SnappableOrientation orientation)
-    {
-        foreach (Snappable snap in SnapPoints)
-        {
-            if (snap.GetOrientation() == orientation) 
-            {
-                snap.Disable();
-            }
-        }
-    }
-
-    public void EnableSnapNode(SnappableOrientation orientation)
-    {
-        foreach (Snappable snap in SnapPoints)
-        {
-            if (snap.GetOrientation() == orientation)
-            {
-                snap.Enable();
-            }
-        }
-    }
-
     public abstract void FireWeapons();
 
-    internal int DetectThrusters()
+    internal bool IsThruster()
     {
-        int thrusters = 0;
-        foreach (Snappable snappable in SnapPoints)
-        {
-            Module module = snappable.GetModule();
-            if (module != null)
-            {
-                thrusters += module.DetectThrusters();
-            }
-        }
-        if (this.classification == Classification.Thruster)
-        {
-            return thrusters++;
-        }
-        return thrusters;
+        return this.classification == Classification.Thruster;
     }
 }
 

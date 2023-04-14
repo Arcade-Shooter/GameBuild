@@ -56,7 +56,10 @@ public class Ship : MonoBehaviour
             Module module = snappable.GetModule();
             if (module != null)
             {
-                thrusters += module.DetectThrusters();
+                if (module.IsThruster())
+                {
+                    thrusters++;
+                }
             }
         }
 
