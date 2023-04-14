@@ -217,7 +217,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  HeldSnappables: []
+  HeldSnappable: {fileID: 0}
   isDraggable: 1
   spriteRenderer: {fileID: 1251940011448440095}
   spriteRenderer2: {fileID: 1457040003}

@@ -96,6 +96,9 @@ public abstract class Module : MonoBehaviour
     public delegate void DragEndedDelegate(Module module);
     public DragEndedDelegate dragEndedCallback;
 
+    public delegate void DragStartedDelegate();
+    public DragStartedDelegate dragStartedCallback;
+
     public Snappable HeldSnappable;
 
 
@@ -117,6 +120,7 @@ public abstract class Module : MonoBehaviour
 
         if (isDraggable == true)
         {
+            dragStartedCallback();
             isDragged = true;
             spriteRenderer.sortingOrder = 5;
             spriteRenderer2.sortingOrder = 6;

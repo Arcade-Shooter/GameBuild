@@ -29,6 +29,23 @@ public class SnapController : MonoBehaviour
         foreach (Module module in moduleObjects)
         {
             module.dragEndedCallback = OnDragEnded;
+            module.dragStartedCallback = ShowSnaps;
+        }
+    }
+
+    private void ShowSnaps()
+    {
+        foreach (Snappable snappable in snapPoints) 
+        {
+            snappable.GetComponent<Renderer>().enabled = true;
+        }
+    }
+
+    private void HideSnaps()
+    {
+        foreach (Snappable snappable in snapPoints)
+        {
+            snappable.GetComponent<Renderer>().enabled = false;
         }
     }
 
@@ -56,5 +73,6 @@ public class SnapController : MonoBehaviour
             module.HeldSnappable = ClosestSnapPoint;
         }
 
+        HideSnaps();
     }
 }
