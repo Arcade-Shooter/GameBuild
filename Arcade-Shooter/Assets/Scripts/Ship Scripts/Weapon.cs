@@ -49,16 +49,5 @@ public class Weapon : Module
     {
         //Shoot module if applicable
         this.shoot = true;
-
-        //Check For attatched modules
-        foreach (Snappable snappable in this.SnapPoints)
-        {
-            Module module = snappable.GetModule();
-            if (module != null)
-            {
-                module.FireWeapons();
-            }
-        }
-        
     }
 }
