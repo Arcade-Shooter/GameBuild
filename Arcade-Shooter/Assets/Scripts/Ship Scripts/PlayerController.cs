@@ -7,25 +7,32 @@ public class PlayerController : MonoBehaviour
 
     public float Speed;
     public GameObject Bullet;
+
+    [SerializeField]private int Health;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.setHealth(100);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (this.Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         Move();     //update ship position
         Shoot();    //update if player shoot
        
-
     }
 
     //Ship movement
     private void Move()
     {
-  
 
         //get keyboard input
         float h = Input.GetAxis("Horizontal");  //"A" "D" "left" "right"
@@ -33,7 +40,6 @@ public class PlayerController : MonoBehaviour
 
         //the next position is that now position add the new diraction with speed * time.deltaTime.
         Vector3 NextPosition = transform.position + new Vector3(h, v, 0) * Speed * Time.deltaTime;
-
 
         /*
          * the boarder are setted by camera range, and this is NOT a dynamic value,
@@ -65,5 +71,42 @@ public class PlayerController : MonoBehaviour
             Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
 
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "EnemyBullet")
+        {
+            DamageByBullet();
+        }
+        if(collision.tag == "Enemy")
+        {
+            DamageByShip();
+        }
+
+    }
+    public void DamageByShip()
+    {
+        if (this.Health >= 1 )
+        {
+            this.Health -= 5;
+        }
+    }
+    public void DamageByBullet()
+    {
+        if (this.Health >= 1)
+        {
+            this.Health -= 10;
+        }
+    }
+
+    public void setHealth(int Health)
+    {
+        this.Health = Health;
+    }
+
+    public int getHealth()
+    {
+        return this.Health;
     }
 }

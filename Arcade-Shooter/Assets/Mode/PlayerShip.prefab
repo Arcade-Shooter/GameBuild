@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 6032533626569784755}
   - component: {fileID: 6032533626569784756}
   - component: {fileID: 6032533626569784757}
+  - component: {fileID: 6295650572136313113}
+  - component: {fileID: 7447875170880468885}
   m_Layer: 0
   m_Name: PlayerShip
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,5 +99,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56fa5d03688ec64998e6928c5f2d2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 8
+  Speed: 6
   Bullet: {fileID: 2436712962327111584, guid: 97055c960ab1ec44cb2a779effdcfce7, type: 3}
+  Health: 100
+--- !u!50 &6295650572136313113
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6032533626569784758}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!68 &7447875170880468885
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6032533626569784758}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.85, y: 0}
+  - {x: -0.8463507, y: 0.18182111}
+  - {x: -0.14278132, y: 0.34585}
+  - {x: -0.14500722, y: 0.56390643}
+  - {x: 0.16267772, y: 0.5634937}
+  - {x: 0.16381493, y: 0.36025357}
+  - {x: 0.84409446, y: 0.19105911}
+  - {x: 0.8300787, y: -0.23381138}
+  - {x: 0.7559969, y: -0.22943497}
+  - {x: 0.7642296, y: -0.04143715}
+  - {x: 0.23439252, y: -0.115134716}
+  - {x: 0.23545298, y: -0.3906114}
+  - {x: 0.096315145, y: -0.56797457}
+  - {x: -0.08101678, y: -0.5582547}
+  - {x: -0.23347276, y: -0.39813304}
+  - {x: -0.22463939, y: -0.10830927}
+  - {x: -0.76222044, y: -0.041312933}
+  - {x: -0.76129144, y: -0.22715831}
+  - {x: -0.8174976, y: -0.23789787}
+  - {x: -0.84950477, y: 0.008983135}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
          */
 
         //check if the bullet sitll in the range of camera,and kill the object if not.
-        if (transform.position.y > 6.0f)
+        if (transform.position.y > 6.0f || transform.position.y < -6.0f)
         {
             Destroy(gameObject);    //kill the bullet object. 
         }
@@ -46,5 +46,13 @@ public class Bullet : MonoBehaviour
         //{
         //    Destroy(gameObject);
         //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }
