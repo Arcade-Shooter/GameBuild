@@ -11,7 +11,7 @@ public class Shield : Module
     [SerializeField] private float RechargeRate;
     private int MinActivationAmount; //Not Implimented yet
     private float ShieldDistance; //Not Implimented yet
-    [SerializeField] private List<SpriteRenderer> ShieldLayers;
+    [SerializeField] private List<ShieldLayer> ShieldLayers;
 
     public Shield(int Health, int Power, float Shield, float RechargeRate, int MinActivationAmount, float Distance )
         : base(Health, Power, Classification.Shield)
@@ -26,7 +26,12 @@ public class Shield : Module
     // Start is called before the first frame update
     void Start()
     {
-        
+     
+        foreach (ShieldLayer layer in ShieldLayers)
+        {
+            layer.CollisionCallBack = DamadgeShield;
+        }
+
     }
 
     // Update is called once per frame
@@ -53,18 +58,20 @@ public class Shield : Module
         int count = 0;
         for (; count < (int)ShieldHealth; count++) //Shield Layers on
         {
-            SpriteRenderer renderer = (SpriteRenderer)ShieldLayers[count];
-            renderer.enabled = true;
+            ShieldLayer layer = ShieldLayers[count];
+            layer.GetComponent<SpriteRenderer>().enabled = true;
+            layer.GetComponent<BoxCollider2D>().enabled = true;
         }
 
         for (; count < MaxShield; count++) //Shield Layers off
         {
-            SpriteRenderer renderer = (SpriteRenderer)ShieldLayers[count];
-            renderer.enabled = false;
+            ShieldLayer layer = ShieldLayers[count];
+            layer.GetComponent<SpriteRenderer>().enabled = false;
+            layer.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
-    public void DamadgeShield()
+    public void DamadgeShield(int damadge)
     {
 
     }

@@ -38,4 +38,9 @@ public class Projectile : MonoBehaviour
             }
         }
     }
+
+    public int GetDamage()
+    {
+        return Damage;
+    }
 }
