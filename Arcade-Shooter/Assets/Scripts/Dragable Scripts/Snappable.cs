@@ -62,6 +62,7 @@ public class Snappable : MonoBehaviour
     {
         this.IsOccupied = false;
         this.IsDisabled = false;
+        module.Connected = false;
         this.module = null;
 
     }

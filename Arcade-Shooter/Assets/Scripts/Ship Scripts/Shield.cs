@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Shield : Module
 {
 
-    private int ShieldHealth;
-    private int MaxShield;
-    private int RechargeRate;
-    private int MinActivationAmount;
-    private float ShieldDistance;
+    [SerializeField] private float ShieldHealth;
+    [SerializeField] private float MaxShield;
+    [SerializeField] private float RechargeRate;
+    private int MinActivationAmount; //Not Implimented yet
+    private float ShieldDistance; //Not Implimented yet
+    [SerializeField] private List<SpriteRenderer> ShieldLayers;
 
-    public Shield(int Health, int Power, int Shield, int RechargeRate, int MinActivationAmount, float Distance )
+    public Shield(int Health, int Power, float Shield, float RechargeRate, int MinActivationAmount, float Distance )
         : base(Health, Power, Classification.Shield)
     {
         this.ShieldHealth = Shield;
@@ -30,25 +32,40 @@ public class Shield : Module
     // Update is called once per frame
     void Update()
     {
-        
+        if (!this.Connected) //Sets the shield health to zero when disconected
+        {
+            ShieldHealth = 0;
+        }
+        else if (!this.PauseState && ShieldHealth < MaxShield) //Increases shield health per frame
+        {
+            ShieldHealth += RechargeRate * Time.deltaTime;
+            if (ShieldHealth > MaxShield)
+            {
+                ShieldHealth = MaxShield;
+            }
+        }
+
+
+
+
+        //Determine shield visualisation (Hard Coded!!!!)
+
+        int count = 0;
+        for (; count < (int)ShieldHealth; count++) //Shield Layers on
+        {
+            SpriteRenderer renderer = (SpriteRenderer)ShieldLayers[count];
+            renderer.enabled = true;
+        }
+
+        for (; count < MaxShield; count++) //Shield Layers off
+        {
+            SpriteRenderer renderer = (SpriteRenderer)ShieldLayers[count];
+            renderer.enabled = false;
+        }
     }
 
     public void DamadgeShield()
     {
-
-    }
-
-    public override void FireWeapons()
-    {
-        //Check For attatched modules
-        foreach (Snappable snappable in this.SnapPoints)
-        {
-            Module module = snappable.GetModule();
-            if (module != null)
-            {
-                module.FireWeapons();
-            }
-        }
 
     }
 }

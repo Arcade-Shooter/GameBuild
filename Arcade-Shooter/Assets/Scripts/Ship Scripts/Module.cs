@@ -11,11 +11,10 @@ public abstract class Module : MonoBehaviour
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
     [SerializeField] private int Power;
-    [SerializeField] private int MaxPower;
     private Classification classification;
-    private bool PauseState;
-    private bool Disabled;
-    [SerializeField] protected List<Snappable> SnapPoints;
+    protected bool PauseState;
+    protected bool Disabled;
+    public bool Connected;
 
 
 
@@ -24,7 +23,6 @@ public abstract class Module : MonoBehaviour
         this.Health = Health;
         this.MaxHealth = Health;
         this.Power = Power;
-        this.MaxPower = Power;
         this.classification = classification;
         this.PauseState = false;
         this.Disabled = false;
@@ -82,7 +80,10 @@ public abstract class Module : MonoBehaviour
         this.Disabled = true;
     }
 
-
+    public Classification GetClassification()
+    {
+        return this.classification;
+    }
 
 
     /******************************************
@@ -148,8 +149,6 @@ public abstract class Module : MonoBehaviour
             dragEndedCallback(this);
         }
     }
-
-    public abstract void FireWeapons();
 
     internal bool IsThruster()
     {

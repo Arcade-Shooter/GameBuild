@@ -209,14 +209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169d0dbb562dea74bb45ed97038bf695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
-  MaxHealth: 0
-  Power: 0
-  MaxPower: 0
-  SnapPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Health: 3
+  MaxHealth: 3
+  Power: 1
+  Connected: 0
   HeldSnappable: {fileID: 0}
   isDraggable: 1
   spriteRenderer: {fileID: 1251940011448440095}

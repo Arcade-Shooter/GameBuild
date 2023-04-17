@@ -31,17 +31,4 @@ public class Thruster : Module
         return 0;
     }
 
-    public override void FireWeapons()
-    {
-        //Check For attatched modules
-        foreach (Snappable snappable in this.SnapPoints)
-        {
-            Module module = snappable.GetModule();
-            if (module != null)
-            {
-                module.FireWeapons();
-            }
-        }
-
-    }
 }

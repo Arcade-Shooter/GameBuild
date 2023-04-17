@@ -71,6 +71,7 @@ public class SnapController : MonoBehaviour
             module.transform.position = ClosestSnapPoint.transform.position;
             ClosestSnapPoint.Occupy(module);
             module.HeldSnappable = ClosestSnapPoint;
+            module.Connected = true;
         }
 
         HideSnaps();

@@ -434,9 +434,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipHP: 0
   SnapPoints:
-  - {fileID: 3889542075471115108}
+  - {fileID: 5189606490615727120}
+  - {fileID: 992784506964091778}
+  - {fileID: 4221955465134973805}
   - {fileID: 3889542075588583045}
+  - {fileID: 7624941028006417550}
   - {fileID: 3889542074173061182}
+  - {fileID: 1854240092347134822}
+  - {fileID: 3889542075471115108}
   ThrusterBoost: 0
   shoot: 0
 --- !u!1 &3889542075471115111

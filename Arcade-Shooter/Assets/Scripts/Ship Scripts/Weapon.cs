@@ -45,7 +45,7 @@ public class Weapon : Module
         }
     }
 
-    public override void FireWeapons()
+    public void FireWeapon()
     {
         //Shoot module if applicable
         this.shoot = true;

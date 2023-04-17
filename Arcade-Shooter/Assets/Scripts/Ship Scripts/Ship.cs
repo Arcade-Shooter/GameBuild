@@ -41,9 +41,9 @@ public class Ship : MonoBehaviour
         foreach (Snappable snappable in SnapPoints)
         {
             Module module = snappable.GetModule();
-            if ( module != null)
+            if ( module != null && module.GetClassification() == Classification.Weapon)
             {
-                module.FireWeapons();
+                ((Weapon)module).FireWeapon(); //Transform module into a weapon and shoot it
             }
         }
     }
