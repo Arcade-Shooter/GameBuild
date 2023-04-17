@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class HealthbarScript : MonoBehaviour
 {
+    public void Start()
+    {
+        Debug.Log("123abc");
+    }
     [SerializeField] Image healthbarImage;
 
     [SerializeField] Player player;
