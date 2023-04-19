@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyGeneration : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
-
     public GameObject EnemyShip;
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +23,12 @@ public class EnemyGeneration : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                float XPosition = Random.Range(-8.4f, 8.4f);
-                GameObject Enemyship1 = Instantiate(EnemyShip, new Vector3(XPosition, 6.5f, 0), Quaternion.Euler(0, 0, 0));
-
+                GameObject NewEnemy = Instantiate(EnemyShip);
+                float XPosition = Random.Range(-9, 9);
+                NewEnemy.transform.position = new Vector3(XPosition, -7, 0);
             }
+
+            yield return new WaitForSeconds(2.0f);
         }
-        yield return new WaitForSeconds(3.0f);
     }
 }
