@@ -45,11 +45,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4193583667243190, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4193583667243190, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4193583667243190, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
       propertyPath: m_LocalRotation.y
@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4193583667243190, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4193583667243190, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -71,9 +71,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212592764215928704, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 212833696140276620, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
       propertyPath: m_SortingOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 212952195174925470, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
@@ -82,21 +90,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1512782934554904, guid: 401d8aca9e846254890399f66cd7de66, type: 3}
   m_PrefabInstance: {fileID: 2365074321531754860}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &97332744103939757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2366414343154950260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1dda299081c3fc4590d70a286a32d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 5
-  Bullet: {fileID: 8756158021857462367, guid: f461b25da1de5af49b5b8c32fbba83bc, type: 3}
-  ProbabilityShoot: 10
 --- !u!50 &-8647104515444693017
 Rigidbody2D:
   serializedVersion: 4
@@ -118,8 +111,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!68 &651486480201808927
-EdgeCollider2D:
+--- !u!114 &97332744103939757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2366414343154950260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1dda299081c3fc4590d70a286a32d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: -3
+  Bullet: {fileID: 8756158021857462367, guid: f461b25da1de5af49b5b8c32fbba83bc, type: 3}
+  ProbabilityShoot: 10
+--- !u!70 &1807416635988083746
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,31 +136,9 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.245, y: 0}
-  - {x: -0.23671858, y: -0.1218946}
-  - {x: -0.19386695, y: -0.117930174}
-  - {x: -0.18793131, y: -0.06957126}
-  - {x: -0.13962078, y: -0.06253457}
-  - {x: -0.08265695, y: -0.0047154427}
-  - {x: -0.046407115, y: -0.000977993}
-  - {x: -0.057103872, y: -0.058279753}
-  - {x: -0.051279556, y: -0.19774151}
-  - {x: 0.05044887, y: -0.19540954}
-  - {x: 0.06426978, y: -0.05282116}
-  - {x: 0.04962097, y: -0.0034132004}
-  - {x: 0.23370242, y: -0.13394237}
-  - {x: 0.24524939, y: 0.0960691}
-  - {x: 0.046382103, y: 0.24403739}
-  - {x: -0.040029764, y: 0.24483228}
-  - {x: -0.23533505, y: 0.097651005}
-  - {x: -0.2468551, y: 0.0021386147}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Size: {x: 0.49, y: 0.46}
+  m_Direction: 0

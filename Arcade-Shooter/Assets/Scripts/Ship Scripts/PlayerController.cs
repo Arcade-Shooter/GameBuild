@@ -75,12 +75,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //if hitted by enemy bullet
         if (collision.tag == "EnemyBullet")
         {
+            Destroy(collision.gameObject);
             DamageByBullet();
         }
-        if(collision.tag == "Enemy")
+        //if hitted by enemy ship
+        if (collision.tag == "Enemy")
         {
+            Destroy(collision.gameObject);
             DamageByShip();
         }
 
@@ -92,6 +96,7 @@ public class PlayerController : MonoBehaviour
             this.Health -= 5;
         }
     }
+
     public void DamageByBullet()
     {
         if (this.Health >= 1)

@@ -16,10 +16,12 @@ public class Bullet : MonoBehaviour
     void Update()
     {
 
-        DestroyBullet();    //kill this object if it's out of boarder.
-        
         transform.Translate(Vector3.up * Speed * Time.deltaTime);   //update the bullet position.
-
+        if (transform.position.y > 6.0f || transform.position.y < -6.0f)
+        {
+            Destroy(gameObject);    //kill the bullet object. 
+        }
+        //DestroyBullet();    //kill this object if it's out of boarder.
     }
 
     private void DestroyBullet()
@@ -48,11 +50,4 @@ public class Bullet : MonoBehaviour
         //}
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Player")
-        {
-            Destroy(gameObject);
-        }
-    }
 }
