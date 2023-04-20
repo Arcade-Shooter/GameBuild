@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthbarV6TutorialSaysUseImage : MonoBehaviour
+public class HealthbarV6Image : MonoBehaviour
 {
     /**
      * Health variables will be Serialized, but private
@@ -22,7 +22,7 @@ public class HealthbarV6TutorialSaysUseImage : MonoBehaviour
     //____________________________________________
 
     //private void Awake()
-    void Start()
+    private void Start()
     {
         //health = maxHealth; User can Set the Initial amount of health
         //healthBarInnerImage = healthBarInner.GetComponent<Image>();
@@ -59,14 +59,14 @@ public class HealthbarV6TutorialSaysUseImage : MonoBehaviour
     }
 
     // HEAL/DAMAGE AN ENTIRE BAR
-    public void HealFull()
+    private void HealFull()
     {
         //set health to maxHealth
         health = maxHealth;
         UpdateBar();
         AnimateHeal();
     }
-    public void DamageFull() //basically instakill
+    private void DamageFull() //basically instakill
     {
         //set health to 0
         health = 0;
@@ -80,10 +80,14 @@ public class HealthbarV6TutorialSaysUseImage : MonoBehaviour
     {
         //damage animation i.e. white shake
         Debug.Log("Damage Animation!");
+        //GetComponent<AnimHealFlash>().HealFlash(1, Color.red);
+        GetComponent<AnimHealFlash>().HealFlash(1, Color.Lerp(Color.red, Color.black, 0.5f));
     }
     private void AnimateHeal()
     {
         Debug.Log("Heal Animation!");
+        //GetComponent<AnimHealFlash>().HealFlash(1);
+        GetComponent<AnimHealFlash>().HealFlash(1, Color.gray);
         //heal animation i.e. grow animation
 
     }
