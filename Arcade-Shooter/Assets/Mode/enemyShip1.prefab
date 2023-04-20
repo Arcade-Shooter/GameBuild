@@ -141,4 +141,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: -4
   Bullet: {fileID: 8756158021857462367, guid: f461b25da1de5af49b5b8c32fbba83bc, type: 3}
-  ProbabilityShoot: 10
+  ProbabilityShoot: 9

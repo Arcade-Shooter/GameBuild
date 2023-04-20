@@ -88,6 +88,11 @@ public class PlayerController : MonoBehaviour
             DamageByShip();
         }
 
+        if (collision.tag == "Item")
+        {
+            Destroy(collision.gameObject);
+        }
+
     }
     public void DamageByShip()
     {
