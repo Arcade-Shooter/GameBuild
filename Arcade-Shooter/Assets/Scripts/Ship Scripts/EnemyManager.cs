@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
             {
                 GameObject NewEnemy = Instantiate(EnemyShip);
                 float XPosition = Random.Range(-9, 9);
-                NewEnemy.transform.position = new Vector3(XPosition, -7, 0);
+                NewEnemy.transform.position = new Vector3(XPosition, 7, 0);
             }
 
             yield return new WaitForSeconds(2.0f);

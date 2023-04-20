@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     {
 
         transform.Translate(Vector3.up * Speed * Time.deltaTime);   //update the bullet position.
-        if (transform.position.y > 6.0f || transform.position.y < -6.0f)
+        if (transform.position.y > 5.53f || transform.position.y < -6.0f)
         {
             Destroy(gameObject);    //kill the bullet object. 
         }
