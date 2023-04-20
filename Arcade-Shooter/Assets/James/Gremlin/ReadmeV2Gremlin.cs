@@ -15,4 +15,4 @@ so easy to miss and get hit by accident
 also begins to grow and move towards player now
 
 */
-public class Readme: MonoBehaviour {}
+public class ReadmeV2Gremlin: MonoBehaviour {}
