@@ -23,8 +23,10 @@ public class ShieldLayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D projectile)
     {
-        int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
-        Debug.Log(damage);
-        //Collision();
+        if (projectile.tag == "Enemy") {
+            int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
+            CollisionCallBack(damage);
+            Destroy(projectile.gameObject);
+        }
     }
 }

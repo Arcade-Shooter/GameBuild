@@ -10,8 +10,8 @@ public abstract class Module : MonoBehaviour
 
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
-    [SerializeField] private int Power;
-    private Classification classification;
+    private int Power; // Not Implimented
+    [SerializeField] private Classification classification;
     protected bool PauseState;
     protected bool Disabled;
     public bool Connected;
@@ -42,16 +42,20 @@ public abstract class Module : MonoBehaviour
     }
 
 
-    public void TakeDamadge(int Damage)
+    public void TakeDamage(int Damage)
     {
         this.Health -= Damage;
         if (this.Health <= 0.1 * this.MaxHealth) //Disable if lower then n% health
         {
             this.Disabled = true;
         }
+        if (this.Health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-    public void HealDamadge(int Damage)
+    public void HealDamage(int Damage)
     {
         this.Health += Damage;
         if (this.Health <= 0.1 * this.MaxHealth) //Disable if lower then n% health
@@ -86,12 +90,19 @@ public abstract class Module : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter2D(Collider2D projectile)
+    {
+        if (projectile.tag == "Enemy")
+        {
+            int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
+            this.TakeDamage(damage);
+            Destroy(projectile.gameObject);
+        }
+    }
+
     /******************************************
      This Section is for the dragable functionality
     ******************************************/
-
-
-
 
     // Delegate for snapping to a Snappable point and occupying it
     public delegate void DragEndedDelegate(Module module);

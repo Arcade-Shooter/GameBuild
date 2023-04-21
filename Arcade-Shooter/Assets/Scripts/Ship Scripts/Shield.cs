@@ -73,6 +73,10 @@ public class Shield : Module
 
     public void DamadgeShield(int damadge)
     {
-
+        this.ShieldHealth -= damadge;
+        if (this.ShieldHealth < 1)
+        {
+            ShieldHealth = 0;
+        }
     }
 }
