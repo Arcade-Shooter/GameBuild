@@ -6,10 +6,11 @@ public class Ship : MonoBehaviour
 {
 
 
-    private int ShipHP;
-    private List<Module> ModuleList; //Array List of modules
-    private int ThrusterBoost; //An integer
-
+    [SerializeField] private int ShipHP;
+    [SerializeField] private List<Snappable> SnapPoints; 
+    [SerializeField] private int ThrusterBoost; //An integer
+    [SerializeField] private bool shoot = false;
+    [SerializeField] private bool getThrusters = false;
     
     
     
@@ -29,21 +30,48 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (shoot)
+        {
+            FireWeapons();
+            shoot = false;
+        }
+
+        if (getThrusters)
+        {
+            DetectThrusters();
+            getThrusters = false;
+        }
     }
 
     public void FireWeapons()
     {
-
-    }
-
-    public void TogglePause()
-    {
-
+        foreach (Snappable snappable in SnapPoints)
+        {
+            Module module = snappable.GetModule();
+            if ( module != null && module.GetClassification() == Classification.Weapon)
+            {
+                ((Weapon)module).FireWeapon(); //Transform module into a weapon and shoot it
+            }
+        }
     }
 
     private int DetectThrusters()
     {
-        return 0;
+        int thrusters = 0;
+        foreach (Snappable snappable in SnapPoints)
+        {
+            Module module = snappable.GetModule();
+            if (module != null)
+            {
+                if (module.IsThruster())
+                {
+                    thrusters++;
+                }
+            }
+        }
+
+        Debug.Log("" + thrusters);
+        return thrusters;
+
     }
 }

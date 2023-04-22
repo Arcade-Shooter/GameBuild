@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - EnemyBullet
-  - PlayerBullet
+  - Snappable
+  - PlayerDraggable
   - Enemy
   layers:
   - Default
@@ -14,10 +14,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player Projectiles
+  - Player ShipModules
+  - Enemy Projectiles
+  - Enemy Ship
   - 
   - 
   - 
