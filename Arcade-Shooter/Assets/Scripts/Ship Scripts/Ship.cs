@@ -10,8 +10,9 @@ public class Ship : MonoBehaviour
     [SerializeField] private int MaxHealth;
     [SerializeField] private List<Snappable> SnapPoints; 
     [SerializeField] private int ThrusterBoost; //An integer
-    [SerializeField] private bool shoot = false;
-    [SerializeField] private bool getThrusters = false;
+    [SerializeField] private int Speed;
+    private bool shoot = false;
+    private bool getThrusters = false;
     
     
     
@@ -25,7 +26,10 @@ public class Ship : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (var snappable in SnapPoints)
+        {
+            snappable.ModuleChangeCallback = ModuleChange;
+        }
     }
 
     // Update is called once per frame
@@ -42,6 +46,9 @@ public class Ship : MonoBehaviour
             DetectThrusters();
             getThrusters = false;
         }
+
+        Move();     //update ship position
+        Shoot();    //update if player shoot
     }
 
     public void FireWeapons()
@@ -99,5 +106,54 @@ public class Ship : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    //Ship movement
+    private void Move()
+    {
+
+        //get keyboard input
+        float h = Input.GetAxis("Horizontal");  //"A" "D" "left" "right"
+        float v = Input.GetAxis("Vertical");    //"W" "S" "up" "down"
+
+        //the next position is that now position add the new diraction with speed * time.deltaTime.
+        Vector3 NextPosition = transform.position + new Vector3(h, v, 0) * (Speed + ThrusterBoost) * Time.deltaTime ;
+
+        /*
+         * the boarder are setted by camera range, and this is NOT a dynamic value,
+         * if the camera has been moved, then the value MUST be changed!
+         */
+
+        //check the x of next postion stil in the range of caremra
+        if (NextPosition.x > 8.0f || NextPosition.x < -8.0f)
+        {
+            NextPosition.x = transform.position.x;
+        }
+
+        //check the y of next postion stil in the range of caremra
+        if (NextPosition.y > 4.4f || NextPosition.y < -4.4f)
+        {
+            NextPosition.y = transform.position.y;
+        }
+
+        transform.position = NextPosition;
+    }
+
+    //ship shoot
+    private void Shoot()
+    {
+        //check if the "Space" has been pressed
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //print("Space key has been pressed");
+            shoot = true;
+
+        }
+    }
+
+    //Module Change
+    private void ModuleChange()
+    {
+        ThrusterBoost = DetectThrusters(); //When modules change check if the number of thrusters has changed
     }
 }
