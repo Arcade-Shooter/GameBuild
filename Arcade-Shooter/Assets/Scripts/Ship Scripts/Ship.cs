@@ -6,7 +6,8 @@ public class Ship : MonoBehaviour
 {
 
 
-    [SerializeField] private int ShipHP;
+    [SerializeField] private int Health;
+    [SerializeField] private int MaxHealth;
     [SerializeField] private List<Snappable> SnapPoints; 
     [SerializeField] private int ThrusterBoost; //An integer
     [SerializeField] private bool shoot = false;
@@ -73,5 +74,30 @@ public class Ship : MonoBehaviour
         Debug.Log("" + thrusters);
         return thrusters;
 
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D projectile)
+    {
+        if (projectile.tag == "EnemyBullet")
+        {
+            int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
+            this.TakeDamage(damage);
+            Destroy(projectile.gameObject);
+        }
+        else if (projectile.tag == "Enemy")
+        {
+            this.TakeDamage(1);
+            Destroy(projectile.gameObject);
+        }
+    }
+
+    private void TakeDamage(int damage)
+    {
+        this.Health -= damage;
+        if (this.Health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

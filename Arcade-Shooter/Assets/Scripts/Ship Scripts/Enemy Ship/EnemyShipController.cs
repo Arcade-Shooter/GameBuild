@@ -29,7 +29,9 @@ public class EnemyShipController : MonoBehaviour
     {
         if (collision.tag == "PlayerBullet")
         {
+            Debug.Log("Enemy Hit");
             Destroy(gameObject);
+            Destroy(collision.gameObject);
         }
         if (collision.tag == "Player")
         {

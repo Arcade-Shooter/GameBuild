@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 2375984630051337001}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.83, y: -5.24, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3577821419994279402}
   - {fileID: 3577821419690853772}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 2
   MaxHealth: 2
-  Power: 1
+  classification: 1
   Connected: 0
   HeldSnappable: {fileID: 0}
   isDraggable: 1

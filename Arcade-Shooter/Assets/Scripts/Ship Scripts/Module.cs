@@ -92,10 +92,15 @@ public abstract class Module : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D projectile)
     {
-        if (projectile.tag == "Enemy")
+        if (projectile.tag == "EnemyBullet")
         {
             int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
             this.TakeDamage(damage);
+            Destroy(projectile.gameObject);
+        }
+        else if (projectile.tag == "Enemy")
+        {
+            this.TakeDamage(1);
             Destroy(projectile.gameObject);
         }
     }

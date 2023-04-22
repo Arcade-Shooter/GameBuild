@@ -8,26 +8,16 @@ public class PlayerController : MonoBehaviour
     public float Speed;
     public GameObject Bullet;
 
-    [SerializeField]private int Health;
-
     // Start is called before the first frame update
     void Start()
     {
-        this.setHealth(100);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (this.Health <= 0)
-        {
-            Destroy(gameObject);
-        }
-
         Move();     //update ship position
         Shoot();    //update if player shoot
-       
     }
 
     //Ship movement
@@ -68,55 +58,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //print("Space key has been pressed");
-            Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
+            this.GetComponent<Ship>().FireWeapons();
 
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //if hitted by enemy bullet
-        if (collision.tag == "EnemyBullet")
-        {
-            Destroy(collision.gameObject);
-            DamageByBullet();
-        }
-        //if hitted by enemy ship
-        if (collision.tag == "Enemy")
-        {
-            Destroy(collision.gameObject);
-            DamageByShip();
-        }
-
-        if (collision.tag == "Item")
-        {
-            Destroy(collision.gameObject);
-        }
-
-    }
-    public void DamageByShip()
-    {
-        if (this.Health >= 1 )
-        {
-            this.Health -= 5;
-        }
-    }
-
-    public void DamageByBullet()
-    {
-        if (this.Health >= 1)
-        {
-            this.Health -= 10;
-        }
-    }
-
-    public void setHealth(int Health)
-    {
-        this.Health = Health;
-    }
-
-    public int getHealth()
-    {
-        return this.Health;
     }
 }
