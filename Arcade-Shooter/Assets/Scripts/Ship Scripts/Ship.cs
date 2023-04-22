@@ -143,7 +143,7 @@ public class Ship : MonoBehaviour
     private void Shoot()
     {
         //check if the "Space" has been pressed
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             //print("Space key has been pressed");
             shoot = true;
