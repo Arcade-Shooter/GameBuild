@@ -14,10 +14,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Projectiles
-  - ShipModules
-  - 
-  - 
+  - Player Projectiles
+  - Player ShipModules
+  - Enemy Projectiles
+  - Enemy Ship
   - 
   - 
   - 

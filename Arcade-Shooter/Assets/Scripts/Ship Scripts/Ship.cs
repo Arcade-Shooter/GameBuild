@@ -10,6 +10,7 @@ public class Ship : MonoBehaviour
     [SerializeField] private List<Snappable> SnapPoints; 
     [SerializeField] private int ThrusterBoost; //An integer
     [SerializeField] private bool shoot = false;
+    [SerializeField] private bool getThrusters = false;
     
     
     
@@ -33,6 +34,12 @@ public class Ship : MonoBehaviour
         {
             FireWeapons();
             shoot = false;
+        }
+
+        if (getThrusters)
+        {
+            DetectThrusters();
+            getThrusters = false;
         }
     }
 
@@ -63,6 +70,7 @@ public class Ship : MonoBehaviour
             }
         }
 
+        Debug.Log("" + thrusters);
         return thrusters;
 
     }
