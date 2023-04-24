@@ -30,4 +30,5 @@ public class Thruster : Module
     {
         return 0;
     }
+
 }
