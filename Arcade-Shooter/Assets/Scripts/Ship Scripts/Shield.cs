@@ -13,16 +13,6 @@ public class Shield : Module
     private float ShieldDistance; //Not Implimented yet
     [SerializeField] private List<ShieldLayer> ShieldLayers;
 
-    public Shield(int Health, int Power, float Shield, float RechargeRate, int MinActivationAmount, float Distance )
-        : base(Health, Power, Classification.Shield)
-    {
-        this.ShieldHealth = Shield;
-        this.MaxShield = Shield;
-        this.RechargeRate = RechargeRate;
-        this.MinActivationAmount = MinActivationAmount;
-        this.ShieldDistance = Distance;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +31,7 @@ public class Shield : Module
         {
             ShieldHealth = 0;
         }
-        else if (!this.PauseState && ShieldHealth < MaxShield) //Increases shield health per frame
+        else if (!this.Paused && ShieldHealth < MaxShield) //Increases shield health per frame
         {
             ShieldHealth += RechargeRate * Time.deltaTime;
             if (ShieldHealth > MaxShield)
