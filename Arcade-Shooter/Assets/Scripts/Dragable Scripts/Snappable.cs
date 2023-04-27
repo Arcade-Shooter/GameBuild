@@ -51,7 +51,8 @@ public class Snappable : MonoBehaviour
 
 
 
-
+    //Occupy is a method that changes the state of a snap point.
+    //If the snap point is occupied it is ignored by the snap controller for attaching drag dropped modules
     public void Occupy(Module module)
     {
         this.IsDisabled = true;
@@ -60,7 +61,7 @@ public class Snappable : MonoBehaviour
         ModuleChangeCallback();
     }
 
-
+    //Vacate is a methos the releases the held state of a snap point
     public void Vacate()
     {
         this.IsOccupied = false;
@@ -73,7 +74,7 @@ public class Snappable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (module)
+        if (module) //If there is a module attached to this snap point move it with the snap point
         {
             module.transform.position = this.transform.position;
         }

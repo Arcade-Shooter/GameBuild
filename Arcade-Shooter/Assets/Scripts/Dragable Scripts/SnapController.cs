@@ -13,6 +13,8 @@ public class SnapController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //At the start of the game it collect all Snappoints and PlayerDraggable elements and adds them to the lists
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("Snappable");
         foreach (GameObject go in gos)
@@ -26,6 +28,8 @@ public class SnapController : MonoBehaviour
             moduleObjects.Add((Module)go.GetComponent(typeof(Module)));
         }
 
+
+        //For each module in the list set it's module callbacks to the correct methods
         foreach (Module module in moduleObjects)
         {
             module.dragEndedCallback = OnDragEnded;
@@ -33,6 +37,7 @@ public class SnapController : MonoBehaviour
         }
     }
 
+    //Small function that sets all snappoints to be visible
     private void ShowSnaps()
     {
         foreach (Snappable snappable in snapPoints) 
@@ -41,6 +46,7 @@ public class SnapController : MonoBehaviour
         }
     }
 
+    //Small function that sets all snappoints to be invisible
     private void HideSnaps()
     {
         foreach (Snappable snappable in snapPoints)
@@ -49,6 +55,9 @@ public class SnapController : MonoBehaviour
         }
     }
 
+
+    //Main method of the snap controller
+    //This method is called whenever a dragable module has been dropped
     private void OnDragEnded(Module module)
     {
         float closestDistance = -1;
@@ -66,6 +75,7 @@ public class SnapController : MonoBehaviour
             }
         }
 
+        //Check if the closes snap point is in range and if so, occupy it with the given module
         if (ClosestSnapPoint != null && closestDistance <= snapRange)
         {
             module.transform.position = ClosestSnapPoint.transform.position;

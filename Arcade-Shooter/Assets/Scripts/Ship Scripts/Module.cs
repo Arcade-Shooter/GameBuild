@@ -12,36 +12,12 @@ public abstract class Module : MonoBehaviour
     [SerializeField] private int MaxHealth;
     private int Power; // Not Implimented
     [SerializeField] private Classification classification;
-    protected bool PauseState;
+    protected bool Paused;
     protected bool Disabled;
     public bool Connected;
 
 
-
-    protected Module(int Health, int Power, Classification classification)
-    {
-        this.Health = Health;
-        this.MaxHealth = Health;
-        this.Power = Power;
-        this.classification = classification;
-        this.PauseState = false;
-        this.Disabled = false;
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
+    //Method for taking damage
     public void TakeDamage(int Damage)
     {
         this.Health -= Damage;
@@ -55,6 +31,7 @@ public abstract class Module : MonoBehaviour
         }
     }
 
+    //Method for healing damage
     public void HealDamage(int Damage)
     {
         this.Health += Damage;
@@ -64,6 +41,7 @@ public abstract class Module : MonoBehaviour
         }
     }
 
+    //Methods for adjusting power
     public void IncreasePower(int Power)
     {
         this.Power += Power;
@@ -74,6 +52,7 @@ public abstract class Module : MonoBehaviour
         this.Power -= Power;
     }
 
+    //Methods for toggling disabled state
     public void Enable()
     {
         this.Disabled = false;
@@ -84,24 +63,25 @@ public abstract class Module : MonoBehaviour
         this.Disabled = true;
     }
 
+    //Method to return the Classification of the module
     public Classification GetClassification()
     {
         return this.classification;
     }
 
-
-    private void OnTriggerEnter2D(Collider2D projectile)
+    //Method to control Collisions with modules
+    private void OnTriggerEnter2D(Collider2D Collsion)
     {
-        if (projectile.tag == "EnemyBullet")
+        if (Collsion.tag == "EnemyBullet")
         {
-            int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
+            int damage = Collsion.gameObject.GetComponent<Projectile>().GetDamage();
             this.TakeDamage(damage);
-            Destroy(projectile.gameObject);
+            Destroy(Collsion.gameObject);
         }
-        else if (projectile.tag == "Enemy")
+        else if (Collsion.tag == "Enemy")
         {
             this.TakeDamage(1);
-            Destroy(projectile.gameObject);
+            Destroy(Collsion.gameObject);
         }
     }
 
@@ -109,33 +89,38 @@ public abstract class Module : MonoBehaviour
      This Section is for the dragable functionality
     ******************************************/
 
-    // Delegate for snapping to a Snappable point and occupying it
+    //This is a callback method supplied by Snappable Controller
+    //This callback gets the snappable controller to check for the cloases snap point and if it's within the range occupy that module
     public delegate void DragEndedDelegate(Module module);
     public DragEndedDelegate dragEndedCallback;
 
+
+    //This callback is Method is supplied by Snappable Controller
+    //This callback is only here to show the snappoints when a module start being dragged
     public delegate void DragStartedDelegate();
     public DragStartedDelegate dragStartedCallback;
 
-    public Snappable HeldSnappable;
+    public Snappable HeldSnappable; //If the module is attatched it has a reverence to the snap point it ocupys 
 
-
+    //Dragabke variables
     [SerializeField] private bool isDraggable = true;
     private bool isDragged = false;
     private Vector3 mouseDragStartPosition;
     private Vector3 spriteDragStartPosition;
 
+    //Sprite renderers to increase the draw height of the modules components so when dragged they are visible over ship components rather than behind
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer spriteRenderer2;
 
     private void OnMouseDown()
     {
-        if (HeldSnappable)
+        if (HeldSnappable) //If this module occupys a snap point, vacate it
         {
             HeldSnappable.Vacate();
             HeldSnappable = null;
         }
 
-        if (isDraggable == true)
+        if (isDraggable == true) //Show nodes, increase draw height, collect starting positions
         {
             dragStartedCallback();
             isDragged = true;
@@ -149,7 +134,7 @@ public abstract class Module : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (isDraggable == true)
+        if (isDraggable == true) //Draw module at mouse position, offset by the difference in starting postion (Makes it look more natural)
         {
             transform.localPosition = spriteDragStartPosition + Camera.main.ScreenToWorldPoint(Input.mousePosition) - mouseDragStartPosition;
         }
@@ -157,7 +142,7 @@ public abstract class Module : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (isDraggable == true)
+        if (isDraggable == true) //set draw order back to original, call the snap comtroller method to check for nearby snap points
         {
             isDragged = false;
             spriteRenderer.sortingOrder = 0;
@@ -166,13 +151,14 @@ public abstract class Module : MonoBehaviour
         }
     }
 
-    internal bool IsThruster()
+    internal bool IsThruster() //Simple method used in detect thrusters
     {
         return this.classification == Classification.Thruster;
     }
 }
 
-public enum Classification
+//Module classifications
+public enum Classification 
 {
     Weapon,
     Shield,

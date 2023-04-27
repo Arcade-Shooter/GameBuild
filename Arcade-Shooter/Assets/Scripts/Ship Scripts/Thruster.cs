@@ -5,22 +5,6 @@ using UnityEngine;
 public class Thruster : Module
 { 
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public int GetIncrease()
-    {
-        return 0;
-    }
+    //There is nothing unique to the thruster class as of yet
 
 }

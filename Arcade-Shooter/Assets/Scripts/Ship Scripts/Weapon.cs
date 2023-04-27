@@ -13,23 +13,17 @@ public class Weapon : Module
     private float ShootFrameCounter;
     [SerializeField] private bool shoot;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
 
-        
-        if (ShootFrameCounter <= FireRate) // If rate is 1 then it shoots 1 every 60 frames
+        // If fire rate is 1 then it shoots 1 every 60 frames
+        if (ShootFrameCounter <= FireRate) //If the weapon has not completed it's firerate cooldown then continue the cooldown
         {
             ShootFrameCounter += Time.deltaTime;
             shoot = false;
         }
-        else if(shoot)
+        else if(shoot) //If the weapon has completed it's cooldown and has been told to shoot
         {
             Instantiate(pew, transform.position, transform.rotation);
             ShootFrameCounter = 0;

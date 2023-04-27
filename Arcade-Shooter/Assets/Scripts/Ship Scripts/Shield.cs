@@ -17,9 +17,10 @@ public class Shield : Module
     void Start()
     {
      
+        //This gives each of the shield layers the callback method for damage shield
         foreach (ShieldLayer layer in ShieldLayers)
         {
-            layer.CollisionCallBack = DamadgeShield;
+            layer.CollisionCallBack = DamageShield;
         }
 
     }
@@ -27,7 +28,7 @@ public class Shield : Module
     // Update is called once per frame
     void Update()
     {
-        if (!this.Connected) //Sets the shield health to zero when disconected
+        if (!this.Connected) //Sets the shield health to zero when disconected to avoid exploitation
         {
             ShieldHealth = 0;
         }
@@ -36,7 +37,7 @@ public class Shield : Module
             ShieldHealth += RechargeRate * Time.deltaTime;
             if (ShieldHealth > MaxShield)
             {
-                ShieldHealth = MaxShield;
+                ShieldHealth = MaxShield; //Reached max shield health
             }
         }
 
@@ -44,6 +45,9 @@ public class Shield : Module
 
 
         //Determine shield visualisation (Hard Coded!!!!)
+        //These two for loops determine if things should be turned on or off
+        //The first for loop counts from 0 up to current health, turning on the relevant shield layers
+        //The second for loop cound from current health to max health turning off the relevant shield layers
 
         int count = 0;
         for (; count < (int)ShieldHealth; count++) //Shield Layers on
@@ -61,7 +65,8 @@ public class Shield : Module
         }
     }
 
-    public void DamadgeShield(int damadge)
+    //Setter for shield health damage
+    public void DamageShield(int damadge)
     {
         this.ShieldHealth -= damadge;
         if (this.ShieldHealth < 1)
