@@ -11,6 +11,8 @@ public class Snappable : MonoBehaviour
     [SerializeField] private bool IsOccupied;
     [SerializeField] private Module module = null;
 
+    public delegate void ModuleChangeDelegate();
+    public ModuleChangeDelegate ModuleChangeCallback;
 
 
     /********************
@@ -55,6 +57,7 @@ public class Snappable : MonoBehaviour
         this.IsDisabled = true;
         this.IsOccupied = true;
         this.module = module;
+        ModuleChangeCallback();
     }
 
 
@@ -64,7 +67,7 @@ public class Snappable : MonoBehaviour
         this.IsDisabled = false;
         module.Connected = false;
         this.module = null;
-
+        ModuleChangeCallback();
     }
 
     // Update is called once per frame

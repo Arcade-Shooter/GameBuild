@@ -12,21 +12,50 @@ public abstract class Module : MonoBehaviour
     [SerializeField] private int MaxHealth;
     private int Power; // Not Implimented
     [SerializeField] private Classification classification;
-    protected bool Paused;
+    protected bool PauseState;
     protected bool Disabled;
     public bool Connected;
 
 
-    public void TakeDamage(int Damage) //Method for reducing health amount
+
+    protected Module(int Health, int Power, Classification classification)
+    {
+        this.Health = Health;
+        this.MaxHealth = Health;
+        this.Power = Power;
+        this.classification = classification;
+        this.PauseState = false;
+        this.Disabled = false;
+    }
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
+    public void TakeDamage(int Damage)
     {
         this.Health -= Damage;
-        if (this.Health <= 0) //Destroy if health is zero
+        if (this.Health <= 0.1 * this.MaxHealth) //Disable if lower then n% health
+        {
+            this.Disabled = true;
+        }
+        if (this.Health <= 0)
         {
             Destroy(this.gameObject);
         }
     }
 
-    public void HealDamage(int Damage) //Heal is never called but is available as an option
+    public void HealDamage(int Damage)
     {
         this.Health += Damage;
         if (this.Health <= 0.1 * this.MaxHealth) //Disable if lower then n% health
@@ -35,7 +64,6 @@ public abstract class Module : MonoBehaviour
         }
     }
 
-    //Changing Power level by increments
     public void IncreasePower(int Power)
     {
         this.Power += Power;
@@ -46,7 +74,6 @@ public abstract class Module : MonoBehaviour
         this.Power -= Power;
     }
 
-    //Changing Disabled state
     public void Enable()
     {
         this.Disabled = false;
@@ -57,20 +84,24 @@ public abstract class Module : MonoBehaviour
         this.Disabled = true;
     }
 
-    //Classification getter
     public Classification GetClassification()
     {
         return this.classification;
     }
 
-    //Collision function for 
-    private void OnTriggerEnter2D(Collider2D Collision)
+
+    private void OnTriggerEnter2D(Collider2D projectile)
     {
-        if (Collision.tag == "Enemy")
+        if (projectile.tag == "EnemyBullet")
         {
-            int damage = Collision.gameObject.GetComponent<Projectile>().GetDamage();
+            int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
             this.TakeDamage(damage);
-            Destroy(Collision.gameObject);
+            Destroy(projectile.gameObject);
+        }
+        else if (projectile.tag == "Enemy")
+        {
+            this.TakeDamage(1);
+            Destroy(projectile.gameObject);
         }
     }
 
