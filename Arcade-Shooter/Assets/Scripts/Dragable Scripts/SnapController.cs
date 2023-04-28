@@ -8,6 +8,7 @@ public class SnapController : MonoBehaviour
 
     public List<Snappable> snapPoints;
     public List<Module> moduleObjects;
+    [SerializeField] public Ship PlayerShip;
     public float snapRange = 0.5f;
 
     // Start is called before the first frame update
@@ -22,11 +23,9 @@ public class SnapController : MonoBehaviour
             snapPoints.Add((Snappable) go.GetComponent(typeof(Snappable)));
         }
 
-        gos = GameObject.FindGameObjectsWithTag("PlayerDraggable");
-        foreach (GameObject go in gos)
-        {
-            moduleObjects.Add((Module)go.GetComponent(typeof(Module)));
-        }
+        this.PlayerShip.AddModuleCallback = AddDraggable;
+        this.PlayerShip.RemoveModuleCallback = RemoveDraggable;
+
 
 
         //For each module in the list set it's module callbacks to the correct methods
@@ -36,6 +35,21 @@ public class SnapController : MonoBehaviour
             module.dragStartedCallback = ShowSnaps;
         }
     }
+
+    public void AddDraggable(Module module)
+    {
+        this.moduleObjects.Add(module);
+        module.dragEndedCallback = OnDragEnded;
+        module.dragStartedCallback = ShowSnaps;
+    }
+
+    public void RemoveDraggable(Module module)
+    {
+        this.moduleObjects.Remove(module);
+        module.dragEndedCallback = null;
+        module.dragStartedCallback = null;
+    }
+
 
     //Small function that sets all snappoints to be visible
     private void ShowSnaps()
@@ -63,12 +77,15 @@ public class SnapController : MonoBehaviour
         float closestDistance = -1;
         Snappable ClosestSnapPoint = null;
 
+        Module draggedModule = module;
+        Snappable draggedSnappable = module.HeldSnappable;
 
-        // Find the closest snap point
+
+        // Find the closest snap point to where it was dropped
         foreach (Snappable snapPoint in snapPoints)
         {
             float currentDistance = Vector2.Distance(module.transform.position, snapPoint.transform.position);
-            if ((ClosestSnapPoint == null && snapPoint.GetDisabledState() == false) || (currentDistance < closestDistance && snapPoint.GetDisabledState() == false))
+            if ((ClosestSnapPoint == null) || (currentDistance < closestDistance))
             {
                 ClosestSnapPoint = snapPoint;
                 closestDistance = currentDistance;
@@ -78,12 +95,30 @@ public class SnapController : MonoBehaviour
         //Check if the closes snap point is in range and if so, occupy it with the given module
         if (ClosestSnapPoint != null && closestDistance <= snapRange)
         {
-            module.transform.position = ClosestSnapPoint.transform.position;
-            ClosestSnapPoint.Occupy(module);
-            module.HeldSnappable = ClosestSnapPoint;
-            module.Connected = true;
-        }
+            if (ClosestSnapPoint.GetOccupiedState() == false) //If there was no module in there
+            {
+                draggedSnappable.Vacate(module);//Vacate the old module
+                ClosestSnapPoint.Occupy(module);
+                HideSnaps();
+            }
+            else //If already occupied, swap modules
+            {
+                Module swappingModule = ClosestSnapPoint.GetModule();
 
-        HideSnaps();
+                //Vacate both snappables
+                draggedSnappable.Vacate(draggedModule);
+                ClosestSnapPoint.Vacate(swappingModule);
+                
+                //Occupy both snappables with the opposite modules
+                draggedSnappable.Occupy(swappingModule);
+                ClosestSnapPoint.Occupy(draggedModule);
+                HideSnaps();
+            }
+        }
+        else {
+            //If no snapPoints in range, return to original position;
+            draggedSnappable.Occupy(draggedModule);
+            HideSnaps();
+        }
     }
 }

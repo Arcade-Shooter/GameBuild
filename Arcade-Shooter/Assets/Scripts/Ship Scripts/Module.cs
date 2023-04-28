@@ -116,8 +116,7 @@ public abstract class Module : MonoBehaviour
     {
         if (HeldSnappable) //If this module occupys a snap point, vacate it
         {
-            HeldSnappable.Vacate();
-            HeldSnappable = null;
+            HeldSnappable.Vacate(this);
         }
 
         if (isDraggable == true) //Show nodes, increase draw height, collect starting positions
@@ -154,6 +153,18 @@ public abstract class Module : MonoBehaviour
     internal bool IsThruster() //Simple method used in detect thrusters
     {
         return this.classification == Classification.Thruster;
+    }
+
+
+    //Setters for the modules drag controls
+    public void EnableDrag()
+    {
+        this.isDraggable = true;
+    }
+
+    public void DisableDrag()
+    {
+        this.isDraggable = false;
     }
 }
 

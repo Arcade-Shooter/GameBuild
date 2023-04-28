@@ -11,6 +11,9 @@ public class Snappable : MonoBehaviour
     [SerializeField] private bool IsOccupied;
     [SerializeField] private Module module = null;
 
+
+    //This Callback is supplied by the ship class
+    //The purpose of this callback is check the ship when modules have changed (Primarily for the number of thrusters)
     public delegate void ModuleChangeDelegate();
     public ModuleChangeDelegate ModuleChangeCallback;
 
@@ -32,7 +35,6 @@ public class Snappable : MonoBehaviour
     {
         return module;
     }
-
 
 
     /********************
@@ -58,25 +60,36 @@ public class Snappable : MonoBehaviour
         this.IsDisabled = true;
         this.IsOccupied = true;
         this.module = module;
-        ModuleChangeCallback();
+        module.HeldSnappable = this;
+        module.Connected = true;
+
+        if (ModuleChangeCallback != null)//If the snap point is on the ship trigger an update
+        {
+            ModuleChangeCallback();
+        }
+
+        //Adjust parent to be this node for movement
+        module.transform.position = this.transform.position;
+        module.transform.SetParent(this.transform);
+        
     }
 
     //Vacate is a methos the releases the held state of a snap point
-    public void Vacate()
+    public void Vacate(Module module)
     {
         this.IsOccupied = false;
         this.IsDisabled = false;
         module.Connected = false;
         this.module = null;
-        ModuleChangeCallback();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (module) //If there is a module attached to this snap point move it with the snap point
+        if (ModuleChangeCallback != null)//If the snap point is on the ship trigger an update
         {
-            module.transform.position = this.transform.position;
+            ModuleChangeCallback();
         }
+
+
+        //Release this as the parent node
+        module.transform.parent = null;
+        
     }
 }

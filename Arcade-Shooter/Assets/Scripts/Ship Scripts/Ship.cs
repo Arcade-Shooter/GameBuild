@@ -13,11 +13,13 @@ public class Ship : MonoBehaviour
     [SerializeField] private int Speed;
     private bool shoot = false;
     private bool getThrusters = false;
-    
-    
-    
 
+    //Draggable Module Add and Remove Callbacks
+    public delegate void AddModuleDelegate(Module module);
+    public AddModuleDelegate AddModuleCallback;
 
+    public delegate void RemoveModuleDelegate(Module module);
+    public RemoveModuleDelegate RemoveModuleCallback;
 
 
 
@@ -84,18 +86,40 @@ public class Ship : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D projectile)
+    private void OnTriggerEnter2D(Collider2D Collision)
     {
-        if (projectile.tag == "EnemyBullet")
+        if (Collision.tag == "EnemyBullet")
         {
-            int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
+            int damage = Collision.gameObject.GetComponent<Projectile>().GetDamage();
             this.TakeDamage(damage);
-            Destroy(projectile.gameObject);
+            Destroy(Collision.gameObject);
         }
-        else if (projectile.tag == "Enemy")
+        else if (Collision.tag == "Enemy")
         {
             this.TakeDamage(1);
-            Destroy(projectile.gameObject);
+            Destroy(Collision.gameObject);
+        }
+        else if (Collision.tag == "UnclaimedModule")
+        {
+            Debug.Log("PlauerDraggableHit");
+
+            //Find empty snapPoint
+            foreach (Snappable snap in SnapPoints)
+            {
+
+                if (snap.GetOccupiedState() == false)//If unoccupied, occupy it
+                {
+                    Module module = Collision.gameObject.GetComponent<Module>();
+
+                    snap.Occupy(module);
+                    module.gameObject.tag = "PlayerModule"; //Change tag so it doesn't collide on drag
+                    AddModuleCallback(module); //Add to the drag controller
+                    module.EnableDrag(); //Enable dragging
+                    break;
+                }
+            }
+
+            //If no spaces are available
         }
     }
 
@@ -151,7 +175,7 @@ public class Ship : MonoBehaviour
         }
     }
 
-    //Module Change
+    //Module Change callback method
     private void ModuleChange()
     {
         ThrusterBoost = DetectThrusters(); //When modules change check if the number of thrusters has changed
