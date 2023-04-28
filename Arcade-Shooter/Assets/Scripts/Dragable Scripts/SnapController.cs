@@ -36,11 +36,14 @@ public class SnapController : MonoBehaviour
         }
     }
 
+
+    //For adding draggable modules to the list on ship pickup
     public void AddDraggable(Module module)
     {
         this.moduleObjects.Add(module);
         module.dragEndedCallback = OnDragEnded;
         module.dragStartedCallback = ShowSnaps;
+        PlayerShip.ModuleChange();
     }
 
     public void RemoveDraggable(Module module)
@@ -100,10 +103,17 @@ public class SnapController : MonoBehaviour
                 draggedSnappable.Vacate(module);//Vacate the old module
                 ClosestSnapPoint.Occupy(module);
                 HideSnaps();
+                PlayerShip.ModuleChange();
             }
             else //If already occupied, swap modules
             {
                 Module swappingModule = ClosestSnapPoint.GetModule();
+
+                //If swapping module is a shield, reset it to avoid exploitation
+                if (swappingModule.GetClassification() == Classification.Shield)
+                {
+                    ((Shield)swappingModule).ResetShield();
+                }
 
                 //Vacate both snappables
                 draggedSnappable.Vacate(draggedModule);
@@ -113,6 +123,7 @@ public class SnapController : MonoBehaviour
                 draggedSnappable.Occupy(swappingModule);
                 ClosestSnapPoint.Occupy(draggedModule);
                 HideSnaps();
+                PlayerShip.ModuleChange();
             }
         }
         else {

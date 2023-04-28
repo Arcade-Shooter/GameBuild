@@ -221,9 +221,7 @@ MonoBehaviour:
   - {fileID: 1457040003}
   WeaponName: Pewer
   Projectile:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3616997431128321647, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
   FireRate: 2
   pew: {fileID: 1260516630381133844, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
   shoot: 0

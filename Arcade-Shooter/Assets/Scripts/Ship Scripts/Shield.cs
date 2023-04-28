@@ -74,4 +74,10 @@ public class Shield : Module
             ShieldHealth = 0;
         }
     }
+
+    //Anti cheat method so that moving the shield can't be exploited
+    public void ResetShield()
+    {
+        this.ShieldHealth = 0;
+    }
 }

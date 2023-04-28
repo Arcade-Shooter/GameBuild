@@ -12,12 +12,6 @@ public class Snappable : MonoBehaviour
     [SerializeField] private Module module = null;
 
 
-    //This Callback is supplied by the ship class
-    //The purpose of this callback is check the ship when modules have changed (Primarily for the number of thrusters)
-    public delegate void ModuleChangeDelegate();
-    public ModuleChangeDelegate ModuleChangeCallback;
-
-
     /********************
      * Getters
     ********************/
@@ -63,11 +57,6 @@ public class Snappable : MonoBehaviour
         module.HeldSnappable = this;
         module.Connected = true;
 
-        if (ModuleChangeCallback != null)//If the snap point is on the ship trigger an update
-        {
-            ModuleChangeCallback();
-        }
-
         //Adjust parent to be this node for movement
         module.transform.position = this.transform.position;
         module.transform.SetParent(this.transform);
@@ -81,11 +70,6 @@ public class Snappable : MonoBehaviour
         this.IsDisabled = false;
         module.Connected = false;
         this.module = null;
-
-        if (ModuleChangeCallback != null)//If the snap point is on the ship trigger an update
-        {
-            ModuleChangeCallback();
-        }
 
 
         //Release this as the parent node

@@ -15,24 +15,13 @@ public class Ship : MonoBehaviour
     private bool getThrusters = false;
 
     //Draggable Module Add and Remove Callbacks
+    //These are supplied by the Snap Controller on start so that when the ship picks up a new module it add it to the draggable list
     public delegate void AddModuleDelegate(Module module);
     public AddModuleDelegate AddModuleCallback;
 
     public delegate void RemoveModuleDelegate(Module module);
     public RemoveModuleDelegate RemoveModuleCallback;
 
-
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        foreach (var snappable in SnapPoints)
-        {
-            snappable.ModuleChangeCallback = ModuleChange;
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -53,6 +42,7 @@ public class Ship : MonoBehaviour
         Shoot();    //update if player shoot
     }
 
+    //Iterates through all the attached components and if it's a weapon, tries to shoot
     public void FireWeapons()
     {
         foreach (Snappable snappable in SnapPoints)
@@ -65,6 +55,7 @@ public class Ship : MonoBehaviour
         }
     }
 
+    //Goes through all the attached components and if it's a thruster, increments by 1
     private int DetectThrusters()
     {
         int thrusters = 0;
@@ -86,6 +77,7 @@ public class Ship : MonoBehaviour
     }
 
 
+    //Collision controller for the ship
     private void OnTriggerEnter2D(Collider2D Collision)
     {
         if (Collision.tag == "EnemyBullet")
@@ -120,9 +112,11 @@ public class Ship : MonoBehaviour
             }
 
             //If no spaces are available
+            //Not implimented so new components don't do anything
         }
     }
 
+    //Ship health damage
     private void TakeDamage(int damage)
     {
         this.Health -= damage;
@@ -176,7 +170,8 @@ public class Ship : MonoBehaviour
     }
 
     //Module Change callback method
-    private void ModuleChange()
+    //This is called by the SnapController when a change has occured with the draggable modules
+    public void ModuleChange()
     {
         ThrusterBoost = DetectThrusters(); //When modules change check if the number of thrusters has changed
     }
