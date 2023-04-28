@@ -9,6 +9,7 @@ public class SnapController : MonoBehaviour
     public List<Snappable> snapPoints;
     public List<Module> moduleObjects;
     [SerializeField] public Ship PlayerShip;
+    [SerializeField] private Snappable Bin;
     public float snapRange = 0.5f;
 
     // Start is called before the first frame update
@@ -81,7 +82,7 @@ public class SnapController : MonoBehaviour
         Snappable ClosestSnapPoint = null;
 
         Module draggedModule = module;
-        Snappable draggedSnappable = module.HeldSnappable;
+        Snappable OriginalSnapPoint = module.HeldSnappable;
 
 
         // Find the closest snap point to where it was dropped
@@ -98,16 +99,20 @@ public class SnapController : MonoBehaviour
         //Check if the closes snap point is in range and if so, occupy it with the given module
         if (ClosestSnapPoint != null && closestDistance <= snapRange)
         {
-            if (ClosestSnapPoint.GetOccupiedState() == false) //If there was no module in there
+            if (ClosestSnapPoint == Bin) //If component is dragged onto the bin
             {
-                draggedSnappable.Vacate(module);//Vacate the old module
-                ClosestSnapPoint.Occupy(module);
+                Destroy(module.gameObject);
+            }
+            else if (ClosestSnapPoint.GetOccupiedState() == false) //If there was no module in the closest snappable, swap to it
+            { 
+                OriginalSnapPoint.Vacate(draggedModule);
+                ClosestSnapPoint.Occupy(draggedModule);
                 HideSnaps();
                 PlayerShip.ModuleChange();
             }
             else //If already occupied, swap modules
             {
-                Module swappingModule = ClosestSnapPoint.GetModule();
+                Module swappingModule = ClosestSnapPoint.GetModule(); //The module that the draged module will swap with
 
                 //If swapping module is a shield, reset it to avoid exploitation
                 if (swappingModule.GetClassification() == Classification.Shield)
@@ -116,11 +121,11 @@ public class SnapController : MonoBehaviour
                 }
 
                 //Vacate both snappables
-                draggedSnappable.Vacate(draggedModule);
+                OriginalSnapPoint.Vacate(draggedModule);
                 ClosestSnapPoint.Vacate(swappingModule);
                 
                 //Occupy both snappables with the opposite modules
-                draggedSnappable.Occupy(swappingModule);
+                OriginalSnapPoint.Occupy(swappingModule);
                 ClosestSnapPoint.Occupy(draggedModule);
                 HideSnaps();
                 PlayerShip.ModuleChange();
@@ -128,7 +133,7 @@ public class SnapController : MonoBehaviour
         }
         else {
             //If no snapPoints in range, return to original position;
-            draggedSnappable.Occupy(draggedModule);
+            OriginalSnapPoint.Occupy(draggedModule);
             HideSnaps();
         }
     }
