@@ -216,10 +216,14 @@ MonoBehaviour:
   Connected: 0
   HeldSnappable: {fileID: 0}
   isDraggable: 0
-  spriteRenderer: {fileID: 1251940011448440095}
-  spriteRenderer2: {fileID: 1457040003}
+  Square: {fileID: 1251940011448440095}
+  Decoration:
+  - {fileID: 1457040003}
   WeaponName: Pewer
-  Projectile: {fileID: 3616997431128321647, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
+  Projectile:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   FireRate: 2
   pew: {fileID: 1260516630381133844, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
   shoot: 0

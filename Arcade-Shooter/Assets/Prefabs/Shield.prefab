@@ -135,8 +135,9 @@ MonoBehaviour:
   Connected: 0
   HeldSnappable: {fileID: 0}
   isDraggable: 0
-  spriteRenderer: {fileID: 2375984630051336998}
-  spriteRenderer2: {fileID: 3577821419994279403}
+  Square: {fileID: 2375984630051336998}
+  Decoration:
+  - {fileID: 3577821419994279403}
   ShieldHealth: 3
   MaxShield: 3
   RechargeRate: 0.5

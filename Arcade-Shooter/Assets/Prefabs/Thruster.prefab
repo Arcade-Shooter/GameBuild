@@ -216,8 +216,9 @@ MonoBehaviour:
   Connected: 0
   HeldSnappable: {fileID: 0}
   isDraggable: 0
-  spriteRenderer: {fileID: 1918513062081715188}
-  spriteRenderer2: {fileID: 846718210252268648}
+  Square: {fileID: 1918513062081715188}
+  Decoration:
+  - {fileID: 846718210252268648}
 --- !u!50 &2319611979045566791
 Rigidbody2D:
   serializedVersion: 4

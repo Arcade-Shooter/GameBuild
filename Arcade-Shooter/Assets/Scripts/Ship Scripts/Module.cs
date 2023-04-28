@@ -109,8 +109,8 @@ public abstract class Module : MonoBehaviour
     private Vector3 spriteDragStartPosition;
 
     //Sprite renderers to increase the draw height of the modules components so when dragged they are visible over ship components rather than behind
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private SpriteRenderer spriteRenderer2;
+    [SerializeField] private SpriteRenderer Square;
+    [SerializeField] private List<SpriteRenderer> Decoration;
 
     private void OnMouseDown()
     {
@@ -123,8 +123,12 @@ public abstract class Module : MonoBehaviour
         {
             dragStartedCallback();
             isDragged = true;
-            spriteRenderer.sortingOrder = 5;
-            spriteRenderer2.sortingOrder = 6;
+            Square.sortingOrder = 5;
+            foreach (SpriteRenderer sprite in Decoration)
+            {
+                sprite.sortingOrder = 6;
+            }
+            
 
             mouseDragStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             spriteDragStartPosition = transform.localPosition;
@@ -144,8 +148,11 @@ public abstract class Module : MonoBehaviour
         if (isDraggable == true) //set draw order back to original, call the snap comtroller method to check for nearby snap points
         {
             isDragged = false;
-            spriteRenderer.sortingOrder = 0;
-            spriteRenderer2.sortingOrder = 1;
+            Square.sortingOrder = 0;
+            foreach (SpriteRenderer sprite in Decoration)
+            {
+                sprite.sortingOrder = 1;
+            }
             dragEndedCallback(this);
         }
     }

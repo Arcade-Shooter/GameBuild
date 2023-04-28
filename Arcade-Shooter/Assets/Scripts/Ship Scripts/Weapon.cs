@@ -6,7 +6,7 @@ public class Weapon : Module
 {
 
     [SerializeField] private string WeaponName;
-    [SerializeField] private Projectile Projectile;
+    [SerializeField] private List<Projectile> Projectile;
     [SerializeField] private float FireRate;
 
     [SerializeField] private GameObject pew;
@@ -25,7 +25,10 @@ public class Weapon : Module
         }
         else if(shoot) //If the weapon has completed it's cooldown and has been told to shoot
         {
-            Instantiate(pew, transform.position, transform.rotation);
+            foreach (Projectile p in Projectile)
+            {
+                Instantiate(p, transform.position, transform.rotation);
+            }
             ShootFrameCounter = 0;
             shoot = false;
         }
