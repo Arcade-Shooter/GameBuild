@@ -151,6 +151,6 @@ MonoBehaviour:
   ProjectileName: Pew
   Type: 0
   Damage: 1
-  Speed: 5
+  Speed: 80
   Paused: 0
   bearing: 0

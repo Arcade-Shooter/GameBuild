@@ -302,7 +302,7 @@ MonoBehaviour:
   Connected: 0
   HeldSnappable: {fileID: 0}
   isDraggable: 0
-  Square: {fileID: 0}
+  Square: {fileID: 6431050985661888965}
   Decoration:
   - {fileID: 5215280530029692505}
   - {fileID: 4365817001517728211}
@@ -312,7 +312,7 @@ MonoBehaviour:
   - {fileID: 3616997431128321647, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
   - {fileID: 8473532087300380563, guid: 6b5e4cab86003e34c9133cbf778224e7, type: 3}
   - {fileID: 2296016810717668163, guid: 22b0759add2d8834c9e90298072664ad, type: 3}
-  FireRate: 60
+  FireRate: 0.75
   pew: {fileID: 1260516630381133844, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
   shoot: 0
 --- !u!50 &5215280531533814440
