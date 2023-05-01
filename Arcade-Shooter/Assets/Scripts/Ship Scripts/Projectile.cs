@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Projectile : MonoBehaviour
 {
@@ -17,20 +18,22 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int Damage;
     [SerializeField] private float Speed;
     [SerializeField] private bool Paused;
-    [SerializeField] private Rigidbody2D rigidbody;
+    [SerializeField] private float bearing;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        transform.Rotate(0, 0, -bearing);
+        Rigidbody2D rigid = this.gameObject.GetComponent<Rigidbody2D>();
+        rigid.AddForce(rigid.transform.up * Speed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!Paused)
+        if (!Paused)
         {
-            transform.position += (Vector3.up * this.Speed) * Time.deltaTime;
+
+            
 
             if (transform.position.y > 5.5)
             {

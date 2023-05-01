@@ -5,10 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Snappable
-  - PlayerDraggable
   - Enemy
   - EnemyBullet
   - PlayerBullet
+  - PlayerShip
+  - UnclaimedModule
+  - PlayerModule
   layers:
   - Default
   - TransparentFX
