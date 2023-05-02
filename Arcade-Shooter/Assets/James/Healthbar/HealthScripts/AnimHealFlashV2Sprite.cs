@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AnimHealFlash : MonoBehaviour
+public class AnimHealFlashV2Sprite : MonoBehaviour
 {
     public Color flashColor = Color.white;
     public float interval = 1.0f; //1second
