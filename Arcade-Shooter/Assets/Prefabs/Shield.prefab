@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2375984630051336998}
   - component: {fileID: 2375984630051336996}
   - component: {fileID: 2375984630051336993}
+  - component: {fileID: 6627775139861065399}
   m_Layer: 7
   m_Name: Shield
-  m_TagString: PlayerDraggable
+  m_TagString: UnclaimedModule
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +115,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
 --- !u!114 &2375984630051336993
 MonoBehaviour:
@@ -133,9 +134,10 @@ MonoBehaviour:
   classification: 1
   Connected: 0
   HeldSnappable: {fileID: 0}
-  isDraggable: 1
-  spriteRenderer: {fileID: 2375984630051336998}
-  spriteRenderer2: {fileID: 3577821419994279403}
+  isDraggable: 0
+  Square: {fileID: 2375984630051336998}
+  Decoration:
+  - {fileID: 3577821419994279403}
   ShieldHealth: 3
   MaxShield: 3
   RechargeRate: 0.5
@@ -143,6 +145,27 @@ MonoBehaviour:
   - {fileID: 1706697429}
   - {fileID: 971828137}
   - {fileID: 272794385}
+--- !u!50 &6627775139861065399
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2375984630051337001}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3577821419597531261
 GameObject:
   m_ObjectHideFlags: 0

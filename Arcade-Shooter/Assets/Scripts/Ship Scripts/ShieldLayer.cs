@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ShieldLayer : MonoBehaviour
 {
-
+    //Callback supplied by it's parent shield module
+    //This callback is for the shield damadge method
     public delegate void CollisionDelegate(int damadge);
     public CollisionDelegate CollisionCallBack;
 
@@ -20,7 +21,7 @@ public class ShieldLayer : MonoBehaviour
         
     }
 
-
+    //Collision controller for the shield layers
     private void OnTriggerEnter2D(Collider2D projectile)
     {
         if (projectile.tag == "EnemyBullet") {
