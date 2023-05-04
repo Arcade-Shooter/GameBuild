@@ -6,8 +6,6 @@ using UnityEngine;
 public abstract class Module : MonoBehaviour
 {
 
-
-
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
     private int Power; // Not Implimented

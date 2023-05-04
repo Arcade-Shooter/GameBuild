@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+    private static Ship instance;
 
+ 
 
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
     [SerializeField] private List<Snappable> SnapPoints; 
     [SerializeField] private int ThrusterBoost; //An integer
     [SerializeField] private int Speed;
-    private bool shoot = false;
-    private bool getThrusters = false;
+    [SerializeField] private GameObject Bullet;
+    //private bool shoot = false;
+    //private bool getThrusters = false;
 
     //Draggable Module Add and Remove Callbacks
     //These are supplied by the Snap Controller on start so that when the ship picks up a new module it add it to the draggable list
@@ -23,20 +26,28 @@ public class Ship : MonoBehaviour
     public RemoveModuleDelegate RemoveModuleCallback;
 
 
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (shoot)
-        {
-            FireWeapons();
-            shoot = false;
-        }
+        //if (shoot)
+        //{
+        //    FireWeapons();
+        //    //shoot = false;
+        //}
 
-        if (getThrusters)
-        {
-            DetectThrusters();
-            getThrusters = false;
-        }
+        //if (getThrusters)
+        //{
+        //    DetectThrusters();
+        //    //getThrusters = false;
+        //}
 
         Move();     //update ship position
         Shoot();    //update if player shoot
@@ -163,8 +174,9 @@ public class Ship : MonoBehaviour
         //check if the "Space" has been pressed
         if (Input.GetKey(KeyCode.Space))
         {
+            Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
             //print("Space key has been pressed");
-            shoot = true;
+            //shoot = true;
 
         }
     }
@@ -174,5 +186,15 @@ public class Ship : MonoBehaviour
     public void ModuleChange()
     {
         ThrusterBoost = DetectThrusters(); //When modules change check if the number of thrusters has changed
+    }
+
+    public static Ship GetInstance()
+    {
+        return instance;
+    }
+
+    private static void SetInstance(Ship ship)
+    {
+        instance = ship;
     }
 }
