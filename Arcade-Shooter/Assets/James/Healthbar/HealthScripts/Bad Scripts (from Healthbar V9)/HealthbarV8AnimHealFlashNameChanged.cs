@@ -3,34 +3,22 @@ using UnityEngine.UI;
 
 /**
 
-Healthbar V10 - ( the weird version in the script name no longer means anything )
-
-This Version brings fantastic new changes, like:
-health visually changes BEFORE the animation, so thats good
-damage flash for hurting should probably be brown not red
-
-____________________________
+Healthbar V8 - AnimHealFlash.cs Name Changed:
 
 
-Healthbar V7 - Sprite Tiled:
+No joke, the only reason i have to change this script
+is because of my nightmare versioning: i changed the script
+"AnimHealFlash.cs" to "AnimHealFlashV2Sprite.cs" (because im silly and thats just what i do)
+And because I cannot create a [SerializeField] to drag in a script,
+I now have to go and change the name in the AnimHealFlash in this script.
 
-the "Healthbar" script now uses a SpriteRenderer, where the image mode is "tiled".
-This means we can crop the image to show more or less hearts.
+This is absolute pain, if i could put a unit test around this i would.
+in fact, I would rather use Unity's built-in animation system, then i could just
+drag in the appropriate animation.
 
-
-
-One issue with this version is
-it still relies on my weird little "AnimHealFlash.cs" script.
-
-In the next version I am hoping to replace this script with a proper
-Unity animation i can drag and drop into the script
-using [SerializeField] variables i.e:
-
-[SerializeField] private Animation animHealFlash;
-[SerializeField] private Animation animDamageFlash;
-
+For now, this is not 
 */
-public class HealthbarV7SpriteTiled : MonoBehaviour
+public class HealthbarV8AnimHealFlashNameChanged : MonoBehaviour
 {
     //VARIABLES
     [SerializeField] private int maxHealth = 3; //3 heart capsules
@@ -100,10 +88,7 @@ public class HealthbarV7SpriteTiled : MonoBehaviour
     //ANIMATION STUFF
     private void AnimateDamage()
     {
-        //the 1 means "flash once" not "flash for 1 second" (this is a personal oops i made)
-        //its brown, not red anymore, so you can read the amount of damage as the animation plays. less interfery
-        Color darkRed = new Color(0.8f, 0.4f, 0); 
-        GetComponent<AnimHealFlash>().HealFlash(1, darkRed); 
+        GetComponent<AnimHealFlash>().HealFlash(1, Color.red);
     }
     private void AnimateHeal()
     {
