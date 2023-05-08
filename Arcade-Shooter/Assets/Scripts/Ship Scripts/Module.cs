@@ -102,7 +102,7 @@ public abstract class Module : MonoBehaviour
 
     public Snappable HeldSnappable; //If the module is attatched it has a reverence to the snap point it ocupys 
 
-    //Dragabke variables
+    //Dragable variables
     [SerializeField] private bool isDraggable = true;
     private bool isDragged = false;
     private Vector3 mouseDragStartPosition;

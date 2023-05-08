@@ -35,6 +35,8 @@ public class SnapController : MonoBehaviour
             module.dragEndedCallback = OnDragEnded;
             module.dragStartedCallback = ShowSnaps;
         }
+
+        HideSnaps();
     }
 
 

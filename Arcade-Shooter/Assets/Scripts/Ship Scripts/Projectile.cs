@@ -32,9 +32,6 @@ public class Projectile : MonoBehaviour
     {
         if (!Paused)
         {
-
-            
-
             if (transform.position.y > 5.5)
             {
                 Destroy(gameObject);
