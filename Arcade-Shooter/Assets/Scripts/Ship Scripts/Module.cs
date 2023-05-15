@@ -13,7 +13,7 @@ public abstract class Module : MonoBehaviour
     private int Power; // Not Implimented
     [SerializeField] private Classification classification;
     protected bool Paused;
-    protected bool Disabled;
+    protected bool Disabled; 
     public bool Connected;
 
 
@@ -69,6 +69,11 @@ public abstract class Module : MonoBehaviour
         return this.classification;
     }
 
+    internal bool IsThruster() //Simple method used in the ships detect thrusters method
+    {
+        return this.classification == Classification.Thruster;
+    }
+
     //Method to control Collisions with modules
     private void OnTriggerEnter2D(Collider2D Collsion)
     {
@@ -90,7 +95,7 @@ public abstract class Module : MonoBehaviour
     ******************************************/
 
     //This is a callback method supplied by Snappable Controller
-    //This callback gets the snappable controller to check for the cloases snap point and if it's within the range occupy that module
+    //This callback gets the snappable controller to check for the cloasest snap point and if it's within the range occupy that module
     public delegate void DragEndedDelegate(Module module);
     public DragEndedDelegate dragEndedCallback;
 
@@ -100,7 +105,7 @@ public abstract class Module : MonoBehaviour
     public delegate void DragStartedDelegate();
     public DragStartedDelegate dragStartedCallback;
 
-    public Snappable HeldSnappable; //If the module is attatched it has a reverence to the snap point it ocupys 
+    public Snappable HeldSnappable; //If the module is attatched it has a reference to the snap point it ocupys 
 
     //Dragable variables
     [SerializeField] private bool isDraggable = true;
@@ -145,7 +150,7 @@ public abstract class Module : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (isDraggable == true) //set draw order back to original, call the snap comtroller method to check for nearby snap points
+        if (isDraggable == true) //set draw order back to original, call the snap controller method to check for nearby snap points
         {
             isDragged = false;
             Square.sortingOrder = 0;
@@ -155,11 +160,6 @@ public abstract class Module : MonoBehaviour
             }
             dragEndedCallback(this);
         }
-    }
-
-    internal bool IsThruster() //Simple method used in detect thrusters
-    {
-        return this.classification == Classification.Thruster;
     }
 
 
