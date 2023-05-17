@@ -11,7 +11,7 @@ public class SpreadGun : WeaponType
     public SpreadGun( ) 
         : base("Spread Gun", "This gun shoot 3 bullets spreadly",60 , 10, 100, 3)
     {
-       
+        
     }
 
     private void Update()
@@ -37,6 +37,8 @@ public class SpreadGun : WeaponType
 
         }
     }
+
+
 
     public override void useItem(GameObject player)
     {

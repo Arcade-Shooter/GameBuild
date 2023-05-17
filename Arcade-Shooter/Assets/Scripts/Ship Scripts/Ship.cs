@@ -10,7 +10,6 @@ public class Ship : MonoBehaviour
 
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
-    [SerializeField] private List<Snappable> SnapPoints; 
     [SerializeField] private int ThrusterBoost; //An integer
     [SerializeField] private int Speed;
     [SerializeField] private GameObject Bullet;
@@ -54,38 +53,9 @@ public class Ship : MonoBehaviour
     }
 
     //Iterates through all the attached components and if it's a weapon, tries to shoot
-    public void FireWeapons()
-    {
-        foreach (Snappable snappable in SnapPoints)
-        {
-            Module module = snappable.GetModule();
-            if ( module != null && module.GetClassification() == Classification.Weapon)
-            {
-                ((Weapon)module).FireWeapon(); //Transform module into a weapon and shoot it
-            }
-        }
-    }
 
     //Goes through all the attached components and if it's a thruster, increments by 1
-    private int DetectThrusters()
-    {
-        int thrusters = 0;
-        foreach (Snappable snappable in SnapPoints)
-        {
-            Module module = snappable.GetModule();
-            if (module != null)
-            {
-                if (module.IsThruster())
-                {
-                    thrusters++;
-                }
-            }
-        }
 
-        Debug.Log("" + thrusters);
-        return thrusters;
-
-    }
 
 
     //Collision controller for the ship
@@ -107,20 +77,6 @@ public class Ship : MonoBehaviour
             Debug.Log("PlauerDraggableHit");
 
             //Find empty snapPoint
-            foreach (Snappable snap in SnapPoints)
-            {
-
-                if (snap.GetOccupiedState() == false)//If unoccupied, occupy it
-                {
-                    Module module = Collision.gameObject.GetComponent<Module>();
-
-                    snap.Occupy(module);
-                    module.gameObject.tag = "PlayerModule"; //Change tag so it doesn't collide on drag
-                    AddModuleCallback(module); //Add to the drag controller
-                    module.EnableDrag(); //Enable dragging
-                    break;
-                }
-            }
 
             //If no spaces are available
             //Not implimented so new components don't do anything
@@ -185,7 +141,6 @@ public class Ship : MonoBehaviour
     //This is called by the SnapController when a change has occured with the draggable modules
     public void ModuleChange()
     {
-        ThrusterBoost = DetectThrusters(); //When modules change check if the number of thrusters has changed
     }
 
     public static Ship GetInstance()

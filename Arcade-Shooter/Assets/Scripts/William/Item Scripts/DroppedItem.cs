@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreboardView : MonoBehaviour
+public class DroppedItem : MonoBehaviour
 {
-
-    //Maybe a canvas
-
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +13,6 @@ public class ScoreboardView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check if menu state is State.Scoreboard
+        
     }
 }
