@@ -54,7 +54,6 @@ public class Snappable : MonoBehaviour
         this.IsDisabled = true;
         this.IsOccupied = true;
         this.module = module;
-        module.HeldSnappable = this;
         module.Connected = true;
 
         //Adjust parent to be this node for movement
@@ -64,16 +63,16 @@ public class Snappable : MonoBehaviour
     }
 
     //Vacate is a methos the releases the held state of a snap point
-    public void Vacate(Module module)
+    public void Vacate()
     {
+
+        //Release this as the parent node
+        this.GetModule().transform.parent = null;
+
         this.IsOccupied = false;
         this.IsDisabled = false;
         module.Connected = false;
         this.module = null;
-
-
-        //Release this as the parent node
-        module.transform.parent = null;
         
     }
 }
