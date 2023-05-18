@@ -19,7 +19,6 @@ public abstract class Module : MonoBehaviour
     [SerializeField] private Classification classification;
 
 
-
     //Method to return the Classification of the module
     public Classification GetClassification()
     {

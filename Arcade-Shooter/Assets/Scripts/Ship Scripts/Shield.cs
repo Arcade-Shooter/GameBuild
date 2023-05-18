@@ -28,18 +28,18 @@ public class Shield : Module
     // Update is called once per frame
     void Update()
     {
-        if (!this.Connected) //Sets the shield health to zero when disconected to avoid exploitation
-        {
-            ShieldHealth = 0;
-        }
-        else if (!this.Paused && ShieldHealth < MaxShield) //Increases shield health per frame
-        {
-            ShieldHealth += RechargeRate * Time.deltaTime;
-            if (ShieldHealth > MaxShield)
-            {
-                ShieldHealth = MaxShield; //Reached max shield health
-            }
-        }
+        // if (!this.Connected) //Sets the shield health to zero when disconected to avoid exploitation
+        // {
+        //     ShieldHealth = 0;
+        // }
+        // else if (!this.Paused && ShieldHealth < MaxShield) //Increases shield health per frame
+        // {
+        //     ShieldHealth += RechargeRate * Time.deltaTime;
+        //     if (ShieldHealth > MaxShield)
+        //     {
+        //         ShieldHealth = MaxShield; //Reached max shield health
+        //     }
+        // }
 
 
 

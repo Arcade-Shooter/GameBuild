@@ -4,16 +4,19 @@ using UnityEngine;
 
 public abstract class WeaponType : Equipment
 {
-    [SerializeField] private int Damage;
-    [SerializeField] private int FireRate;
-    [SerializeField] private int Health;
+    // [SerializeField] protected int Damage;
+    [SerializeField] protected float FireRate;
+    [SerializeField] protected int Health;
 
-    protected WeaponType(string name, string description, int rarity, int damage, int fireRate, int Health) 
-        : base(name, description, rarity, EquipType.Weapon)
-    {
-        this.Damage = damage;
-        this.FireRate = fireRate;
-    }
+    protected WeaponType(){
+        this.Type = EquipmentType.Weapon;
+    }   
+    // protected WeaponType(string name, string description, int rarity)
+    //     : base(name, description, rarity, EquipmentType.Weapon) 
+    //     {
 
+    //     }
+    
     public abstract void fire();
+
 }
