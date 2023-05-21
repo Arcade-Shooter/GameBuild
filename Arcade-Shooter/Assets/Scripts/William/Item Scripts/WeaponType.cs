@@ -7,16 +7,43 @@ public abstract class WeaponType : Equipment
     // [SerializeField] protected int Damage;
     [SerializeField] protected float FireRate;
     [SerializeField] protected int Health;
+    [SerializeField] protected GameObject Bullet;
 
-    protected WeaponType(){
+    protected WeaponType()
+    {
         this.Type = EquipmentType.Weapon;
-    }   
-    // protected WeaponType(string name, string description, int rarity)
-    //     : base(name, description, rarity, EquipmentType.Weapon) 
-    //     {
+    }
 
-    //     }
-    
-    public abstract void Fire();
+    public void AutoFire()
+    {
+        if (this.Equipped)
+        {
+            Fire();
+        }
+        else
+        {
+
+        }
+    }
+
+    public virtual void Fire()
+    {
+
+    }
+
+    protected void Start()
+    {
+        StartCoroutine(FireWithRate(FireRate));
+    }
+
+    protected IEnumerator FireWithRate(float fireRate)
+    {
+        while (true)
+        {
+            AutoFire();
+            // Wait a certain amount of time to control the frequency of firing
+            yield return new WaitForSeconds(1f / fireRate);
+        }
+    }
 
 }

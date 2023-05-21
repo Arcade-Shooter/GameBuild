@@ -12,24 +12,19 @@ public abstract class Equipment : MonoBehaviour
     protected EquipmentType Type; //type of equipment
     protected bool Equipped;
 
-    protected Equipment(){
-        this.Equipped = false;
+    protected Equipment()
+    {
+        Equipped = false; 
     }
 
-    // protected Equipment(string name, string description, int rarity, EquipmentType type)
-    // {
-    //     this.Name = name;
-    //     this.Description = description;
-    //     this.Rarity = rarity;
-    //     this.Type = type;
-    //     this.Equipped = false;
-    // }
-
-    public virtual void Equip(){
+    public void Equip(){
         this.Equipped = true;
+        Debug.Log(Name + " is Equipped.");
     }
-    public virtual void Unequip(){
+    public void Unequip(){
         this.Equipped = false;
+        Debug.Log(Name + " is Unequipped.");
+
     }
 
     public EquipmentType GetEquipmentType(){

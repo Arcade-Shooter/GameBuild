@@ -5,9 +5,6 @@ using UnityEngine;
 public class MachineGun : WeaponType
 {
 
-    public GameObject Bullet;
-    private float nextFireTime = 0f;
-
     void Awake() {
         //Equipemtn variable
         this.Name = "MachineGun";
@@ -15,36 +12,11 @@ public class MachineGun : WeaponType
         this.Rarity = 9;
         //WeaponType veriable 
         this.Health = 3;
-        this.FireRate = 1.6f;
-    }
-
-    void Update()
-    {
-        if(this.Equipped == true){
-            Fire();
-        }
+        this.FireRate = 0.9f;
     }
 
     public override void Fire()
-    {
-
-        if (Time.time > nextFireTime)
-        {
-            GameObject.Instantiate(Bullet, transform.position, transform.rotation);
-            nextFireTime = Time.time + 1 / this.FireRate;
-        }
-        Debug.Log("MachineGun is firing at a rate of " + this.FireRate + " bullets per second.");
-    }
-
-    public override void Equip()
-    {
-        this.Equipped = true;
-        Debug.Log("MachineGun equipped.");
-    }
-
-    public override void Unequip()
-    {
-        this.Equipped = false;
-        Debug.Log("MachineGun unequipped.");
+    {   
+        GameObject.Instantiate(Bullet, transform.position, transform.rotation);
     }
 }
