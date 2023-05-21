@@ -7,9 +7,6 @@ public class MachineGun : WeaponType
 
     public GameObject Bullet;
     private float nextFireTime = 0f;
-    public MachineGun(){
-        
-    }
 
     void Awake() {
         //Equipemtn variable
@@ -18,7 +15,7 @@ public class MachineGun : WeaponType
         this.Rarity = 9;
         //WeaponType veriable 
         this.Health = 3;
-        this.FireRate = 1.3f;
+        this.FireRate = 1.6f;
     }
 
     void Update()

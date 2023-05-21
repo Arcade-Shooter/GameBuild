@@ -21,19 +21,23 @@ public class SnapablePoint : MonoBehaviour
         equipment.transform.localPosition = Vector3.zero;
         equipment.transform.localRotation = Quaternion.identity;
         equipment.Equip();
+
+        this.equippedEquipment = equipment;
     }
 
     public void UnequipEquipment()
     {
-        if (equippedEquipment != null)
-        {
-            equippedEquipment.Unequip();
-            equippedEquipment = null;
-        }
+        this.equippedEquipment.Unequip();
+        this.equippedEquipment = null;
     }
 
     public EquipmentType GetAllowedEquipmentType(){
         return this.allowedEquipmentType;
     }
+
+    public Equipment GetEquippedEquipment(){
+        return this.equippedEquipment;
+    }
+
    
 }

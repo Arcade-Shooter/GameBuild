@@ -5,9 +5,6 @@ using UnityEngine;
 public class EquippedManagement : MonoBehaviour
 {
     private List<SnapablePoint> SnapablePointsList = new List<SnapablePoint>(); // to store all the snapable points
-    [SerializeField] private SnapablePoint[] EquippedPoints;    //to store all equipped points
-    [SerializeField] private Dictionary<EquipmentType, SnapablePoint> EquippedPointDictionary = new Dictionary<EquipmentType, SnapablePoint>();
-
     private InventoryManagement inventoryManagement;
 
     //The counters for the current equipment list loop
@@ -24,58 +21,67 @@ public class EquippedManagement : MonoBehaviour
     }
 
     public void Equip(Equipment equipment)
-    {   //put the equipment on a snapable point
-        EquipmentType equipmentType = equipment.GetEquipmentType();
-        List<SnapablePoint> availablePoints = new List<SnapablePoint>();
+    {
+        //put the equipment on a snapable point
+        SnapablePoint AvailablePoint = FindAvailableSnapablePoint(SnapablePointsList, equipment.GetEquipmentType());
 
-        // 检查所有挂载点，找到空的可用类型的挂载点
-        foreach (SnapablePoint point in SnapablePointsList)
+        if (AvailablePoint != null)
         {
-            if (point.GetAllowedEquipmentType() == equipmentType && !point.HasEquipment())
-            {
-                availablePoints.Add(point);
-            }
-        }
-
-        if (availablePoints.Count > 0)
-        {
-            // 找到可用的挂载点，将装备挂载到第一个可用的挂载点上
-            SnapablePoint point = availablePoints[0];
-            point.EquipEquipment(equipment);
+            // Find an available snapable point and mount the equipment to the available point
+            AvailablePoint.EquipEquipment(equipment);
         }
         else
         {
-            // 没有可用的挂载点，将装备添加到背包中
+            // No snapable points available, add to the inventory
             InventoryManagement.Instance.AddEquipment(equipment);
         }
 
     }
 
-    public void UnEquipWeapon(EquipmentType equipmentType)
+    public void UnEquipWeapon(Equipment equipment)
     {
-        if (this.EquippedPointDictionary.ContainsKey(equipmentType))
+        foreach (SnapablePoint point in SnapablePointsList)
         {
-            SnapablePoint point = this.EquippedPointDictionary[equipmentType];
-            point.UnequipEquipment();
+            if (point.GetEquippedEquipment() == equipment)
+            {
+                point.UnequipEquipment();
+            }
         }
     }
 
-    public SnapablePoint[] GetEquippedPointsByEquipmentType(EquipmentType equipmentType)
-    {   //Find all equipped point of the same type
-        List<SnapablePoint> snapablePointsOfType = new List<SnapablePoint>();
-
-        foreach (SnapablePoint snapablePoint in EquippedPoints)
+    public SnapablePoint FindAvailableSnapablePoint(List<SnapablePoint> snapablePoints, EquipmentType type)
+    {   //find an available snapable point
+        foreach (SnapablePoint snapablePoint in snapablePoints)
         {
-            if (snapablePoint.GetAllowedEquipmentType() == equipmentType)
+            if (!snapablePoint.HasEquipment())  //check it's taken or not
             {
-                snapablePointsOfType.Add(snapablePoint);
+                if (snapablePoint.GetAllowedEquipmentType() == type)
+                {
+                    //check the point allowed equipment type
+                    return snapablePoint;
+                }
             }
         }
 
-        return snapablePointsOfType.ToArray();
+        return null;
     }
 
-    private void SwitchToNextEquipment(EquipmentType equipmentType)
+    // public SnapablePoint[] GetEquippedPointsByEquipmentType(EquipmentType equipmentType)
+    // {   //Find all equipped point of the same type
+    //     List<SnapablePoint> snapablePointsOfType = new List<SnapablePoint>();
+
+    //     foreach (SnapablePoint snapablePoint in SnapablePointsList)
+    //     {
+    //         if (snapablePoint.GetAllowedEquipmentType() == equipmentType)
+    //         {
+    //             snapablePointsOfType.Add(snapablePoint);
+    //         }
+    //     }
+
+    //     return snapablePointsOfType.ToArray();
+    // }
+
+    public void SwitchToNextEquipment(EquipmentType equipmentType)
     {
         //Get the corresponding type of equipment
         Equipment[] equipmentList = null;
@@ -139,7 +145,8 @@ public class EquippedManagement : MonoBehaviour
         }
     }
 
-    public List<SnapablePoint> GetSnapablePointsList () {
+    public List<SnapablePoint> GetSnapablePointsList()
+    {
         return this.SnapablePointsList;
     }
 

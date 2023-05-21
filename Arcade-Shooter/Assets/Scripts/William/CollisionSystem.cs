@@ -5,11 +5,10 @@ using UnityEngine;
 public class CollisionSystem : MonoBehaviour
 {
      public void HandleCollision(ShipCtrl playerShip, Equipment equipment)
-    {
+    {   //to get all snapable point into a list, then to find an avaibale point to put equipment on.
         EquippedManagement equippedManagement = playerShip.GetEquippedManagement();
-        // SnapablePoint[] snapablePoints = equippedManagement.GetEquippedPointsByEquipmentType(equipment.GetEquipmentType());
-        SnapablePoint[] snapablePoints = equippedManagement.GetSnapablePointsList().ToArray();
-        SnapablePoint availableSnapablePoint = FindAvailableSnapablePoint(snapablePoints, equipment.GetEquipmentType());
+        List<SnapablePoint> snapablePoints = equippedManagement.GetSnapablePointsList();  
+        SnapablePoint availableSnapablePoint =equippedManagement.FindAvailableSnapablePoint(snapablePoints, equipment.GetEquipmentType());
 
         if (availableSnapablePoint != null)
         {
@@ -19,22 +18,6 @@ public class CollisionSystem : MonoBehaviour
         {
             InventoryManagement.Instance.AddEquipment(equipment);
         }
-    }
-
-    private SnapablePoint FindAvailableSnapablePoint(SnapablePoint[] snapablePoints, EquipmentType type)
-    {   //find an available snapable point
-        foreach (SnapablePoint snapablePoint in snapablePoints)
-        {
-            if (!snapablePoint.HasEquipment())  //check it's taken or not
-            {
-                if(snapablePoint.GetAllowedEquipmentType() == type){
-                    //check the point allowed equipment type
-                    return snapablePoint;
-                }
-            }
-        }
-
-        return null;
     }
 
 }

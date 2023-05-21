@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float Speed;
+    [SerializeField] private float Speed;
+    [SerializeField] private Vector3 Direction;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -22,6 +18,11 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);    //kill the bullet object. 
         }
         //DestroyBullet();    //kill this object if it's out of boarder.
+    }
+
+    public void SetDirection(Vector3 dirction)
+    {
+        this.Direction = dirction.normalized;
     }
 
     private void DestroyBullet()

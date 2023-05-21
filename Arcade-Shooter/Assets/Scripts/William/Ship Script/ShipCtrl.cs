@@ -47,15 +47,15 @@ public class ShipCtrl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //Check if 1 has benn pressed, then change to next weapon.
-            // SwitchToNextEquipment(EquipmentType.Weapon);
+            this.equippedManagement.SwitchToNextEquipment(EquipmentType.Weapon);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            // SwitchToNextEquipment(EquipmentType.Shield);
+            this.equippedManagement.SwitchToNextEquipment(EquipmentType.Shield);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            // SwitchToNextEquipment(EquipmentType.Thruster);
+            this.equippedManagement.SwitchToNextEquipment(EquipmentType.Thruster);
         }
 
     }
