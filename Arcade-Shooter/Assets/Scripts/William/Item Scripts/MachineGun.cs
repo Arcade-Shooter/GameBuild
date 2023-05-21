@@ -23,13 +23,15 @@ public class MachineGun : WeaponType
 
     void Update()
     {
-        Fire();
+        if(this.Equipped == true){
+            Fire();
+        }
     }
 
     public override void Fire()
     {
 
-           if (Time.time > nextFireTime)
+        if (Time.time > nextFireTime)
         {
             GameObject.Instantiate(Bullet, transform.position, transform.rotation);
             nextFireTime = Time.time + 1 / this.FireRate;

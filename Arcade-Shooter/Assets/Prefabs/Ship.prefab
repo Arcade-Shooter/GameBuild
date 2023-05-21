@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedEquipmentType: 0
+  equippedEquipment: {fileID: 0}
 --- !u!1 &3225615419189013142
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedEquipmentType: 1
+  equippedEquipment: {fileID: 0}
 --- !u!1 &3889542074173061168
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedEquipmentType: 2
+  equippedEquipment: {fileID: 0}
 --- !u!1 &3889542074713064389
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +308,9 @@ GameObject:
   - component: {fileID: 3889542074713064386}
   - component: {fileID: 3889542074713064387}
   - component: {fileID: 1018141592743861233}
+  - component: {fileID: 6552882616638007579}
+  - component: {fileID: 4201621871182868658}
+  - component: {fileID: 6672535361312044930}
   - component: {fileID: 2127532123}
   - component: {fileID: 3989380914204559365}
   m_Layer: 7
@@ -404,15 +410,43 @@ MonoBehaviour:
   MaxHealth: 0
   Speed: 0
   CurrentHealth: 0
-  equippedItem:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+--- !u!114 &6552882616638007579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889542074713064389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 500f9098b613dab4eb27f3abe6ad882e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EquippedPoints: []
+--- !u!114 &4201621871182868658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889542074713064389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e14747b71b798147926821133d6391f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6672535361312044930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889542074713064389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d769cb5284edd14f97ee765e5a2cbef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &2127532123
 Rigidbody2D:
   serializedVersion: 4
@@ -570,6 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedEquipmentType: 0
+  equippedEquipment: {fileID: 0}
 --- !u!1 &3889542075588583047
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedEquipmentType: 0
+  equippedEquipment: {fileID: 0}
 --- !u!1 &7239759441236877326
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedEquipmentType: 0
+  equippedEquipment: {fileID: 0}
 --- !u!1 &7252131915305057584
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedEquipmentType: 0
+  equippedEquipment: {fileID: 0}
 --- !u!1 &8405527617304690148
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,3 +1000,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedEquipmentType: 0
+  equippedEquipment: {fileID: 0}

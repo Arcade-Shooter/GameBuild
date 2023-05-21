@@ -73,15 +73,4 @@ public class InventoryManagement : MonoBehaviour
 
         return thrusters.ToArray();
     }
-
-    public Equipment GetARandomEquipment()
-    {   //Get a random equipment
-        if (equipmentList.Count > 0)
-        {
-            int randomIndex = Random.Range(0, equipmentList.Count);
-            return equipmentList[randomIndex];
-        }
-
-        return null;
-    }
 }

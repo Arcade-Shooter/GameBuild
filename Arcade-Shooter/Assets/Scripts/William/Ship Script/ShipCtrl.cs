@@ -4,111 +4,81 @@ using UnityEngine;
 
 public class ShipCtrl : MonoBehaviour
 {
-    [SerializeField] private float MaxHealth;   
-    [SerializeField] private float Speed; 
+    [SerializeField] private float MaxHealth;
+    [SerializeField] private float Speed;
     [SerializeField] private float CurrentHealth;
 
     private EquippedManagement equippedManagement;
     private InventoryManagement inventoryManagement;
-    
-    //The counters for the current equipment list loop
-    private int currenctWeaponIndex = 0;
-    private int currentShieldIndex = 0;
-    private int currentThrusterIndex = 0;
+    private CollisionSystem collisionSystem;
 
-
-    private void Start() {
+    private void Start()
+    {
         // Initialize the basic properties of the ship
         this.MaxHealth = 3;
         this.Speed = 3;
         this.CurrentHealth = this.MaxHealth;
         this.equippedManagement = GetComponent<EquippedManagement>();
+        this.equippedManagement.gameObject.SetActive(true);
+        if (this.equippedManagement == null)
+        {
+            Debug.LogError("EquippedManagement is null");
+        }
         this.inventoryManagement = GetComponent<InventoryManagement>();
+        this.inventoryManagement.gameObject.SetActive(true);
+        if (this.inventoryManagement == null)
+        {
+            Debug.LogError("inventoryManagement is null");
+        }
+        this.collisionSystem = GetComponent<CollisionSystem>();
+        this.collisionSystem.gameObject.SetActive(true);
+
+        if (collisionSystem == null)
+        {
+            Debug.LogError("No CollisionSystem found in the scene!");
+        }
     }
 
-    private void Update() {
-        
+    private void Update()
+    {
+
         Move(); // update movement every frame
 
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
             //Check if 1 has benn pressed, then change to next weapon.
-            SwitchToNextEquipment(EquipmentType.Weapon);
+            // SwitchToNextEquipment(EquipmentType.Weapon);
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2)){
-            SwitchToNextEquipment(EquipmentType.Shield);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            // SwitchToNextEquipment(EquipmentType.Shield);
         }
-          if(Input.GetKeyDown(KeyCode.Alpha3)){
-            SwitchToNextEquipment(EquipmentType.Thruster);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            // SwitchToNextEquipment(EquipmentType.Thruster);
         }
-   
+
     }
 
-    public void TakeDamage(float amount){
+    public void TakeDamage(float amount)
+    {
         //Receive damage values
         this.CurrentHealth -= amount;
-        
-        if(this.CurrentHealth <= 0 ){
+
+        if (this.CurrentHealth <= 0)
+        {
             this.CurrentHealth = 0;
             Destroy(this);
         }
     }
 
-    public void Healing(float amount){
+    public void Healing(float amount)
+    {
         //Receive the healing value
         this.CurrentHealth += amount;
-        if(this.CurrentHealth >= this.MaxHealth){
+        if (this.CurrentHealth >= this.MaxHealth)
+        {
             this.CurrentHealth = this.MaxHealth;
-        }
-    }
-
-    private void SwitchToNextEquipment(EquipmentType equipmentType)
-    {
-        //Get the corresponding type of equipment
-        Equipment[] equipmentList = null;
-
-        switch(equipmentType){
-                case EquipmentType.Weapon:
-                    //Get a list of weapons
-                    equipmentList = this.inventoryManagement.GetWeapons();
-                    //Determine if the weapon list is empty or not
-                    if(equipmentList.Length > 0){
-                        //Verify that the current index does not exceed the array length
-                        if(currenctWeaponIndex >= equipmentList.Length){
-                            currenctWeaponIndex = 0;
-                        }else{
-                            currenctWeaponIndex += 1;
-                        }
-                        equippedManagement.Equip(equipmentList[currenctWeaponIndex]);
-                    }
-                break;
-                case EquipmentType.Shield:
-                    //Get a list of Shields
-                    equipmentList = this.inventoryManagement.GetShields();
-                    //Determine if the weapon list is empty or not
-                    if(equipmentList.Length > 0){
-                        //Verify that the current index does not exceed the array length
-                        if(currentShieldIndex >= equipmentList.Length){
-                            currentShieldIndex = 0;
-                        }else{
-                            currentShieldIndex += 1;
-                        }
-                        equippedManagement.Equip(equipmentList[currenctWeaponIndex]);
-                    }
-                break;
-                case EquipmentType.Thruster:
-                    //Get a list of Thrusters
-                    equipmentList = this.inventoryManagement.GetThrusters();
-                    //Determine if the weapon list is empty or not
-                    if(equipmentList.Length > 0){
-                        //Verify that the current index does not exceed the array length
-                        if(currentThrusterIndex >= equipmentList.Length){
-                            currentThrusterIndex = 0;
-                        }else{
-                            currentThrusterIndex += 1;
-                        }
-                        equippedManagement.Equip(equipmentList[currenctWeaponIndex]);
-                    }
-                break;
         }
     }
 
@@ -141,4 +111,32 @@ public class ShipCtrl : MonoBehaviour
         transform.position = NextPosition;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("EnemyBullet"))
+        {
+            Bullet bullet = collision.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                TakeDamage(1);
+            }
+        }
+
+        if (collision.CompareTag("Equipment"))
+        {   
+            Debug.Log("collision with Equipment");
+            Equipment equipment = collision.GetComponent<Equipment>();
+
+            if (equipment != null)
+            {
+                this.collisionSystem.HandleCollision(this, equipment);
+            }
+        }
+    }
+
+    public EquippedManagement GetEquippedManagement()
+    {
+        return this.equippedManagement;
+    }
 }
