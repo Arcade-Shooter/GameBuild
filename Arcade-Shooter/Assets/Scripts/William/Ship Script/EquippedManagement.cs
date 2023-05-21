@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EquippedManagement : MonoBehaviour
 {
-    private int MaxWeaponLength = 6;
-
     [SerializeField] private SnapablePoint[] snapablePoints;
     [SerializeField] private Dictionary<EquipmentType, SnapablePoint> SnapPointDictionary = new Dictionary<EquipmentType, SnapablePoint>();
    

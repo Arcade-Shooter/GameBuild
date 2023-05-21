@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SnapablePoint : MonoBehaviour
 {
-    public EquipmentType allowedEquipmentType;
-    private Equipment equippedEquipment;
+    [SerializeField] private EquipmentType allowedEquipmentType;
+    [SerializeField] private Equipment equippedEquipment;
 
     public bool HasEquipment()
     {
