@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3540197410589262537}
   - component: {fileID: 5021466291873870063}
-  - component: {fileID: 7624941028006417550}
+  - component: {fileID: 1984036111800898625}
   m_Layer: 7
   m_Name: SnapPoint BR
   m_TagString: Snappable
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7624941028006417550
+--- !u!114 &1984036111800898625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2212391558107185439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fa75f45de2bac4dbaf3a2c52ffb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
-  IsOccupied: 0
-  module: {fileID: 0}
+  allowedEquipmentType: 0
 --- !u!1 &3225615419189013142
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7625852156629222326}
   - component: {fileID: 4070093003687489926}
-  - component: {fileID: 992784506964091778}
+  - component: {fileID: 841570678338637125}
   m_Layer: 7
   m_Name: SnapPoint T
   m_TagString: Snappable
@@ -185,7 +183,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &992784506964091778
+--- !u!114 &841570678338637125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,12 +192,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3225615419189013142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fa75f45de2bac4dbaf3a2c52ffb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
-  IsOccupied: 0
-  module: {fileID: 0}
+  allowedEquipmentType: 1
 --- !u!1 &3889542074173061168
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3889542074173061183}
   - component: {fileID: 3889542074173061181}
-  - component: {fileID: 3889542074173061182}
+  - component: {fileID: 4504073672477389523}
   m_Layer: 7
   m_Name: SnapPoint B
   m_TagString: Snappable
@@ -285,7 +281,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3889542074173061182
+--- !u!114 &4504073672477389523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,12 +290,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3889542074173061168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fa75f45de2bac4dbaf3a2c52ffb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
-  IsOccupied: 0
-  module: {fileID: 0}
+  allowedEquipmentType: 2
 --- !u!1 &3889542074713064389
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3889542074713064386}
   - component: {fileID: 3889542074713064387}
-  - component: {fileID: 3889542074713064384}
+  - component: {fileID: 1018141592743861233}
   - component: {fileID: 2127532123}
   - component: {fileID: 3989380914204559365}
   m_Layer: 7
@@ -329,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 3889542074713064389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7771726916358120471}
@@ -395,7 +389,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3889542074713064384
+--- !u!114 &1018141592743861233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,23 +398,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3889542074713064389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4a36bbdc3401124c8125ab61e830f57, type: 3}
+  m_Script: {fileID: 11500000, guid: c5bfb569e8192a14f804bda95adcc97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 10
-  MaxHealth: 10
-  SnapPoints:
-  - {fileID: 5189606490615727120}
-  - {fileID: 992784506964091778}
-  - {fileID: 4221955465134973805}
-  - {fileID: 3889542075588583045}
-  - {fileID: 7624941028006417550}
-  - {fileID: 3889542074173061182}
-  - {fileID: 1854240092347134822}
-  - {fileID: 3889542075471115108}
-  ThrusterBoost: 1
-  Speed: 2
-  Bullet: {fileID: 2436712962327111584, guid: 97055c960ab1ec44cb2a779effdcfce7, type: 3}
+  MaxHealth: 0
+  Speed: 0
+  CurrentHealth: 0
+  equippedItem:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!50 &2127532123
 Rigidbody2D:
   serializedVersion: 4
@@ -490,7 +482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3889542075471115109}
   - component: {fileID: 3889542075471115110}
-  - component: {fileID: 3889542075471115108}
+  - component: {fileID: 2502926161605374523}
   m_Layer: 7
   m_Name: SnapPoint L
   m_TagString: Snappable
@@ -565,7 +557,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3889542075471115108
+--- !u!114 &2502926161605374523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -574,12 +566,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3889542075471115111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fa75f45de2bac4dbaf3a2c52ffb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
-  IsOccupied: 0
-  module: {fileID: 0}
+  allowedEquipmentType: 0
 --- !u!1 &3889542075588583047
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3889542075588583046}
   - component: {fileID: 3889542075588583044}
-  - component: {fileID: 3889542075588583045}
+  - component: {fileID: 7774509625971919628}
   m_Layer: 7
   m_Name: SnapPoint R
   m_TagString: Snappable
@@ -665,7 +655,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3889542075588583045
+--- !u!114 &7774509625971919628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -674,12 +664,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3889542075588583047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fa75f45de2bac4dbaf3a2c52ffb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
-  IsOccupied: 0
-  module: {fileID: 0}
+  allowedEquipmentType: 0
 --- !u!1 &7239759441236877326
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,7 +678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4456410816838699119}
   - component: {fileID: 8965865809203170528}
-  - component: {fileID: 4221955465134973805}
+  - component: {fileID: 5112263722576681927}
   m_Layer: 7
   m_Name: SnapPoint TR
   m_TagString: Snappable
@@ -765,7 +753,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4221955465134973805
+--- !u!114 &5112263722576681927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -774,12 +762,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7239759441236877326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fa75f45de2bac4dbaf3a2c52ffb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
-  IsOccupied: 0
-  module: {fileID: 0}
+  allowedEquipmentType: 0
 --- !u!1 &7252131915305057584
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7771726916358120471}
   - component: {fileID: 9027374015192375347}
-  - component: {fileID: 5189606490615727120}
+  - component: {fileID: 6689431537480926673}
   m_Layer: 7
   m_Name: SnapPoint TL
   m_TagString: Snappable
@@ -865,7 +851,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5189606490615727120
+--- !u!114 &6689431537480926673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -874,12 +860,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7252131915305057584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fa75f45de2bac4dbaf3a2c52ffb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
-  IsOccupied: 0
-  module: {fileID: 0}
+  allowedEquipmentType: 0
 --- !u!1 &8405527617304690148
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746475334665350159}
   - component: {fileID: 7153597019332230727}
-  - component: {fileID: 1854240092347134822}
+  - component: {fileID: 7264334612597787536}
   m_Layer: 7
   m_Name: SnapPoint BL
   m_TagString: Snappable
@@ -965,7 +949,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1854240092347134822
+--- !u!114 &7264334612597787536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -974,9 +958,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8405527617304690148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
+  m_Script: {fileID: 11500000, guid: 29fa75f45de2bac4dbaf3a2c52ffb95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
-  IsOccupied: 0
-  module: {fileID: 0}
+  allowedEquipmentType: 0

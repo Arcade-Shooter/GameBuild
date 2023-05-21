@@ -2,25 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ShipCtrl : MonoBehaviour
+public class ShipCtrl : MonoBehaviour
 {
-    [SerializeField] private int MaxHealth;
-    [SerializeField] private int Speed; 
-    
-    [SerializeField] private int Health;
-    [SerializeField] private GameObject Bullet;
+    [SerializeField] private float MaxHealth;   
+    [SerializeField] private float Speed; 
+    [SerializeField] private float CurrentHealth;
+
+    [SerializeField] private List<Equipment> equippedItem = new List<Equipment>();
 
     protected ShipCtrl()
     {
-        this.MaxHealth = 3;
-        this.Speed = 3;
-    }
-    protected ShipCtrl(int health, int maxHealth, int speed, GameObject bullet) : this()
-    {
-        this.Bullet = bullet;
-        this.Health = health;
+
     }
 
+    void Awake() {
+        this.MaxHealth = 3;
+        this.Speed = 3;
+        this.CurrentHealth = this.MaxHealth;
+    }
+
+    void Update() {
+        Move();
+    }
+
+    public void TakeDamage(float amount){
+
+        this.CurrentHealth -= amount;
+        
+        if(this.CurrentHealth <= 0 ){
+            this.CurrentHealth = 0;
+            Destroy(this);
+        }
+    }
+
+    public void Healing(float amount){
+        this.CurrentHealth += amount;
+        if(this.CurrentHealth >= this.MaxHealth){
+            this.CurrentHealth = this.MaxHealth;
+        }
+    }
+
+ 
     public void Move()
     {
         //get keyboard input
@@ -49,6 +71,6 @@ public abstract class ShipCtrl : MonoBehaviour
 
         transform.position = NextPosition;
     }
-    abstract public void fire();
+
 
 }

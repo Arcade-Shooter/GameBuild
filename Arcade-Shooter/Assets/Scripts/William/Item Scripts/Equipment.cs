@@ -2,11 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EquipmentType {
-    Weapon,
-    Shield,
-    Thruster,
-};
 
 public abstract class Equipment : MonoBehaviour
 {
@@ -30,7 +25,15 @@ public abstract class Equipment : MonoBehaviour
     //     this.Equipped = false;
     // }
 
-    public abstract void Equip();
-    public abstract void Unequip();
+    public virtual void Equip(){
+        this.Equipped = true;
+    }
+    public virtual void Unequip(){
+        this.Equipped = false;
+    }
+
+    public EquipmentType GetEquipmentType(){
+        return this.Type;
+    }
 
 }

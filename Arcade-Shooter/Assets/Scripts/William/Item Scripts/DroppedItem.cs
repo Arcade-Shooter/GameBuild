@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroppedItem : MonoBehaviour
+public abstract class DroppedItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    protected string Name;     //nme of the item
+    protected string Description; // description of the item
+    [SerializeField] protected int Rarity;    //the probability of the item drop
+    protected DroppedItemList Type; //type of equipment
+    protected bool used;
+
+    protected DroppedItem(){
+        this.used = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void UseItem();
+    public abstract void DropItem();
 }

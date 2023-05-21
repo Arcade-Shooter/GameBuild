@@ -17,6 +17,6 @@ public abstract class WeaponType : Equipment
 
     //     }
     
-    public abstract void fire();
+    public abstract void Fire();
 
 }

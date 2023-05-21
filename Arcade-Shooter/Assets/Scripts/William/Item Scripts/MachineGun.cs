@@ -23,10 +23,10 @@ public class MachineGun : WeaponType
 
     void Update()
     {
-        fire();
+        Fire();
     }
 
-    public override void fire()
+    public override void Fire()
     {
 
            if (Time.time > nextFireTime)
