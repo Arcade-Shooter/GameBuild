@@ -10,21 +10,35 @@ public class Ship : MonoBehaviour
 
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
-    [SerializeField] private List<Snappable> SnapPoints; 
+    [SerializeField] private Snappable InventorySlot;
+    private Snappable[,] ModuleSnapPoints = new Snappable[3, 3];
+    [SerializeField] private int CursorPositionX, CursorPositionY;
+    [SerializeField] private Transform CursorTransform;
     [SerializeField] private int ThrusterBoost; //An integer
     [SerializeField] private int Speed;
     [SerializeField] private GameObject Bullet;
     //private bool shoot = false;
     //private bool getThrusters = false;
 
-    //Draggable Module Add and Remove Callbacks
-    //These are supplied by the Snap Controller on start so that when the ship picks up a new module it add it to the draggable list
-    public delegate void AddModuleDelegate(Module module);
-    public AddModuleDelegate AddModuleCallback;
 
-    public delegate void RemoveModuleDelegate(Module module);
-    public RemoveModuleDelegate RemoveModuleCallback;
+    //Because the 2D array cannot be serialized this list is here to hold onto the snap points
+    public List<Snappable> snaps;
 
+    //Called at the start
+    void Start()
+    {
+        //Initialise the 2D array |||HARD CODED|||
+        ModuleSnapPoints[0, 0] = snaps[0];
+        ModuleSnapPoints[1, 0] = snaps[1];
+        ModuleSnapPoints[2, 0] = snaps[2];
+        ModuleSnapPoints[0, 1] = snaps[3];
+        ModuleSnapPoints[1, 1] = snaps[4];
+        ModuleSnapPoints[2, 1] = snaps[5];
+        ModuleSnapPoints[0, 2] = snaps[6];
+        ModuleSnapPoints[1, 2] = snaps[7];
+        ModuleSnapPoints[2, 2] = snaps[8];
+        Debug.Log(ModuleSnapPoints);
+    }
 
     private void Awake()
     {
@@ -50,13 +64,15 @@ public class Ship : MonoBehaviour
         //}
 
         Move();     //update ship position
+        MoveCursor();
+        UseCursor();
         Shoot();    //update if player shoot
     }
 
     //Iterates through all the attached components and if it's a weapon, tries to shoot
     public void FireWeapons()
     {
-        foreach (Snappable snappable in SnapPoints)
+        foreach (Snappable snappable in ModuleSnapPoints)
         {
             Module module = snappable.GetModule();
             if ( module != null && module.GetClassification() == Classification.Weapon)
@@ -70,7 +86,7 @@ public class Ship : MonoBehaviour
     private int DetectThrusters()
     {
         int thrusters = 0;
-        foreach (Snappable snappable in SnapPoints)
+        foreach (Snappable snappable in ModuleSnapPoints)
         {
             Module module = snappable.GetModule();
             if (module != null)
@@ -81,10 +97,8 @@ public class Ship : MonoBehaviour
                 }
             }
         }
-
         Debug.Log("" + thrusters);
         return thrusters;
-
     }
 
 
@@ -104,26 +118,16 @@ public class Ship : MonoBehaviour
         }
         else if (Collision.tag == "UnclaimedModule")
         {
-            Debug.Log("PlauerDraggableHit");
+            Debug.Log("Player Module Hit");
 
-            //Find empty snapPoint
-            foreach (Snappable snap in SnapPoints)
+            if (!InventorySlot.GetOccupiedState()) //If the inventory is unocupied
             {
-
-                if (snap.GetOccupiedState() == false)//If unoccupied, occupy it
-                {
-                    Module module = Collision.gameObject.GetComponent<Module>();
-
-                    snap.Occupy(module);
-                    module.gameObject.tag = "PlayerModule"; //Change tag so it doesn't collide on drag
-                    AddModuleCallback(module); //Add to the drag controller
-                    module.EnableDrag(); //Enable dragging
-                    break;
-                }
-            }
-
-            //If no spaces are available
-            //Not implimented so new components don't do anything
+                //change the tag
+                Collision.gameObject.tag = "PlayerModule";
+                //InventorySlot.occupy()
+                InventorySlot.Occupy(Collision.GetComponent<Module>());
+            } 
+            //else do nothing
         }
     }
 
@@ -142,8 +146,8 @@ public class Ship : MonoBehaviour
     {
 
         //get keyboard input
-        float h = Input.GetAxis("Horizontal");  //"A" "D" "left" "right"
-        float v = Input.GetAxis("Vertical");    //"W" "S" "up" "down"
+        float h = Input.GetAxis("Horizontal");  //"A" "D"
+        float v = Input.GetAxis("Vertical");    //"W" "S"
 
         //the next position is that now position add the new diraction with speed * time.deltaTime.
         Vector3 NextPosition = transform.position + new Vector3(h, v, 0) * (Speed + ThrusterBoost) * Time.deltaTime ;
@@ -166,6 +170,60 @@ public class Ship : MonoBehaviour
         }
 
         transform.position = NextPosition;
+    }
+
+
+    private void MoveCursor()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        { //Horisontal
+            if (CursorPositionX > 0){
+                CursorPositionX--;
+            }
+        }else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (CursorPositionX < 2){
+                CursorPositionX++;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        { //Vertical
+            if (CursorPositionY > 0){
+                CursorPositionY--;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (CursorPositionY < 2){
+                CursorPositionY++;
+            }
+        }
+
+        CursorTransform.position = ModuleSnapPoints[CursorPositionX, CursorPositionY].transform.position;// Move cursor box
+
+    }
+
+    private void UseCursor()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            if (ModuleSnapPoints[CursorPositionX, CursorPositionY].GetOccupiedState()) //if the cursor position is occupied
+            {
+                Module module = ModuleSnapPoints[CursorPositionX, CursorPositionY].GetModule();
+                ModuleSnapPoints[CursorPositionX, CursorPositionY].Vacate();
+                Destroy(module.gameObject);
+            }
+        }else if (Input.GetKeyDown("e"))
+        {
+            Snappable snapPoint = ModuleSnapPoints[CursorPositionX, CursorPositionY];
+            if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false &&  InventorySlot.GetOccupiedState() == true ) //if the cursor position is unocupied and there's one in the inventory
+            {
+                Module module = InventorySlot.GetModule();
+                InventorySlot.Vacate();
+                ModuleSnapPoints[CursorPositionX, CursorPositionY].Occupy(module);
+            }
+        }
     }
 
     //ship shoot
