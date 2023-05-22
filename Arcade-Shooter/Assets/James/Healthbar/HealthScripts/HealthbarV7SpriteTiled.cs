@@ -123,7 +123,6 @@ public class HealthbarV7SpriteTiled : MonoBehaviour
          [the script is attached to the black hearts],
          Anyways HealthBarInner should already be dragged into the field)
         */
-        Debug.Log("Updated Health(Capsule)Bar");
         float healthPercent = (float)health / (float)maxHealth;
         healthSpriteRenderer.size = new Vector2(healthPercent * spriteWidth, spriteHeight);
     }

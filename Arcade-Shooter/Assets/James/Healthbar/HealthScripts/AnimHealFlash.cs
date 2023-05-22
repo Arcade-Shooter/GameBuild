@@ -33,8 +33,6 @@ public class AnimHealFlash : MonoBehaviour
         //originalColor = healthOutlineImage.color;
         //SPRITERENDERER 2
         healthOutlineSprite = this.GetComponent<SpriteRenderer>();
-        Debug.Log("our new sprite renderer  -->");
-        Debug.Log(healthOutlineSprite);
 
         originalColor = healthOutlineSprite.color;
     }

@@ -275,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e2e5babc1dc3a42a88afd92d752663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneExit: 0
   pauseUI: {fileID: 650991130}
 --- !u!1 &331986947
 GameObject:
@@ -744,7 +743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e2e5babc1dc3a42a88afd92d752663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneExit: 0
   pauseUI: {fileID: 650991130}
 --- !u!1 &438604053
 GameObject:
