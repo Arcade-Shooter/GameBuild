@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public GameObject EnemyShip;
+    [SerializeField] private GameObject EnemyShip;
+
+    [SerializeField] private int MinEnemies = 1;
+    [SerializeField] private int MaxEnemies = 9;
+
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(enumerator());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
@@ -21,14 +21,15 @@ public class EnemyManager : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i < 3; i++)
+            int numEnemies = Random.Range(MinEnemies, MaxEnemies); 
+            for (int i = 0; i < numEnemies; i++)
             {
                 GameObject NewEnemy = Instantiate(EnemyShip);
                 float XPosition = Random.Range(-9, 9);
                 NewEnemy.transform.position = new Vector3(XPosition, 7, 0);
             }
 
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(Random.Range(1, 5));
         }
     }
 }

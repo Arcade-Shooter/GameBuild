@@ -32,7 +32,7 @@ public class Ship : MonoBehaviour
         this.Speed = 3;
         this.Health = this.MaxHealth;
 
-          //Initialise the 2D array |||HARD CODED|||
+        //Initialise the 2D array |||HARD CODED|||
         // ModuleSnapPoints[0, 0] = snaps[0];
         // ModuleSnapPoints[1, 0] = snaps[1];
         // ModuleSnapPoints[2, 0] = snaps[2];
@@ -49,10 +49,12 @@ public class Ship : MonoBehaviour
         this.snaps.AddRange(allSnapPoints);
 
         int counter = 0;
-        for(int i = 0; i < 3; i++){
-            for(int n = 0; n < 3; n++){
-                this.ModuleSnapPoints[n,i] = this.snaps[counter];
-                counter ++;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int n = 0; n < 3; n++)
+            {
+                this.ModuleSnapPoints[n, i] = this.snaps[counter];
+                counter++;
             }
         }
 
@@ -62,7 +64,7 @@ public class Ship : MonoBehaviour
     void Start()
     {
 
-      
+
     }
 
     // Update is called once per frame
@@ -161,7 +163,6 @@ public class Ship : MonoBehaviour
     //Ship movement
     private void Move()
     {
-
         //get keyboard input
         float h = Input.GetAxis("Horizontal");  //"A" "D"
         float v = Input.GetAxis("Vertical");    //"W" "S"
@@ -169,25 +170,22 @@ public class Ship : MonoBehaviour
         //the next position is that now position add the new diraction with speed * time.deltaTime.
         Vector3 NextPosition = transform.position + new Vector3(h, v, 0) * (Speed + ThrusterBoost) * Time.deltaTime;
 
-        /*
-         * the boarder are setted by camera range, and this is NOT a dynamic value,
-         * if the camera has been moved, then the value MUST be changed!
-         */
+        // 获取摄像机的边界
+        Bounds cameraBounds = CameraBounds.GetCameraBounds();
 
-        //check the x of next postion stil in the range of caremra
-        if (NextPosition.x > 8.0f || NextPosition.x < -8.0f)
-        {
-            NextPosition.x = transform.position.x;
-        }
+        // 获取角色的边界（我们假设角色有一个BoxCollider2D组件）
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        Bounds playerBounds = collider.bounds;
 
-        //check the y of next postion stil in the range of caremra
-        if (NextPosition.y > 4.4f || NextPosition.y < -4.4f)
-        {
-            NextPosition.y = transform.position.y;
-        }
+        // 确保新的位置不会让角色的边界超出摄像机的边界
+        float adjustedX = Mathf.Clamp(NextPosition.x, cameraBounds.min.x + playerBounds.extents.x, cameraBounds.max.x - playerBounds.extents.x);
+        float adjustedY = Mathf.Clamp(NextPosition.y, cameraBounds.min.y + playerBounds.extents.y, cameraBounds.max.y - playerBounds.extents.y);
+        NextPosition = new Vector3(adjustedX, adjustedY, NextPosition.z);
+
 
         transform.position = NextPosition;
     }
+
 
 
     private void MoveCursor()
@@ -253,7 +251,7 @@ public class Ship : MonoBehaviour
     private void Shoot()
     {
         //check if the "Space" has been pressed
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.I))
         {
             Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
             //print("Space key has been pressed");
