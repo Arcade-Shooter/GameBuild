@@ -5,10 +5,11 @@ using UnityEngine;
 public class MachineGun : WeaponType
 {
 
-    void Awake() {
+    void Awake()
+    {
         //Equipemtn variable
         this.Name = "MachineGun";
-        this.Description ="This is a Machine Gun";
+        this.Description = "This is a Machine Gun";
         this.Rarity = 9;
         //WeaponType veriable 
         this.Health = 3;
@@ -16,7 +17,8 @@ public class MachineGun : WeaponType
     }
 
     public override void Fire()
-    {   
-        GameObject.Instantiate(Bullet, transform.position, transform.rotation);
+    {
+        Instantiate(this.Bullet, transform.position, transform.rotation);
+
     }
 }

@@ -170,14 +170,14 @@ public class Ship : MonoBehaviour
         //the next position is that now position add the new diraction with speed * time.deltaTime.
         Vector3 NextPosition = transform.position + new Vector3(h, v, 0) * (Speed + ThrusterBoost) * Time.deltaTime;
 
-        // 获取摄像机的边界
+        // Gets the boundaries of the camera
         Bounds cameraBounds = CameraBounds.GetCameraBounds();
 
-        // 获取角色的边界（我们假设角色有一个BoxCollider2D组件）
+        // Get the boundaries of the character by BoxCollider2D
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
         Bounds playerBounds = collider.bounds;
 
-        // 确保新的位置不会让角色的边界超出摄像机的边界
+        // Make sure the new position doesn't extend the character's boundaries beyond the camera's boundaries
         float adjustedX = Mathf.Clamp(NextPosition.x, cameraBounds.min.x + playerBounds.extents.x, cameraBounds.max.x - playerBounds.extents.x);
         float adjustedY = Mathf.Clamp(NextPosition.y, cameraBounds.min.y + playerBounds.extents.y, cameraBounds.max.y - playerBounds.extents.y);
         NextPosition = new Vector3(adjustedX, adjustedY, NextPosition.z);

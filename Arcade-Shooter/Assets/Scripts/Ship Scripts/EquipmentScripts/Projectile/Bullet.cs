@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void move(){
-        transform.Translate(Direction * Speed * Time.deltaTime);   //update the bullet position.
+        transform.Translate(Vector3.up * Speed * Time.deltaTime);   //update the bullet position.
         if (transform.position.y > CameraBounds.TopBoundary || transform.position.y < CameraBounds.BottomBoundary || 
             transform.position.x > CameraBounds.RightBoundary || transform.position.x < CameraBounds.LeftBoundary)
         {

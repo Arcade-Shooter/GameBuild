@@ -8,6 +8,8 @@ public abstract class WeaponType : Equipment
     [Header("")]
     [SerializeField] protected float FireRate;
     [SerializeField] protected GameObject Bullet;
+    // protected ObjectPoolManagement objectPoolManager;
+
 
     protected WeaponType()
     {
