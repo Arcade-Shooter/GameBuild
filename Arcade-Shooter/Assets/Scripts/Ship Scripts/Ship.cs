@@ -33,16 +33,29 @@ public class Ship : MonoBehaviour
         this.Health = this.MaxHealth;
 
           //Initialise the 2D array |||HARD CODED|||
-        ModuleSnapPoints[0, 0] = snaps[0];
-        ModuleSnapPoints[1, 0] = snaps[1];
-        ModuleSnapPoints[2, 0] = snaps[2];
-        ModuleSnapPoints[0, 1] = snaps[3];
-        ModuleSnapPoints[1, 1] = snaps[4];
-        ModuleSnapPoints[2, 1] = snaps[5];
-        ModuleSnapPoints[0, 2] = snaps[6];
-        ModuleSnapPoints[1, 2] = snaps[7];
-        ModuleSnapPoints[2, 2] = snaps[8];
-        Debug.Log(ModuleSnapPoints);
+        // ModuleSnapPoints[0, 0] = snaps[0];
+        // ModuleSnapPoints[1, 0] = snaps[1];
+        // ModuleSnapPoints[2, 0] = snaps[2];
+        // ModuleSnapPoints[0, 1] = snaps[3];
+        // ModuleSnapPoints[1, 1] = snaps[4];
+        // ModuleSnapPoints[2, 1] = snaps[5];
+        // ModuleSnapPoints[0, 2] = snaps[6];
+        // ModuleSnapPoints[1, 2] = snaps[7];
+        // ModuleSnapPoints[2, 2] = snaps[8];
+        // Debug.Log(ModuleSnapPoints);
+
+        Snappable[] allSnapPoints = this.transform.GetComponentsInChildren<Snappable>();
+
+        this.snaps.AddRange(allSnapPoints);
+
+        int counter = 0;
+        for(int i = 0; i < 3; i++){
+            for(int n = 0; n < 3; n++){
+                this.ModuleSnapPoints[n,i] = this.snaps[counter];
+                counter ++;
+            }
+        }
+
     }
 
     //Called at the start

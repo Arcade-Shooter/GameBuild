@@ -99,7 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 1
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}
 --- !u!1 &981858698916792267
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 0
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}
 --- !u!1 &3225615419189013142
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +385,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 0
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}
 --- !u!1 &3889542074173061168
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +486,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 0
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}
 --- !u!1 &3889542074713064389
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,10 +625,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 10
   MaxHealth: 10
-  InventorySlot: {fileID: 0}
-  CursorTransform: {fileID: 0}
+  InventorySlot: {fileID: 5976822507537209442, guid: 44cd55c2a771a0b4ab3d726dc05efe67, type: 3}
+  CursorPositionX: 0
+  CursorPositionY: 0
+  CursorTransform: {fileID: 4781841851832370556}
   ThrusterBoost: 1
   Speed: 2
+  Bullet: {fileID: 2436712962327111584, guid: 97055c960ab1ec44cb2a779effdcfce7, type: 3}
   snaps: []
 --- !u!50 &2127532123
 Rigidbody2D:
@@ -746,7 +753,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 0
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}
 --- !u!1 &3889542075588583047
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +854,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 0
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}
 --- !u!1 &7239759441236877326
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,7 +955,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 0
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}
 --- !u!1 &7252131915305057584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,7 +1056,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 0
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}
 --- !u!1 &8405527617304690148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,4 +1157,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDisabled: 0
   IsOccupied: 0
-  module: {fileID: 0}
+  IsInventoryPoint: 0
+  equipment: {fileID: 0}

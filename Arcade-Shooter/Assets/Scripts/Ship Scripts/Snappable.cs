@@ -8,6 +8,8 @@ public class Snappable : MonoBehaviour
 
     [SerializeField] private bool IsDisabled;
     [SerializeField] private bool IsOccupied;
+
+    [SerializeField] private bool IsInventoryPoint = false;
     [SerializeField] private Equipment equipment = null;
 
 
@@ -22,6 +24,10 @@ public class Snappable : MonoBehaviour
     public bool GetOccupiedState()
     {
         return IsOccupied;
+    }
+
+    public bool GetIsInventoryPoint(){
+        return this.IsInventoryPoint;
     }
 
     public Equipment GetEquipment()
@@ -42,6 +48,10 @@ public class Snappable : MonoBehaviour
     public void Enable() 
     {
         this.IsDisabled = false;
+    }
+
+    public void SetInventoryPoint(){
+        this.IsInventoryPoint = true;
     }
 
 
