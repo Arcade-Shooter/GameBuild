@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Shield : Module
+public class Shield : Equipment
 {
 
     [SerializeField] private float ShieldHealth;
