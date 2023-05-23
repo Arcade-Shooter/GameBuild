@@ -622,10 +622,22 @@ MonoBehaviour:
   Health: 10
   MaxHealth: 10
   InventorySlot: {fileID: 0}
-  CursorTransform: {fileID: 0}
+  CursorPositionX: 0
+  CursorPositionY: 0
+  CursorTransform: {fileID: 4781841851832370556}
   ThrusterBoost: 1
   Speed: 2
-  snaps: []
+  shoot: 0
+  snaps:
+  - {fileID: 5189606490615727120}
+  - {fileID: 992784506964091778}
+  - {fileID: 4221955465134973805}
+  - {fileID: 3889542075471115108}
+  - {fileID: 4690441397298896327}
+  - {fileID: 3889542075588583045}
+  - {fileID: 1854240092347134822}
+  - {fileID: 3889542074173061182}
+  - {fileID: 7624941028006417550}
 --- !u!50 &2127532123
 Rigidbody2D:
   serializedVersion: 4

@@ -14,7 +14,7 @@ public class Ship : MonoBehaviour
     [SerializeField] private Transform CursorTransform;
     [SerializeField] private int ThrusterBoost; //An integer
     [SerializeField] private int Speed;
-    private bool shoot = false;
+    public bool shoot = false;
     private bool getThrusters = false;
 
 
