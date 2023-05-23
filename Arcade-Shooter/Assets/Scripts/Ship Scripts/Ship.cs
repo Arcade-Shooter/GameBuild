@@ -6,8 +6,6 @@ public class Ship : MonoBehaviour
 {
     private static Ship instance;
 
- 
-
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
     [SerializeField] private Snappable InventorySlot;
@@ -24,9 +22,21 @@ public class Ship : MonoBehaviour
     //Because the 2D array cannot be serialized this list is here to hold onto the snap points
     public List<Snappable> snaps;
 
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        this.MaxHealth = 3;
+        this.Speed = 3;
+        this.Health = this.MaxHealth;
+    }
+
     //Called at the start
     void Start()
     {
+
         //Initialise the 2D array |||HARD CODED|||
         ModuleSnapPoints[0, 0] = snaps[0];
         ModuleSnapPoints[1, 0] = snaps[1];
@@ -38,14 +48,6 @@ public class Ship : MonoBehaviour
         ModuleSnapPoints[1, 2] = snaps[7];
         ModuleSnapPoints[2, 2] = snaps[8];
         Debug.Log(ModuleSnapPoints);
-    }
-
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
     }
 
     // Update is called once per frame
@@ -70,17 +72,17 @@ public class Ship : MonoBehaviour
     }
 
     //Iterates through all the attached components and if it's a weapon, tries to shoot
-    public void FireWeapons()
-    {
-        foreach (Snappable snappable in ModuleSnapPoints)
-        {
-            Module module = snappable.GetModule();
-            if ( module != null && module.GetClassification() == Classification.Weapon)
-            {
-                ((Weapon)module).FireWeapon(); //Transform module into a weapon and shoot it
-            }
-        }
-    }
+    // public void FireWeapons()
+    // {
+    //     foreach (Snappable snappable in ModuleSnapPoints)
+    //     {
+    //         Equipment equipment = snappable.GetEquipment();
+    //         if (equipment != null && equipment.GetEquipmentType() == EquipmentType.Weapon)
+    //         {
+    //             equipment.FireWeapon(); //Transform module into a weapon and shoot it
+    //         }
+    //     }
+    // }
 
     //Goes through all the attached components and if it's a thruster, increments by 1
     private int DetectThrusters()
@@ -88,10 +90,10 @@ public class Ship : MonoBehaviour
         int thrusters = 0;
         foreach (Snappable snappable in ModuleSnapPoints)
         {
-            Module module = snappable.GetModule();
-            if (module != null)
+            Equipment equipment = snappable.GetEquipment();
+            if (equipment != null)
             {
-                if (module.IsThruster())
+                if (equipment.GetEquipmentType() == EquipmentType.Thruster)
                 {
                     thrusters++;
                 }
@@ -125,8 +127,8 @@ public class Ship : MonoBehaviour
                 //change the tag
                 Collision.gameObject.tag = "PlayerModule";
                 //InventorySlot.occupy()
-                InventorySlot.Occupy(Collision.GetComponent<Module>());
-            } 
+                InventorySlot.Occupy(Collision.GetComponent<Equipment>());
+            }
             //else do nothing
         }
     }
@@ -138,6 +140,7 @@ public class Ship : MonoBehaviour
         if (this.Health <= 0)
         {
             Destroy(this.gameObject);
+            this.Health = 0;
         }
     }
 
@@ -150,7 +153,7 @@ public class Ship : MonoBehaviour
         float v = Input.GetAxis("Vertical");    //"W" "S"
 
         //the next position is that now position add the new diraction with speed * time.deltaTime.
-        Vector3 NextPosition = transform.position + new Vector3(h, v, 0) * (Speed + ThrusterBoost) * Time.deltaTime ;
+        Vector3 NextPosition = transform.position + new Vector3(h, v, 0) * (Speed + ThrusterBoost) * Time.deltaTime;
 
         /*
          * the boarder are setted by camera range, and this is NOT a dynamic value,
@@ -177,25 +180,30 @@ public class Ship : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         { //Horisontal
-            if (CursorPositionX > 0){
+            if (CursorPositionX > 0)
+            {
                 CursorPositionX--;
             }
-        }else if (Input.GetKeyDown(KeyCode.RightArrow))
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (CursorPositionX < 2){
+            if (CursorPositionX < 2)
+            {
                 CursorPositionX++;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         { //Vertical
-            if (CursorPositionY > 0){
+            if (CursorPositionY > 0)
+            {
                 CursorPositionY--;
             }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (CursorPositionY < 2){
+            if (CursorPositionY < 2)
+            {
                 CursorPositionY++;
             }
         }
@@ -210,18 +218,19 @@ public class Ship : MonoBehaviour
         {
             if (ModuleSnapPoints[CursorPositionX, CursorPositionY].GetOccupiedState()) //if the cursor position is occupied
             {
-                Module module = ModuleSnapPoints[CursorPositionX, CursorPositionY].GetModule();
+                Equipment equipment = ModuleSnapPoints[CursorPositionX, CursorPositionY].GetEquipment();
                 ModuleSnapPoints[CursorPositionX, CursorPositionY].Vacate();
-                Destroy(module.gameObject);
+                Destroy(equipment.gameObject);
             }
-        }else if (Input.GetKeyDown("e"))
+        }
+        else if (Input.GetKeyDown("e"))
         {
             Snappable snapPoint = ModuleSnapPoints[CursorPositionX, CursorPositionY];
-            if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false &&  InventorySlot.GetOccupiedState() == true ) //if the cursor position is unocupied and there's one in the inventory
+            if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false && InventorySlot.GetOccupiedState() == true) //if the cursor position is unocupied and there's one in the inventory
             {
-                Module module = InventorySlot.GetModule();
+                Equipment equipment = InventorySlot.GetEquipment();
                 InventorySlot.Vacate();
-                ModuleSnapPoints[CursorPositionX, CursorPositionY].Occupy(module);
+                ModuleSnapPoints[CursorPositionX, CursorPositionY].Occupy(equipment);
             }
         }
     }

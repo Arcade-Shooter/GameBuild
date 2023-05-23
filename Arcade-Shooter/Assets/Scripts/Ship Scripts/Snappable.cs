@@ -2,14 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Module;
 
 public class Snappable : MonoBehaviour
 {
 
     [SerializeField] private bool IsDisabled;
     [SerializeField] private bool IsOccupied;
-    [SerializeField] private Module module = null;
+    [SerializeField] private Equipment equipment = null;
 
 
     /********************
@@ -25,9 +24,9 @@ public class Snappable : MonoBehaviour
         return IsOccupied;
     }
 
-    public Module GetModule()
+    public Equipment GetEquipment()
     {
-        return module;
+        return equipment;
     }
 
 
@@ -49,16 +48,16 @@ public class Snappable : MonoBehaviour
 
     //Occupy is a method that changes the state of a snap point.
     //If the snap point is occupied it is ignored by the snap controller for attaching drag dropped modules
-    public void Occupy(Module module)
+    public void Occupy(Equipment equipment)
     {
         this.IsDisabled = true;
         this.IsOccupied = true;
-        this.module = module;
-        module.Connected = true;
+        this.equipment = equipment;
+        this.equipment.Connected = true;
 
         //Adjust parent to be this node for movement
-        module.transform.position = this.transform.position;
-        module.transform.SetParent(this.transform);
+        this.equipment.transform.position = this.transform.position;
+        this.equipment.transform.SetParent(this.transform);
         
     }
 
@@ -67,12 +66,11 @@ public class Snappable : MonoBehaviour
     {
 
         //Release this as the parent node
-        this.GetModule().transform.parent = null;
+        this.GetEquipment().transform.parent = null;
 
         this.IsOccupied = false;
         this.IsDisabled = false;
-        module.Connected = false;
-        this.module = null;
-        
+        this.equipment.Connected = false;
+        this.equipment = null;
     }
 }

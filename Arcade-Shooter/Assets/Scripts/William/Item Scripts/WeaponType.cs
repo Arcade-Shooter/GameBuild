@@ -6,7 +6,6 @@ public abstract class WeaponType : Equipment
 {
     // [SerializeField] protected int Damage;
     [SerializeField] protected float FireRate;
-    [SerializeField] protected int Health;
     [SerializeField] protected GameObject Bullet;
 
     protected WeaponType()
