@@ -31,13 +31,8 @@ public class Ship : MonoBehaviour
         this.MaxHealth = 3;
         this.Speed = 3;
         this.Health = this.MaxHealth;
-    }
 
-    //Called at the start
-    void Start()
-    {
-
-        //Initialise the 2D array |||HARD CODED|||
+          //Initialise the 2D array |||HARD CODED|||
         ModuleSnapPoints[0, 0] = snaps[0];
         ModuleSnapPoints[1, 0] = snaps[1];
         ModuleSnapPoints[2, 0] = snaps[2];
@@ -48,6 +43,13 @@ public class Ship : MonoBehaviour
         ModuleSnapPoints[1, 2] = snaps[7];
         ModuleSnapPoints[2, 2] = snaps[8];
         Debug.Log(ModuleSnapPoints);
+    }
+
+    //Called at the start
+    void Start()
+    {
+
+      
     }
 
     // Update is called once per frame
@@ -109,8 +111,8 @@ public class Ship : MonoBehaviour
     {
         if (Collision.tag == "EnemyBullet")
         {
-            int damage = Collision.gameObject.GetComponent<Projectile>().GetDamage();
-            this.TakeDamage(damage);
+            // int damage = Collision.gameObject.GetComponent<Projectile>().GetDamage();
+            this.TakeDamage(1);
             Destroy(Collision.gameObject);
         }
         else if (Collision.tag == "Enemy")
@@ -214,7 +216,7 @@ public class Ship : MonoBehaviour
 
     private void UseCursor()
     {
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (ModuleSnapPoints[CursorPositionX, CursorPositionY].GetOccupiedState()) //if the cursor position is occupied
             {
@@ -223,7 +225,7 @@ public class Ship : MonoBehaviour
                 Destroy(equipment.gameObject);
             }
         }
-        else if (Input.GetKeyDown("e"))
+        else if (Input.GetKeyDown(KeyCode.E))
         {
             Snappable snapPoint = ModuleSnapPoints[CursorPositionX, CursorPositionY];
             if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false && InventorySlot.GetOccupiedState() == true) //if the cursor position is unocupied and there's one in the inventory

@@ -11,6 +11,7 @@ public abstract class WeaponType : Equipment
     protected WeaponType()
     {
         this.Type = EquipmentType.Weapon;
+        this.Equipped = true;
     }
 
     public void AutoFire()

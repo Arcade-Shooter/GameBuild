@@ -25,9 +25,10 @@ public class ShieldLayer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D projectile)
     {
         if (projectile.tag == "EnemyBullet") {
-            int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
-            CollisionCallBack(damage);
-            Destroy(projectile.gameObject);
+            Debug.Log(this.name + " has collision with" + projectile.tag);
+            // int damage = projectile.gameObject.GetComponent<Projectile>().GetDamage();
+            // CollisionCallBack(damage);
+            // Destroy(projectile.gameObject);
         }else if (projectile.tag == "Enemy")
         {
             CollisionCallBack(1);

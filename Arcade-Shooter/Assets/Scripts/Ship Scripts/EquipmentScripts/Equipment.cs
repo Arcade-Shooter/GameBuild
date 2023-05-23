@@ -46,8 +46,8 @@ public abstract class Equipment : MonoBehaviour
     {
         if (Collsion.tag == "EnemyBullet")
         {
-            int damage = Collsion.gameObject.GetComponent<Projectile>().GetDamage();
-            this.TakeDamage(damage);
+            // int damage = Collsion.gameObject.GetComponent<Projectile>().GetDamage();
+            this.TakeDamage(1);
             Destroy(Collsion.gameObject);
         }
         else if (Collsion.tag == "Enemy")

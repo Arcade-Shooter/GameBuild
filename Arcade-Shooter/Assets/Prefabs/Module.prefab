@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 1251940011448440095}
   - component: {fileID: 5677400436051764682}
   - component: {fileID: 1251940011448440093}
-  - component: {fileID: 1251940011448440090}
   - component: {fileID: 212055666}
   m_Layer: 7
   m_Name: Module
@@ -186,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rarity: 0
-  Connected: 0
+  Connected: 1
   FireRate: 0
   Bullet: {fileID: 2436712962327111584, guid: 97055c960ab1ec44cb2a779effdcfce7, type: 3}
 --- !u!61 &1251940011448440093
@@ -215,28 +214,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
---- !u!114 &1251940011448440090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1251940011448440080}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 169d0dbb562dea74bb45ed97038bf695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 3
-  MaxHealth: 3
-  classification: 0
-  Connected: 0
-  WeaponName: Pewer
-  Projectile:
-  - {fileID: 3616997431128321647, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
-  FireRate: 0.75
-  pew: {fileID: 1260516630381133844, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
-  shoot: 0
 --- !u!50 &212055666
 Rigidbody2D:
   serializedVersion: 4
