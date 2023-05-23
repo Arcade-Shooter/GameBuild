@@ -9,9 +9,12 @@ public class Snappable : MonoBehaviour
     [SerializeField] private bool IsDisabled;
     [SerializeField] private bool IsOccupied;
 
-    [SerializeField] private bool IsInventoryPoint = false;
+    [SerializeField] private bool IsInventoryPoint;
     [SerializeField] private Equipment equipment = null;
 
+    void Awake(){
+        this.IsOccupied = false;
+    }
 
     /********************
      * Getters
@@ -26,10 +29,9 @@ public class Snappable : MonoBehaviour
         return IsOccupied;
     }
 
-    public bool GetIsInventoryPoint(){
+    public bool GetInventoryPoint(){
         return this.IsInventoryPoint;
     }
-
     public Equipment GetEquipment()
     {
         return equipment;
@@ -56,6 +58,7 @@ public class Snappable : MonoBehaviour
 
 
 
+
     //Occupy is a method that changes the state of a snap point.
     //If the snap point is occupied it is ignored by the snap controller for attaching drag dropped modules
     public void Occupy(Equipment equipment)
@@ -63,11 +66,13 @@ public class Snappable : MonoBehaviour
         this.IsDisabled = true;
         this.IsOccupied = true;
         this.equipment = equipment;
-        this.equipment.Connected = true;
 
-        //Adjust parent to be this node for movement
         this.equipment.transform.position = this.transform.position;
         this.equipment.transform.SetParent(this.transform);
+        //Adjust parent to be this node for movement
+        if(!this.IsInventoryPoint){
+            this.equipment.Equip();
+        }
         
     }
 
@@ -80,7 +85,7 @@ public class Snappable : MonoBehaviour
 
         this.IsOccupied = false;
         this.IsDisabled = false;
-        this.equipment.Connected = false;
+        this.equipment.Unequip();
         this.equipment = null;
     }
 }

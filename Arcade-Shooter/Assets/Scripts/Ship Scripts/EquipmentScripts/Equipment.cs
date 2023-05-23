@@ -5,15 +5,16 @@ using UnityEngine;
 
 public abstract class Equipment : MonoBehaviour
 {
-    protected int Health;
-    protected int MaxHealth;
-    protected string Name;     //nme of the item
-    protected string Description; // description of the item
-    [SerializeField] protected int Rarity;    //the probability of the item drop
     protected EquipmentType Type; //type of equipment
-    protected bool Equipped;
     protected bool Paused;  //not use yet
-    public bool Connected;
+    [Header("All the attribute should initialize it in inherited class ")]
+    [Header("this for test only!")]
+    [SerializeField] protected int Health;
+    [SerializeField] protected int MaxHealth;
+    [SerializeField] protected string Name;     //nme of the item
+    [SerializeField] protected int Rarity;    //the probability of the item drop
+    [SerializeField] protected bool Equipped;
+    [SerializeField, TextArea] protected string Description; // description of the item
 
     protected Equipment()
     {
@@ -28,6 +29,10 @@ public abstract class Equipment : MonoBehaviour
         this.Equipped = false;
         Debug.Log(Name + " is Unequipped.");
 
+    }
+
+    public bool GetEquipState(){
+        return this.Equipped;
     }
 
     public EquipmentType GetEquipmentType(){

@@ -184,8 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0c39cdb628b0448825923a18b8ad5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 0
+  MaxHealth: 0
+  Name: 
   Rarity: 0
-  Connected: 1
+  Equipped: 0
+  Description: 
   FireRate: 0
   Bullet: {fileID: 2436712962327111584, guid: 97055c960ab1ec44cb2a779effdcfce7, type: 3}
 --- !u!61 &1251940011448440093

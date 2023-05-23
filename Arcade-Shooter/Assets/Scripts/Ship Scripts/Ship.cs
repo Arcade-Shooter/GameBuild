@@ -140,11 +140,10 @@ public class Ship : MonoBehaviour
             if (!InventorySlot.GetOccupiedState()) //If the inventory is unocupied
             {
                 //change the tag
-                Collision.gameObject.tag = "PlayerModule";
+                gameObject.tag = "PlayerModule";
                 //InventorySlot.occupy()
                 InventorySlot.Occupy(Collision.GetComponent<Equipment>());
             }
-            //else do nothing
         }
     }
 

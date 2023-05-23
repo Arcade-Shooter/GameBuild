@@ -178,8 +178,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6431050985661888966}
   - component: {fileID: 6431050985661888965}
+  - component: {fileID: 317706611002312162}
   - component: {fileID: 6431050985661888967}
-  - component: {fileID: 6431050985661888960}
   - component: {fileID: 5215280531533814440}
   m_Layer: 7
   m_Name: Split Shot
@@ -258,6 +258,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &317706611002312162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431050985661888970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132730aafdeff2e4296265edfb6f7a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  MaxHealth: 0
+  Name: 
+  Rarity: 0
+  Equipped: 0
+  Description: 
+  FireRate: 0
+  Bullet: {fileID: 2436712962327111584, guid: 97055c960ab1ec44cb2a779effdcfce7, type: 3}
 --- !u!61 &6431050985661888967
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -284,37 +304,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
---- !u!114 &6431050985661888960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6431050985661888970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 169d0dbb562dea74bb45ed97038bf695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 3
-  MaxHealth: 3
-  classification: 0
-  Connected: 0
-  HeldSnappable: {fileID: 0}
-  isDraggable: 0
-  Square: {fileID: 6431050985661888965}
-  Decoration:
-  - {fileID: 5215280530029692505}
-  - {fileID: 4365817001517728211}
-  - {fileID: 5043822600001105483}
-  WeaponName: Pewer
-  Projectile:
-  - {fileID: 3616997431128321647, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
-  - {fileID: 8473532087300380563, guid: 6b5e4cab86003e34c9133cbf778224e7, type: 3}
-  - {fileID: 2296016810717668163, guid: 22b0759add2d8834c9e90298072664ad, type: 3}
-  FireRate: 1
-  pew: {fileID: 1260516630381133844, guid: 0ebc329ed3b115a4b87482ef14f00a4e, type: 3}
-  shoot: 0
 --- !u!50 &5215280531533814440
 Rigidbody2D:
   serializedVersion: 4

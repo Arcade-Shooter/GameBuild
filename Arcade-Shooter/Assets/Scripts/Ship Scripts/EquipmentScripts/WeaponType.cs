@@ -5,13 +5,13 @@ using UnityEngine;
 public abstract class WeaponType : Equipment
 {
     // [SerializeField] protected int Damage;
+    [Header("")]
     [SerializeField] protected float FireRate;
     [SerializeField] protected GameObject Bullet;
 
     protected WeaponType()
     {
         this.Type = EquipmentType.Weapon;
-        this.Equipped = true;
     }
 
     public void AutoFire()

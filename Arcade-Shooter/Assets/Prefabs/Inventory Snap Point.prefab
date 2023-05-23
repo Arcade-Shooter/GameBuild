@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDisabled: 0
+  IsDisabled: 1
   IsOccupied: 0
   IsInventoryPoint: 1
   equipment: {fileID: 0}
