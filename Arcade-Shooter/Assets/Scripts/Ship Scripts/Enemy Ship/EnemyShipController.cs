@@ -10,14 +10,13 @@ public class EnemyShipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemyShoot();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        EnemyShoot();
         transform.Translate(Vector3.up * Speed * Time.deltaTime);   //update the enemy ship position.
         if (transform.position.y < -6.0f)
         {

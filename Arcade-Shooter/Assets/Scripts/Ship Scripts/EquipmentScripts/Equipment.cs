@@ -18,38 +18,48 @@ public abstract class Equipment : MonoBehaviour
 
     protected Equipment()
     {
-        Equipped = false; 
+        Equipped = false;
     }
 
-    public void Equip(){
+    public void Equip()
+    {
         this.Equipped = true;
         Debug.Log(Name + " is Equipped.");
+
     }
-    public void Unequip(){
+    public void Unequip()
+    {
         this.Equipped = false;
         Debug.Log(Name + " is Unequipped.");
 
     }
 
-    public bool GetEquipState(){
+    public bool GetEquipState()
+    {
         return this.Equipped;
     }
 
-    public EquipmentType GetEquipmentType(){
+    public EquipmentType GetEquipmentType()
+    {
         return this.Type;
     }
 
-    public void TakeDamage(int damage){
-        if(this.Health > 0){
+    public void TakeDamage(int damage)
+    {
+        if (this.Health > 0)
+        {
             this.Health -= damage;
-        }else{
+        }
+        else
+        {
             Destroy(this);
         }
     }
 
-        private void OnTriggerEnter2D(Collider2D Collsion)
+    private void OnTriggerEnter2D(Collider2D Collsion)
     {
-        if (Collsion.tag == "EnemyBullet")
+        if(this.Equipped){
+            if (Collsion.tag == "EnemyBullet")
         {
             // int damage = Collsion.gameObject.GetComponent<Projectile>().GetDamage();
             this.TakeDamage(1);
@@ -59,6 +69,7 @@ public abstract class Equipment : MonoBehaviour
         {
             this.TakeDamage(1);
             Destroy(Collsion.gameObject);
+        }
         }
     }
 

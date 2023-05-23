@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float Speed;
-    [SerializeField] private Vector3 Direction = Vector3.up;
+    [SerializeField] float Speed;
+    [SerializeField] Vector3 Direction;
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         move();
     }
 
     private void move(){
-        transform.Translate(Vector3.up * Speed * Time.deltaTime);   //update the bullet position.
+        transform.Translate(Direction * Speed * Time.deltaTime);   //update the bullet position.
         if (transform.position.y > CameraBounds.TopBoundary || transform.position.y < CameraBounds.BottomBoundary || 
             transform.position.x > CameraBounds.RightBoundary || transform.position.x < CameraBounds.LeftBoundary)
         {
             Destroy(gameObject);
         }
     }
+
     public void SetDirection(Vector3 direction){
-        this.Direction = direction.normalized;
+        this.Direction = direction;
     }
 
 }
