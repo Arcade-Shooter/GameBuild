@@ -17,7 +17,7 @@ yay
 )
 
 */
-public class AnimHealFlash : MonoBehaviour
+public class AnimFlash : MonoBehaviour
 {
     public Color flashColor = Color.white;
     public float interval = 0.2f; // 0.2 seconds sounds like a good default

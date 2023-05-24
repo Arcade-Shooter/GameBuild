@@ -3,22 +3,34 @@ using UnityEngine.UI;
 
 /**
 
-Healthbar V8 - AnimHealFlash.cs Name Changed:
+Healthbar V10 - ( the weird version in the script name no longer means anything )
+
+This Version brings fantastic new changes, like:
+health visually changes BEFORE the animation, so thats good
+damage flash for hurting should probably be brown not red
+
+____________________________
 
 
-No joke, the only reason i have to change this script
-is because of my nightmare versioning: i changed the script
-"AnimHealFlash.cs" to "AnimHealFlashV2Sprite.cs" (because im silly and thats just what i do)
-And because I cannot create a [SerializeField] to drag in a script,
-I now have to go and change the name in the AnimHealFlash in this script.
+Healthbar V7 - Sprite Tiled:
 
-This is absolute pain, if i could put a unit test around this i would.
-in fact, I would rather use Unity's built-in animation system, then i could just
-drag in the appropriate animation.
+the "Healthbar" script now uses a SpriteRenderer, where the image mode is "tiled".
+This means we can crop the image to show more or less hearts.
 
-For now, this is not 
+
+
+One issue with this version is
+it still relies on my weird little "AnimHealFlash.cs" script.
+
+In the next version I am hoping to replace this script with a proper
+Unity animation i can drag and drop into the script
+using [SerializeField] variables i.e:
+
+[SerializeField] private Animation animHealFlash;
+[SerializeField] private Animation animDamageFlash;
+
 */
-public class HealthbarV8AnimHealFlashNameChanged : MonoBehaviour
+public class Healthbar : MonoBehaviour
 {
     //VARIABLES
     [SerializeField] private int maxHealth = 3; //3 heart capsules
@@ -34,6 +46,7 @@ public class HealthbarV8AnimHealFlashNameChanged : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("I AM A HEALTHBAR!");
         spriteWidth = healthSpriteRenderer.size.x;
         spriteHeight = healthSpriteRenderer.size.y;
         UpdateBar();
@@ -43,7 +56,7 @@ public class HealthbarV8AnimHealFlashNameChanged : MonoBehaviour
     //the heal() and damage() functions will change the healthbar's amount
     public void Damage(int amount)
     {
-        Debug.Log("Damage a Capsule");
+        Debug.Log("DAMAGE!");
         health -= amount;
         if(health < 0)
         {
@@ -57,7 +70,7 @@ public class HealthbarV8AnimHealFlashNameChanged : MonoBehaviour
     }
     public void Heal(int amount)
     {
-        Debug.Log("Heal a Capsule");
+        Debug.Log("HEAL!");
         health += amount;
         if(health > maxHealth)
         {
@@ -88,11 +101,14 @@ public class HealthbarV8AnimHealFlashNameChanged : MonoBehaviour
     //ANIMATION STUFF
     private void AnimateDamage()
     {
-        GetComponent<AnimHealFlash>().HealFlash(1, Color.red);
+        //the 1 means "flash once" not "flash for 1 second" (this is a personal oops i made)
+        //its brown, not red anymore, so you can read the amount of damage as the animation plays. less interfery
+        Color darkRed = new Color(0.8f, 0.4f, 0); 
+        GetComponent<AnimFlash>().HealFlash(1, darkRed); 
     }
     private void AnimateHeal()
     {
-        GetComponent<AnimHealFlash>().HealFlash(1, Color.gray);
+        GetComponent<AnimFlash>().HealFlash(1, Color.gray);
     }
     //update the bar's health amount
     private void UpdateBar()
@@ -108,7 +124,6 @@ public class HealthbarV8AnimHealFlashNameChanged : MonoBehaviour
          [the script is attached to the black hearts],
          Anyways HealthBarInner should already be dragged into the field)
         */
-        Debug.Log("Updated Health(Capsule)Bar");
         float healthPercent = (float)health / (float)maxHealth;
         healthSpriteRenderer.size = new Vector2(healthPercent * spriteWidth, spriteHeight);
     }
