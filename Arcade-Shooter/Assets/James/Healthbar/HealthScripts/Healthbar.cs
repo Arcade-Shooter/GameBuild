@@ -3,44 +3,60 @@ using UnityEngine.UI;
 
 /**
 
-Healthbar V10 - ( the weird version in the script name no longer means anything )
+Healthbar V12
 
-This Version brings fantastic new changes, like:
-health visually changes BEFORE the animation, so thats good
-damage flash for hurting should probably be brown not red
+This is a major version,
+maybe i shouldve called it Healthbar V2.0 (sounds bigger?)
+maybe "Healthbar Series X"?
+anyway, gonna add a setHealth() method and a setMaxHealth() method.
 
-____________________________
+I also wanna delete a buncha methods!
+I think i only need
+- setCurrentHealth(),
+- setMaxHealth(),
+- UpdateBar()
+
+might still need these old functions though:
+- Start()
+- AnimateHeal()
+- Heal()
+- Damage()
+
+So I can only really delete
+- HealFull()
+- DamageFull()
 
 
-Healthbar V7 - Sprite Tiled:
+Old System:
+the Healthbar stores the current health value, and when a player/capsule takes damage it will call Healthbar.
+It will receive back a value of whether the healthbar still has health.
+If the healthbar is empty, the player/capsule would destroy itself (in its own script, not the healthbar script).
 
-the "Healthbar" script now uses a SpriteRenderer, where the image mode is "tiled".
-This means we can crop the image to show more or less hearts.
+Old System Requirements:
+Heal()
+Damage()
+UpdateBar()
 
 
+New System: (NOPE! WERE GOING BACK TO OLD SYSTEM)
+The Healthbar DOESNT store health...?
+Basically, if we use the new system, the Healthbar wouldnt store any health,
+instead it would rely on each player/capsule to store it's own health.
 
-One issue with this version is
-it still relies on my weird little "AnimHealFlash.cs" script.
+New System Requirements
 
-In the next version I am hoping to replace this script with a proper
-Unity animation i can drag and drop into the script
-using [SerializeField] variables i.e:
-
-[SerializeField] private Animation animHealFlash;
-[SerializeField] private Animation animDamageFlash;
-
+Writing out the New System, it kinda sounds ridiculous. I think I'd rather just store maxHealth in here,
+that way i can change it with a SerializeField
 */
 public class Healthbar : MonoBehaviour
 {
-    //VARIABLES
-    [SerializeField] private int maxHealth = 3; //3 heart capsules
-    [SerializeField] private int health; //only gonna update this with private methods
-    
-    //we used to use an image component:
-    // --> public Image healthBarImage;
-    //but now we're gonna grab a different component:
+    //############  Variables  ###############
+    //COOL SETTTINGS:
+    [SerializeField] private int maxHealth = 3; //3 heart capsules, but this can change
     public SpriteRenderer healthSpriteRenderer;
 
+    //(((super private, machine settings))):
+    private int currentHealth; //only gonna update this with private methods
     private float spriteWidth;
     private float spriteHeight;
 
@@ -52,17 +68,17 @@ public class Healthbar : MonoBehaviour
         UpdateBar();
     }
 
-    //PUBLIC METHDS (need to access and update these with scripts, UI Buttons etc)
-    //the heal() and damage() functions will change the healthbar's amount
+    //############  Methods  ###############
+    //-------------Public Methods-------------
+    //  Set Health Value/s
+
+    //OLD HEALTH METHODS
     public void Damage(int amount)
     {
         Debug.Log("DAMAGE!");
-        health -= amount;
-        if(health < 0)
-        {
-            //if negative health, round to 0
-            DamageFull();
-        } else
+        currentHealth -= amount;
+        if(currentHealth < 0) { DamageFull();} //  if negative health, round to 0
+        else
         {
             UpdateBar();
             AnimateDamage();
@@ -71,34 +87,54 @@ public class Healthbar : MonoBehaviour
     public void Heal(int amount)
     {
         Debug.Log("HEAL!");
-        health += amount;
-        if(health > maxHealth)
-        {
-            HealFull();
-        } else
+        currentHealth += amount;
+        if(currentHealth > maxHealth) { HealFull(); }
+        else
         {
             UpdateBar();
             AnimateHeal();
         }
     }
-    //PRIVATE METHODS (just other weird stuff)
-    //healFull and damageFull for when damage is too high/low
+    
+    //NEW HEALTH METHODS
+    public void setCurrentHealth(int currentHealth)
+    {
+        this.currentHealth = currentHealth;
+        UpdateBar();
+        AnimateHeal();
+    }
+    
+    /**
+    setMaxHealth()
+
+    This should be called when the player/enemy is 1st created,
+    but by default this script is gonna be attached to a 3-heart bar
+    so we'll just leave it as is for now
+    */
+    public void setMaxHealth(int maxHealth)
+    {
+        this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
+        UpdateBar();
+    }
+
+    //-------------Private Methods-------------
     private void HealFull()
     {
-        health = maxHealth;
+        currentHealth = maxHealth;
         UpdateBar();
         AnimateHeal();
     }
     private void DamageFull()
     {
-        health = 0;
+        currentHealth = 0;
         UpdateBar();
         AnimateDamage();
     }
     
     
     
-    //ANIMATION STUFF
+    //  Animation Stuff
     private void AnimateDamage()
     {
         //the 1 means "flash once" not "flash for 1 second" (this is a personal oops i made)
@@ -110,7 +146,6 @@ public class Healthbar : MonoBehaviour
     {
         GetComponent<AnimFlash>().HealFlash(1, Color.gray);
     }
-    //update the bar's health amount
     private void UpdateBar()
     {
         /**
@@ -124,7 +159,7 @@ public class Healthbar : MonoBehaviour
          [the script is attached to the black hearts],
          Anyways HealthBarInner should already be dragged into the field)
         */
-        float healthPercent = (float)health / (float)maxHealth;
+        float healthPercent = (float)currentHealth / (float)maxHealth;
         healthSpriteRenderer.size = new Vector2(healthPercent * spriteWidth, spriteHeight);
     }
 }
