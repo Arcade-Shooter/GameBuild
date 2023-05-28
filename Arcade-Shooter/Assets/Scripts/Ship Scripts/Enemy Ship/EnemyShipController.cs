@@ -20,7 +20,8 @@ public class EnemyShipController : MonoBehaviour
         transform.Translate(Vector3.up * Speed * Time.deltaTime);   //update the enemy ship position.
         if (transform.position.y < -6.0f)
         {
-            Destroy(gameObject);    //kill the enemy ship object. 
+            //kill the enemy ship object.
+            Destroy(gameObject); 
         }
     }
 
@@ -29,6 +30,12 @@ public class EnemyShipController : MonoBehaviour
         if (collision.tag == "PlayerBullet")
         {
             Debug.Log("Enemy Hit");
+            if (Random.Range(0, 10) < 4)    //40% chance to drop a random equipment
+            {
+                //drop a random equipment on the enemy ship's position
+                int randomIndex = Random.Range(0, EquipmentPrefabsList.EquipmentPrefabs.Count);
+                Instantiate(EquipmentPrefabsList.EquipmentPrefabs[randomIndex], this.transform.position, Quaternion.identity);  
+            }
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }

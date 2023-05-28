@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour
 
     }
 
+
     IEnumerator enumerator()
     {
         while (true)

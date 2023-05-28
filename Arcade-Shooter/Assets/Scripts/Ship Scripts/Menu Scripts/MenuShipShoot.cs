@@ -9,6 +9,6 @@ public class MenuShipShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ship.shoot = true;   
+        // ship.shoot = true;   
     }
 }

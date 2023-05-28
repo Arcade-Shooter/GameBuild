@@ -14,11 +14,33 @@ public abstract class Equipment : MonoBehaviour
     [SerializeField] protected string Name;     //nme of the item
     [SerializeField] protected int Rarity;    //the probability of the item drop
     [SerializeField] protected bool Equipped;
+    [SerializeField] private float spawnTime;
+    [SerializeField] private const float lifetime = 10f;
     [SerializeField, TextArea] protected string Description; // description of the item
 
     protected Equipment()
     {
         Equipped = false;
+    }
+
+    protected void Start()
+    {
+        spawnTime = Time.time; //record the time when the equipment is spawned
+        StartCoroutine(CheckLifetime());
+    }
+
+    protected IEnumerator CheckLifetime()
+    {
+        while (true)
+        {
+            if (Time.time - spawnTime > lifetime && !Equipped)
+            {
+                Destroy(gameObject); //destroy the equipment if it is not equipped for 1 minute
+                yield break;
+            }
+
+            yield return null;
+        }
     }
 
     public void Equip()
@@ -54,6 +76,12 @@ public abstract class Equipment : MonoBehaviour
         {
             Destroy(this);
         }
+    }
+
+    //destroy the equipment if it is not equipped for 1 minute
+    public void DestroyEquipment()
+    {
+    
     }
 
     private void OnTriggerEnter2D(Collider2D Collsion)
