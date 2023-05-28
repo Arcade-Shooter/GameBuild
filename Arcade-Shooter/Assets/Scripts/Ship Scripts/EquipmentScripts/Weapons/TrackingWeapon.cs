@@ -17,9 +17,7 @@ public class TrackingWeapon : WeaponType
 
     public override void Fire()
     {
-      // Get all the enemies on the field
-        // Missile missile = gameObject.GetComponent<Missile>();
-
+        //create new Bullet object at the postion where the ship is.
         Instantiate(this.Bullet, transform.position, transform.rotation);
 
     }

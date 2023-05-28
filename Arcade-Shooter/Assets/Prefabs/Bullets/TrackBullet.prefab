@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 7
   Target: {fileID: 0}
-  rotationSpeed: 50
+  rotationSpeed: 100
 --- !u!70 &2028730899714848275
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -18,13 +18,22 @@ public class Missile : MonoBehaviour
 
     private void move()
     {
+        // Find all enemies
         EnemyShipController[] enemies = FindObjectsOfType<EnemyShipController>();
 
          if (enemies.Length > 0)
-        {
-            // Randomly select an enemy as a tracking target
-            int randomIndex = Random.Range(0, enemies.Length);
-            this.Target = enemies[randomIndex].transform;
+        {    
+            // Find the closest enemy as target
+            float minDistance = Mathf.Infinity;
+            foreach (EnemyShipController enemy in enemies)
+            {
+                float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    Target = enemy.transform;
+                }
+            }
 
             Debug.Log(Target.name + " found!");
             // Track the target
