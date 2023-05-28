@@ -7,13 +7,28 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject EnemyShip;
 
     [SerializeField] private int MinEnemies = 1;
-    [SerializeField] private int MaxEnemies = 9;
+    [SerializeField] private int MaxEnemies = 5;
+
+    private float CameraLeft;
+    // = CameraBounds.LeftBoundary;
+    private float CameraRight;
+    // = CameraBounds.RightBoundary;
+    private float spawnRangeX;
+    //  = CameraBounds.RightBoundary - CameraBounds.LeftBoundary;
+    private float spawnHeight;
+    //  = CameraBounds.TopBoundary + 1;
 
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(enumerator());
+
+        //initialize the camera boundaries
+        CameraLeft = CameraBounds.LeftBoundary;
+        CameraRight = CameraBounds.RightBoundary;
+        spawnRangeX = CameraBounds.RightBoundary - CameraBounds.LeftBoundary;
+        spawnHeight = CameraBounds.TopBoundary + 1;
 
     }
 
@@ -22,15 +37,16 @@ public class EnemyManager : MonoBehaviour
     {
         while (true)
         {
-            int numEnemies = Random.Range(MinEnemies, MaxEnemies); 
+            int numEnemies = Random.Range(MinEnemies, MaxEnemies);  //randomly generate the number of enemies
             for (int i = 0; i < numEnemies; i++)
             {
-                GameObject NewEnemy = Instantiate(EnemyShip);
-                float XPosition = Random.Range(-9, 9);
-                NewEnemy.transform.position = new Vector3(XPosition, 7, 0);
+                GameObject NewEnemy = Instantiate(EnemyShip);   //create a new enemy ship object
+                float XPosition = Random.Range(CameraLeft, CameraRight);    //randomly generate the x position of the enemy ship
+                float YPosition = spawnHeight + Random.Range(0,7);  //randomly generate the y position of the enemy ship
+                NewEnemy.transform.position = new Vector3(XPosition, YPosition, 0); //set the position of the enemy ship
             }
 
-            yield return new WaitForSeconds(Random.Range(1, 5));
+            yield return new WaitForSeconds(Random.Range(0, 3));
         }
     }
 }

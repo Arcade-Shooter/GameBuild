@@ -244,17 +244,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3712103163065083003, guid: 9adef235b44c26b4cbd914119e75c9b2, type: 3}
+      propertyPath: Speed
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 6156535465572246225, guid: 9adef235b44c26b4cbd914119e75c9b2, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6156535465572246225, guid: 9adef235b44c26b4cbd914119e75c9b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.2467403
+      value: 4.28
       objectReference: {fileID: 0}
     - target: {fileID: 6156535465572246225, guid: 9adef235b44c26b4cbd914119e75c9b2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1284206
+      value: -4.69
       objectReference: {fileID: 0}
     - target: {fileID: 6156535465572246225, guid: 9adef235b44c26b4cbd914119e75c9b2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -425,53 +429,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &444382095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 444382097}
-  - component: {fileID: 444382096}
-  m_Layer: 0
-  m_Name: Equipment Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &444382096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444382095}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f34b240fd923fd49b32f2f396409f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyShip: {fileID: 6431050985661888970, guid: bc120d7351c339f4daa497b33622f60b, type: 3}
-  MinEnemies: 1
-  MaxEnemies: 9
---- !u!4 &444382097
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444382095}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1829762, y: -0.050473776, z: -9.948085}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &518903388
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1266b56d5abbb7442aafb89502204577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 1
 --- !u!4 &1069960693
 Transform:
   m_ObjectHideFlags: 0
@@ -1228,7 +1185,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2059442935
 GameObject:
