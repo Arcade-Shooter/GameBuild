@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
-{
-    [SerializeField] private GameObject EnemyShip;
-
+{   
+    //get the enemy ship prefab list
+    [SerializeField] private List<GameObject> EnemyShipPrefabs = new List<GameObject>();
     [SerializeField] private int MinEnemies = 1;
     [SerializeField] private int MaxEnemies = 5;
 
@@ -18,6 +18,10 @@ public class EnemyManager : MonoBehaviour
     private float spawnHeight;
     //  = CameraBounds.TopBoundary + 1;
 
+    void Awake()
+    {
+        EnemyShipPrefabs.AddRange(EnemyPrefabsList.EnemyPrefabs); //get the enemy ship prefab list
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +44,8 @@ public class EnemyManager : MonoBehaviour
             int numEnemies = Random.Range(MinEnemies, MaxEnemies);  //randomly generate the number of enemies
             for (int i = 0; i < numEnemies; i++)
             {
-                GameObject NewEnemy = Instantiate(EnemyShip);   //create a new enemy ship object
+                //randomly generate the enemy ship
+                GameObject NewEnemy = Instantiate(EnemyShipPrefabs[Random.Range(0, EnemyShipPrefabs.Count)]);
                 float XPosition = Random.Range(CameraLeft, CameraRight);    //randomly generate the x position of the enemy ship
                 float YPosition = spawnHeight + Random.Range(0,7);  //randomly generate the y position of the enemy ship
                 NewEnemy.transform.position = new Vector3(XPosition, YPosition, 0); //set the position of the enemy ship
@@ -49,4 +54,6 @@ public class EnemyManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0, 3));
         }
     }
+
+
 }

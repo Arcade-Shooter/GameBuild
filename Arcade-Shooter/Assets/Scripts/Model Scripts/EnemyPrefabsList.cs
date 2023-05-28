@@ -4,17 +4,15 @@ using UnityEngine;
 using System.IO;
 using UnityEditor;
 
-public static class EquipmentPrefabsList
+public static class EnemyPrefabsList
 {
-    //create a read only list of prefabs that can be accessed from anywhere, but only initialized here.
-    //this is used to spawn random equipment on enemy death.
-    public static readonly List<GameObject> EquipmentPrefabs = new List<GameObject>();
+    public static readonly List<GameObject> EnemyPrefabs = new List<GameObject>();
 
     //initialize the list
-    static EquipmentPrefabsList()
+    static EnemyPrefabsList()
     {
-        string folderPath = "Assets/Prefabs/Equipment"; //path to the folder containing the prefabs
-        EquipmentPrefabs.AddRange(LoadPrefabsFromFolder(folderPath));   //load all prefabs from the folder
+        string folderPath = "Assets/Prefabs/Ships/Enemy"; //path to the folder containing the prefabs
+        EnemyPrefabs.AddRange(LoadPrefabsFromFolder(folderPath));   //load all prefabs from the folder
     }
 
 
@@ -40,14 +38,6 @@ public static class EquipmentPrefabsList
 
         return prefabsList;
     }
-
-    //get a random equipment from the list
-    public static GameObject GetRandomEquipment()
-    {
-        return EquipmentPrefabs[Random.Range(0, EquipmentPrefabs.Count)];
-    }
-
-
 
 }
 
