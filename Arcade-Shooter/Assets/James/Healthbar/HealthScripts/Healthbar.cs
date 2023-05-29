@@ -62,9 +62,10 @@ public class Healthbar : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("I AM A HEALTHBAR!");
+        // Debug.Log("I AM A HEALTHBAR!");
         spriteWidth = healthSpriteRenderer.size.x;
         spriteHeight = healthSpriteRenderer.size.y;
+        setCurrentHealth(maxHealth);
         UpdateBar();
     }
 
@@ -75,28 +76,53 @@ public class Healthbar : MonoBehaviour
     //OLD HEALTH METHODS
     public void Damage(int amount)
     {
-        Debug.Log("DAMAGE!");
+        // int damageLogName = Random.Range(1,10);
+        // Debug.Log("Damage "+damageLogName+" Start: "+currentHealth);
+
+        int startH = currentHealth;
         currentHealth -= amount;
-        if(currentHealth < 0) { DamageFull();} //  if negative health, round to 0
+        if(currentHealth < 0)
+        {
+            //weird damage:  (if negative health, round to 0)
+            DamageFull();
+            Debug.Log("Damaged Healthbar Completely: "+currentHealth);
+        }
         else
         {
+            //normal damage:
             UpdateBar();
             AnimateDamage();
+            Debug.Log("Damaged Healthbar: "+currentHealth);
         }
+        // Debug.Log("Damage "+damageLogName+" End: "+currentHealth);
     }
     public void Heal(int amount)
     {
-        Debug.Log("HEAL!");
+        // Debug.Log("HEAL!");
         currentHealth += amount;
-        if(currentHealth > maxHealth) { HealFull(); }
+        if(currentHealth > maxHealth)
+        {
+            HealFull();
+            Debug.Log("Healed Healthbar completely: "+currentHealth);
+        }
         else
         {
             UpdateBar();
             AnimateHeal();
+            Debug.Log("Healed Healthbar: "+currentHealth);
         }
     }
     
     //NEW HEALTH METHODS
+    public int getCurrentHealth()
+    {
+        return this.currentHealth;
+    }
+
+    public int getMaxHealth()
+    {
+        return this.maxHealth;
+    }
     public void setCurrentHealth(int currentHealth)
     {
         this.currentHealth = currentHealth;

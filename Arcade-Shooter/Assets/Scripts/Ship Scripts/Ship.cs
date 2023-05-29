@@ -78,7 +78,7 @@ public class Ship : MonoBehaviour
             }
         }
 
-        Debug.Log("" + thrusters);
+        Debug.Log("Thrusters: "+ "" + thrusters);
         return thrusters;
 
     }

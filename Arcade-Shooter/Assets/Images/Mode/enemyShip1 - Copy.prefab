@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4193583667243190}
   - component: {fileID: 212833696140276620}
   m_Layer: 0
-  m_Name: enemyShip1
+  m_Name: enemyShip1 - Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,6 +8,10 @@ public class EnemyShipController : MonoBehaviour
     public GameObject Bullet;
     public int ProbabilityShoot;    //range: 0 - 10
     // Start is called before the first frame update
+
+//stealing code from ObjectHealthDamage
+    //need to drag in the healthbar here (the healthbar prefab should contain the healthbar script necessary)
+    public GameObject hb;
     void Start()
     {
         EnemyShoot();
@@ -29,12 +33,23 @@ public class EnemyShipController : MonoBehaviour
     {
         if (collision.tag == "PlayerBullet")
         {
-            Debug.Log("Enemy Hit");
-            Destroy(gameObject);
-            Destroy(collision.gameObject);
+            hb.GetComponent<Healthbar>().Damage(1); 
+            int health = hb.GetComponent<Healthbar>().getCurrentHealth();
+            if(health <= 0)
+            {
+                Debug.Log("No Health: Enemy Destroyed");
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+            } else
+            {
+                Debug.Log("Some Health: Enemy Survived");
+            }
+
+            
         }
         if (collision.tag == "Player")
         {
+            Debug.Log("No Healthbar stuff, just die");
             Destroy(gameObject);
         }
     }
