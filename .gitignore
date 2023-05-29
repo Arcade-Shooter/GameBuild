@@ -87,3 +87,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+
+#The unity.dwlt
+*.dwlt
+

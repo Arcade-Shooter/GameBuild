@@ -17,35 +17,9 @@ public class GameController : MonoBehaviour
         // Increment time in the game model
     }
 
-    public void AccelerateLeft()
-    {
 
-    }
 
-    public void AccelerateRight()
-    {
 
-    }
-
-    public void AccelerateUp()
-    {
-
-    }
-
-    public void AccelerateDown()
-    {
-
-    }
-
-    public void FireWeapons()
-    {
-
-    }
-
-    public void TogglePause()
-    {
-
-    }
 
     public void Menu() // Return to the menu
     {
