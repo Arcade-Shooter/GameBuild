@@ -3475,6 +3475,7 @@ MonoBehaviour:
   CursorTransform: {fileID: 935616782}
   ThrusterBoost: 1
   Speed: 2
+  shoot: 0
   snaps:
   - {fileID: 856729836}
   - {fileID: 1718376332}
