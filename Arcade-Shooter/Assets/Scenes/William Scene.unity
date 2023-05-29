@@ -560,7 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyShipPrefabs: []
   MinEnemies: 1
-  MaxEnemies: 9
+  MaxEnemies: 3
 --- !u!4 &1213147124
 Transform:
   m_ObjectHideFlags: 0
