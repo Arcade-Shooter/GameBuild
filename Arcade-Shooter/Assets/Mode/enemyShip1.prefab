@@ -151,6 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1dda299081c3fc4590d70a286a32d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: -4
+  Speed: -2
   Bullet: {fileID: 8756158021857462367, guid: f461b25da1de5af49b5b8c32fbba83bc, type: 3}
-  ProbabilityShoot: 9
+  ProbabilityShoot: 4

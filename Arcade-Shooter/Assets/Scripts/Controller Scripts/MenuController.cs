@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MenuController 
+public class MenuController : MonoBehaviour
 {
 
     public void StartGame()
     {
-
+        SceneManager.LoadScene(1); //Hard Coded for the scene
     }
 
     public void OpenSettings()
@@ -20,8 +21,8 @@ public class MenuController
 
     }
 
-    public void exit() 
+    public void exit()
     {
-    
+        Application.Quit();
     }
 }
