@@ -235,7 +235,7 @@ public class Ship : MonoBehaviour
     private void Shoot()
     {
         //check if the "Space" has been pressed
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
             //print("Space key has been pressed");
