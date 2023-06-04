@@ -10,6 +10,7 @@ public class Snappable : MonoBehaviour
     [SerializeField] private bool IsOccupied;
 
     [SerializeField] private bool IsInventoryPoint;
+    [SerializeField] private bool IsShieldPoint;
     [SerializeField] private Equipment equipment = null;
 
     void Awake(){

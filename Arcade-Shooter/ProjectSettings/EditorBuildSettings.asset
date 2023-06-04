@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main Menu.unity
     guid: 5f01864c23cc55940af4db9511b65cdf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Matthew's Ship Scene.unity
     guid: 650bad6582e7aea45bd69e1f171adc62
+  - enabled: 1
+    path: Assets/Scenes/StartMenu.unity
+    guid: 3959c921ef21689438bb1598aab98521
   m_configObjects: {}

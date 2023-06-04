@@ -169,7 +169,7 @@ public class Ship : MonoBehaviour
         // play explosion sound effect
         // AudioSource.PlayClipAtPoint(ExplosionSound, transform.position);
         Destroy(gameObject);
-      
+
     }
 
     private void MoveCursor()
@@ -221,10 +221,21 @@ public class Ship : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
+            Equipment equipment = InventorySlot.GetEquipment();
+
+            if (equipment.GetEquipmentType() == EquipmentType.Shield)
+            {
+                ModuleSnapPoints[1, 1].Occupy(equipment);
+            }
+            else
+            {
+            }
+
             Snappable snapPoint = ModuleSnapPoints[CursorPositionX, CursorPositionY];
+
             if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false && InventorySlot.GetOccupiedState() == true) //if the cursor position is unocupied and there's one in the inventory
             {
-                Equipment equipment = InventorySlot.GetEquipment();
+
                 InventorySlot.Vacate();
                 ModuleSnapPoints[CursorPositionX, CursorPositionY].Occupy(equipment);
             }
