@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipSoundEffect : MonoBehaviour
+public class SoundEffect : MonoBehaviour
 {
-    public static ShipSoundEffect instance;
+    public static SoundEffect instance;
     public AudioSource audioSource;
 
     public AudioClip shootSound;
@@ -72,5 +72,19 @@ public class ShipSoundEffect : MonoBehaviour
         this.audioSource.UnPause();
     }
 
+    public void stopSound()
+    {
+        this.audioSource.Stop();
+    }
+
+    public void muteSound()
+    {
+        this.audioSource.mute = true;
+    }
+
+    public void unmuteSound()
+    {
+        this.audioSource.mute = false;
+    }
 
 }

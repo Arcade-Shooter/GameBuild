@@ -133,7 +133,7 @@ public class Ship : MonoBehaviour
     //play explosion animation and sound effect when player ship is destroyed  
     private void OnDestroy()
     {
-        ShipSoundEffect.instance.PlayExplosionSound();
+        SoundEffect.instance.PlayExplosionSound();
         Destroy(gameObject);
     }
 
@@ -214,7 +214,7 @@ public class Ship : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //play shoot sound effect
-            ShipSoundEffect.instance.PlayShootSound();
+            SoundEffect.instance.PlayShootSound();
             //Instantiate a new Bullet object
             Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
         }

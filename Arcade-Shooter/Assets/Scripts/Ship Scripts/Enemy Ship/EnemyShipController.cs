@@ -75,13 +75,13 @@ public class EnemyShipController : MonoBehaviour
 
     public void EnemyShoot()
     {
-        ShipSoundEffect.instance.PlayEnemyShootSound();
+        SoundEffect.instance.PlayEnemyShootSound();
         Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));
     }
 
     public void OnDestroy(){
         Debug.Log("Enemy Destroyed");
-        ShipSoundEffect.instance.PlayExplosionSound();
+        SoundEffect.instance.PlayExplosionSound();
         Destroy(gameObject);
     }
 

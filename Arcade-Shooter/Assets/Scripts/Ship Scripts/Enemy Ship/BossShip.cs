@@ -79,7 +79,7 @@ public class BossShip : MonoBehaviour
         if(!PauseMenu.GameIsPaused)  //check if game is paused
         {
             //play boss ship shoot sound effect
-            ShipSoundEffect.instance.PlayBossShootSound();
+            SoundEffect.instance.PlayBossShootSound();
             //create new Bullet object at the postion where the ship is, and bullet direction is spreaded
             Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 10));
             Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -10));
@@ -103,7 +103,7 @@ public class BossShip : MonoBehaviour
     private void OnDestroy()
     {
         //play explosion sound effect when boss ship is destroyed
-        ShipSoundEffect.instance.PlayExplosionSound();
+        SoundEffect.instance.PlayExplosionSound();
         //drop equipment when boss ship is destroyed
         GameObject randomEquipment = EquipmentPrefabsList.GetRandomEquipment();
         Instantiate(randomEquipment, this.transform.position, Quaternion.identity);  //drop the equipment on the boss ship's position

@@ -5,14 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+
     public void StartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void StartMenu(){
+        PauseMenu.instance.OnRestart();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
     public void SettingMenu()
     {
-        // Application.LoadLevel("Setting");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
     
     public void QuitGame()
@@ -24,5 +30,15 @@ public class Menu : MonoBehaviour
     public void OnResume()
     {
         PauseMenu.instance.OnResume();
-    }   
+    } 
+
+    public void OpenSettingMenu()
+    {
+        PauseMenu.instance.OpenSettingMenu();
+    }
+
+    public void CloseSettingMenu(){
+        PauseMenu.instance.CloseSettingMenu();
+    }
+
 }
