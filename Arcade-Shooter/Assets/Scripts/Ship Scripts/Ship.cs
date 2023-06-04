@@ -27,6 +27,7 @@ public class Ship : MonoBehaviour
 
     void Awake()
     {
+        //initialize the player ship
         if (instance == null)
         {
             instance = this;
@@ -35,13 +36,15 @@ public class Ship : MonoBehaviour
         this.Speed = 3;
         this.Health = this.MaxHealth;
 
+        HealtheBar.instance.SetHealth(this.Health);
+        //Get all the snap points
         Snappable[] allSnapPoints = this.transform.GetComponentsInChildren<Snappable>();
 
-        this.snaps.AddRange(allSnapPoints);
+        this.snaps.AddRange(allSnapPoints); //Add all the snap points to the list
 
         int counter = 0;
-        for (int i = 0; i < 3; i++)
-        {
+        for (int i = 0; i < 3; i++) 
+        {   //Loop through the 2D array and add the snap points to the array
             for (int n = 0; n < 3; n++)
             {
                 this.ModuleSnapPoints[n, i] = this.snaps[counter];
@@ -96,6 +99,7 @@ public class Ship : MonoBehaviour
     //Collision controller for the ship
     private void OnTriggerEnter2D(Collider2D Collision)
     {
+        
         if (Collision.tag == "EnemyBullet")
         {
             // int damage = Collision.gameObject.GetComponent<Projectile>().GetDamage();
@@ -125,6 +129,7 @@ public class Ship : MonoBehaviour
     private void TakeDamage(int damage)
     {
         this.Health -= damage;
+        HealtheBar.instance.SetHealth(this.Health);
         if (this.Health <= 0)
         {
             OnDestroy();
@@ -168,6 +173,7 @@ public class Ship : MonoBehaviour
         // Instantiate(Explosion, transform.position, Quaternion.identity);
         // play explosion sound effect
         // AudioSource.PlayClipAtPoint(ExplosionSound, transform.position);
+        ShipSoundEffect.instance.PlayExplosionSound();
         Destroy(gameObject);
 
     }
@@ -248,10 +254,10 @@ public class Ship : MonoBehaviour
         //check if the "Space" has been pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //play shoot sound effect
+            ShipSoundEffect.instance.PlayShootSound();
+            //Instantiate a new Bullet object
             Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
-            //print("Space key has been pressed");
-            //shoot = true;
-
         }
     }
 

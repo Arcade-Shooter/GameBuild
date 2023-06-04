@@ -45,12 +45,14 @@ public abstract class Equipment : MonoBehaviour
     public void Equip()
     {
         this.Equipped = true;
+        ShipSoundEffect.instance.PlayEquipSound();
         Debug.Log(Name + " is Equipped.");
 
     }
     public void Unequip()
     {
         this.Equipped = false;
+        ShipSoundEffect.instance.PlayUnequipSound();
         Debug.Log(Name + " is Unequipped.");
 
     }
@@ -73,6 +75,7 @@ public abstract class Equipment : MonoBehaviour
         }
         else
         {
+            ShipSoundEffect.instance.PlayExplosionSound();
             Destroy(this);
         }
     }

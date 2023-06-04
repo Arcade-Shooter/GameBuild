@@ -64,18 +64,25 @@ public class EnemyShipController : MonoBehaviour
                 GameObject randomEquipment = EquipmentPrefabsList.GetRandomEquipment();
                 Instantiate(randomEquipment, transform.position, Quaternion.Euler(0, 0, 0));
             }
-            Destroy(gameObject);
+            OnDestroy();
             Destroy(collision.gameObject);
         }
         if (collision.tag == "Player")
         {
-            Destroy(gameObject);
+            OnDestroy();
         }
     }
 
     public void EnemyShoot()
     {
+        ShipSoundEffect.instance.PlayEnemyShootSound();
         Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));
+    }
+
+    public void OnDestroy(){
+        Debug.Log("Enemy Destroyed");
+        ShipSoundEffect.instance.PlayExplosionSound();
+        Destroy(gameObject);
     }
 
 }
