@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-
-
     private static Ship instance;
 
     [SerializeField] private int Health;
@@ -34,7 +32,7 @@ public class Ship : MonoBehaviour
         }
         this.MaxHealth = 3;
         this.Speed = 3;
-        this.Health = this.MaxHealth;
+        this.Health = 3;
 
         HealtheBar.instance.SetHealth(this.Health);
         //Get all the snap points
@@ -57,43 +55,12 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (shoot)
-        //{
-        //    FireWeapons();
-        //    //shoot = false;
-        //}
-
-        // if (getThrusters)
-        // {
-        //    DetectThrusters();
-        //    //getThrusters = false;
-        // }
 
         Move();     //update ship position
         MoveCursor();
         UseCursor();
         Shoot();    //update if player shoot
     }
-
-
-    //Goes through all the attached components and if it's a thruster, increments by 1
-    // private int DetectThrusters()
-    // {
-    //     int thrusters = 0;
-    //     foreach (Snappable snappable in ModuleSnapPoints)
-    //     {
-    //         Equipment equipment = snappable.GetEquipment();
-    //         if (equipment != null)
-    //         {
-    //             if (equipment.GetEquipmentType() == EquipmentType.Thruster)
-    //             {
-    //                 thrusters++;
-    //             }
-    //         }
-    //     }
-    //     Debug.Log("" + thrusters);
-    //     return thrusters;
-    // }
 
 
     //Collision controller for the ship
@@ -166,16 +133,8 @@ public class Ship : MonoBehaviour
     //play explosion animation and sound effect when player ship is destroyed  
     private void OnDestroy()
     {
-        // //import explosion animation and sound effect
-        // GameObject Explosion = Resources.Load<GameObject>("Prefabs/Explosion");
-        // AudioClip ExplosionSound = Resources.Load<AudioClip>("Sounds/Explosion");
-        //play explosion animation
-        // Instantiate(Explosion, transform.position, Quaternion.identity);
-        // play explosion sound effect
-        // AudioSource.PlayClipAtPoint(ExplosionSound, transform.position);
         ShipSoundEffect.instance.PlayExplosionSound();
         Destroy(gameObject);
-
     }
 
     private void MoveCursor()
@@ -259,22 +218,5 @@ public class Ship : MonoBehaviour
             //Instantiate a new Bullet object
             Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
         }
-    }
-
-    //Module Change callback method
-    //This is called by the SnapController when a change has occured with the draggable modules
-    public void ModuleChange()
-    {
-        // ThrusterBoost = DetectThrusters(); //When modules change check if the number of thrusters has changed
-    }
-
-    public static Ship GetInstance()
-    {
-        return instance;
-    }
-
-    private static void SetInstance(Ship ship)
-    {
-        instance = ship;
     }
 }

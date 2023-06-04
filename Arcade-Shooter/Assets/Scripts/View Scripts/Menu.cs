@@ -10,10 +10,10 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    // public void SettingMenu()
-    // {
-    //     Application.LoadLevel("Setting");
-    // }
+    public void SettingMenu()
+    {
+        // Application.LoadLevel("Setting");
+    }
     
     public void QuitGame()
     {
@@ -21,4 +21,8 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
+    public void OnResume()
+    {
+        PauseMenu.instance.OnResume();
+    }   
 }

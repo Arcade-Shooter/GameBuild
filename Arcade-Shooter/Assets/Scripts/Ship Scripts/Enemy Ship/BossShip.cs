@@ -30,7 +30,7 @@ public class BossShip : MonoBehaviour
 
     void Update()
     {
-        if (PauseMenu.GameIsPaused)    //check if game is paused
+        if (!PauseMenu.GameIsPaused)    //check if game is paused
         {
             //randomly generate the direction of the boss ship in every 2 seconds
             if (Time.frameCount % 120 == 0)
@@ -76,14 +76,17 @@ public class BossShip : MonoBehaviour
     //boss ship can fire 5 bullets at the same time
     public void Fire()
     {
-        //play boss ship shoot sound effect
-        ShipSoundEffect.instance.PlayBossShootSound();
-        //create new Bullet object at the postion where the ship is, and bullet direction is spreaded
-        Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 10));
-        Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -10));
-        Instantiate(Bullet, transform.position, Quaternion.identity);
-        Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 20));
-        Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -20));
+        if(!PauseMenu.GameIsPaused)  //check if game is paused
+        {
+            //play boss ship shoot sound effect
+            ShipSoundEffect.instance.PlayBossShootSound();
+            //create new Bullet object at the postion where the ship is, and bullet direction is spreaded
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 10));
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -10));
+            Instantiate(Bullet, transform.position, Quaternion.identity);
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 20));
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -20));
+        }
     }
 
     //boss ship take damage function
