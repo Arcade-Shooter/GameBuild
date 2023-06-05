@@ -17,6 +17,6 @@ Run the .exe file
 4. Add the 'Arcade-Shooter' folder as a project.
 
 ## Authors
-Project Owner: Yunsik
-Scrum Mananger: Matthew
-Dev Team: William and James
+ Project Owner: Yunsik
+ Scrum Mananger: Matthew
+ Dev Team: William and James
