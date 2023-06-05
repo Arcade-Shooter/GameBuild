@@ -10,8 +10,8 @@ public class Ship : MonoBehaviour
 
     [SerializeField] private int Health;
     [SerializeField] private int MaxHealth;
-    [SerializeField] private Snappable InventorySlot;
-    private Snappable[,] ModuleSnapPoints = new Snappable[3, 3];
+    [SerializeField] public Snappable InventorySlot;
+    public Snappable[,] ModuleSnapPoints = new Snappable[3, 3];
     [SerializeField] private int CursorPositionX, CursorPositionY;
     [SerializeField] private Transform CursorTransform;
     [SerializeField] private int ThrusterBoost; //An integer
@@ -176,60 +176,102 @@ public class Ship : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         { //Horisontal
-            if (CursorPositionX > 0)
-            {
-                CursorPositionX--;
-            }
+            
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (CursorPositionX < 2)
-            {
-                CursorPositionX++;
-            }
+            
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         { //Vertical
-            if (CursorPositionY > 0)
-            {
-                CursorPositionY--;
-            }
+            
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (CursorPositionY < 2)
-            {
-                CursorPositionY++;
-            }
+
         }
 
         CursorTransform.position = ModuleSnapPoints[CursorPositionX, CursorPositionY].transform.position;// Move cursor box
 
     }
 
+    public void moveLeft()
+    {
+        if (CursorPositionX > 0)
+        {
+            CursorPositionX--;
+        }
+    }
+    public void moveRight()
+    {
+        if (CursorPositionX < 2)
+        {
+            CursorPositionX++;
+        }
+    }
+    public void moveUp()
+    {
+        if (CursorPositionY > 0)
+        {
+           CursorPositionY--;
+        }
+    }
+    public void moveDown()
+    {
+        if (CursorPositionY < 2)
+        {
+            CursorPositionY++;
+        }
+    }
+
+    public int getCursorXPos()
+    {
+        return CursorPositionX;
+    }
+    public int getCursorYPos()
+    {
+        return CursorPositionY;
+    }
+
+    public Snappable getCursorSnapPoint()
+    {
+        return this.ModuleSnapPoints[CursorPositionX, CursorPositionY];
+    }
+
     private void UseCursor()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (ModuleSnapPoints[CursorPositionX, CursorPositionY].GetOccupiedState()) //if the cursor position is occupied
-            {
-                Equipment equipment = ModuleSnapPoints[CursorPositionX, CursorPositionY].GetEquipment();
-                ModuleSnapPoints[CursorPositionX, CursorPositionY].Vacate();
-                Destroy(equipment.gameObject);
-            }
+            equip();
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            Snappable snapPoint = ModuleSnapPoints[CursorPositionX, CursorPositionY];
-            if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false && InventorySlot.GetOccupiedState() == true) //if the cursor position is unocupied and there's one in the inventory
-            {
-                Equipment equipment = InventorySlot.GetEquipment();
-                InventorySlot.Vacate();
-                ModuleSnapPoints[CursorPositionX, CursorPositionY].Occupy(equipment);
-            }
+            unequip();
         }
     }
+
+    public void equip()
+    {
+        Snappable snapPoint = ModuleSnapPoints[CursorPositionX, CursorPositionY];
+        if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false && InventorySlot.GetOccupiedState() == true) //if the cursor position is unocupied and there's one in the inventory
+        {
+            Equipment equipment = InventorySlot.GetEquipment();
+            InventorySlot.Vacate();
+            ModuleSnapPoints[CursorPositionX, CursorPositionY].Occupy(equipment);
+        }
+    }
+
+    public void unequip()
+    {
+        if (ModuleSnapPoints[CursorPositionX, CursorPositionY].GetOccupiedState()) //if the cursor position is occupied
+        {
+            Equipment equipment = ModuleSnapPoints[CursorPositionX, CursorPositionY].GetEquipment();
+            ModuleSnapPoints[CursorPositionX, CursorPositionY].Vacate();
+            Destroy(equipment.gameObject);
+        }
+    }
+
 
     //ship shoot
     private void Shoot()
