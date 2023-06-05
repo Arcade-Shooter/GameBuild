@@ -46,12 +46,7 @@ public class EnemyShipController : MonoBehaviour
         if (collision.tag == "PlayerBullet")
         {
             Debug.Log("Enemy Hit");
-            if (Random.Range(0, 1) < 0.01f) //1% chance to drop equipment
-            {
-                //drop a random equipment on the enemy ship's position
-                GameObject randomEquipment = EquipmentPrefabsList.GetRandomEquipment();
-                Instantiate(randomEquipment, transform.position, Quaternion.Euler(0, 0, 0));
-            }
+           
             OnDestroy();
             Destroy(collision.gameObject);
         }
@@ -70,6 +65,12 @@ public class EnemyShipController : MonoBehaviour
     public void OnDestroy(){
         Debug.Log("Enemy Destroyed");
         SoundEffect.instance.PlayExplosionSound();
+         if (Random.Range(0, 10) < 0.01f) 
+            {
+                //drop a random equipment on the enemy ship's position
+                GameObject randomEquipment = EquipmentPrefabsList.GetRandomEquipment();
+                Instantiate(randomEquipment, transform.position, Quaternion.Euler(0, 0, 0));
+            }
         Destroy(gameObject);
     }
 

@@ -345,7 +345,11 @@ PrefabInstance:
       objectReference: {fileID: 1570986721}
     - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnResume
+      value: OnGoResume
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4981302158918958207, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_text
@@ -711,7 +715,11 @@ PrefabInstance:
       objectReference: {fileID: 2051301948}
     - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenSettingMenu
+      value: OnGoSetting
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
@@ -2131,6 +2139,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffaa499d88d33d4a85695232f02dde3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &959495279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 959495282}
+  - component: {fileID: 959495281}
+  - component: {fileID: 959495280}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &959495280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959495279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f34b240fd923fd49b32f2f396409f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyShipPrefabs: []
+  MinEnemies: 1
+  MaxEnemies: 3
+--- !u!114 &959495281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959495279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 921d53b6f4e47744b8eb79127e862d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1885615445}
+  settingMenu: {fileID: 541773259}
+  gameOverMenu: {fileID: 1822717888}
+--- !u!4 &959495282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959495279}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.98253787, y: 0.43303418, z: -2.3985438}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &961866120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2306,7 +2377,11 @@ PrefabInstance:
       objectReference: {fileID: 988055174}
     - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartMenu
+      value: OnGoMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4981302158918958207, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_text
@@ -2696,7 +2771,11 @@ PrefabInstance:
       objectReference: {fileID: 1174996246}
     - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
+      value: OnRestart
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4981302158918958207, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_text
@@ -3284,7 +3363,11 @@ PrefabInstance:
       objectReference: {fileID: 674625481}
     - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseSettingMenu
+      value: OnGoPauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4981302158918958207, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_text
@@ -3395,6 +3478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuButton
       objectReference: {fileID: 0}
+    - target: {fileID: 4981302158273071953, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4981302158273071958, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3485,7 +3572,11 @@ PrefabInstance:
       objectReference: {fileID: 1803208093}
     - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartMenu
+      value: OnGoMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981302158273071959, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4981302158918958207, guid: 8a91e0f19b3de414789bdcbf8759cec2, type: 3}
       propertyPath: m_text
@@ -3770,9 +3861,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1935086817}
   - component: {fileID: 1935086816}
-  - component: {fileID: 1935086818}
   - component: {fileID: 1935086815}
-  - component: {fileID: 1935086821}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3830,36 +3919,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1935086818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1935086814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 921d53b6f4e47744b8eb79127e862d37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 1885615445}
-  settingMenu: {fileID: 541773259}
-  gameOverMenu: {fileID: 1822717888}
---- !u!114 &1935086821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1935086814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f34b240fd923fd49b32f2f396409f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyShipPrefabs: []
-  MinEnemies: 1
-  MaxEnemies: 3
 --- !u!1 &2044495927
 GameObject:
   m_ObjectHideFlags: 0

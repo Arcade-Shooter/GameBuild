@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ship : MonoBehaviour
 {
@@ -34,14 +35,20 @@ public class Ship : MonoBehaviour
         this.Speed = 3;
         this.Health = 3;
 
-        HealtheBar.instance.SetHealth(this.Health);
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            instance.enabled = true;
+            HealtheBar.instance.SetHealth(this.Health);
+        }else{
+            instance.enabled = false;
+        }
         //Get all the snap points
         Snappable[] allSnapPoints = this.transform.GetComponentsInChildren<Snappable>();
 
         this.snaps.AddRange(allSnapPoints); //Add all the snap points to the list
 
         int counter = 0;
-        for (int i = 0; i < 3; i++) 
+        for (int i = 0; i < 3; i++)
         {   //Loop through the 2D array and add the snap points to the array
             for (int n = 0; n < 3; n++)
             {
@@ -57,16 +64,16 @@ public class Ship : MonoBehaviour
     {
 
         Move();     //update ship position
+        Shoot();    //update if player shoot
         MoveCursor();
         UseCursor();
-        Shoot();    //update if player shoot
     }
 
 
     //Collision controller for the ship
     private void OnTriggerEnter2D(Collider2D Collision)
     {
-        
+
         if (Collision.tag == "EnemyBullet")
         {
             // int damage = Collision.gameObject.GetComponent<Projectile>().GetDamage();
@@ -135,7 +142,7 @@ public class Ship : MonoBehaviour
     {
         SoundEffect.instance.PlayExplosionSound();
         Destroy(gameObject);
-        PauseMenu.instance.OnGameOver();
+        StateManager.instance.OnGameOver();
     }
 
     private void MoveCursor()
@@ -188,15 +195,6 @@ public class Ship : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.E))
         {
             Equipment equipment = InventorySlot.GetEquipment();
-
-            if (equipment.GetEquipmentType() == EquipmentType.Shield)
-            {
-                ModuleSnapPoints[1, 1].Occupy(equipment);
-            }
-            else
-            {
-            }
-
             Snappable snapPoint = ModuleSnapPoints[CursorPositionX, CursorPositionY];
 
             if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false && InventorySlot.GetOccupiedState() == true) //if the cursor position is unocupied and there's one in the inventory

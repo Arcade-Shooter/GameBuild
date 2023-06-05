@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class HealtheBar : MonoBehaviour
 {
     public static HealtheBar instance;  //Instance of the health bar
@@ -14,6 +14,14 @@ public class HealtheBar : MonoBehaviour
         //initialize instance
         instance = this.gameObject.GetComponent<HealtheBar>();
         this.hearts = this.GetComponentsInChildren<Image>();
+    }
+
+    private void Update() {
+        if(SceneManager.GetActiveScene().buildIndex == 1){
+            instance.enabled = true;
+        }else{
+            instance.enabled = false;
+        }
     }
 
     public void SetHealth(int health)

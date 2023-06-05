@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour
         while (true)
         {
             //check if game is not paused
-            if (!PauseMenu.GameIsPaused)
+            if (!StateManager.instance.getState())
             {
                 int numEnemies = Random.Range(MinEnemies, MaxEnemies);  //randomly generate the number of enemies
                 for (int i = 0; i < numEnemies; i++)
