@@ -9,12 +9,16 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenu;
     public GameObject settingMenu;
+    public GameObject gameOverMenu;
 
     void Awake() {
         if (instance == null)
         {
             instance = this;
         }
+        pauseMenu.SetActive(false);
+        settingMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
         // this.pauseMenu = GameObject.Find("PauseMenu");
         // this.settingMenu = GameObject.Find("SettingMenu");    
     }
@@ -42,6 +46,14 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void OnGameOver()
+    {   //Pause the game
+        Time.timeScale = 0f;
+        gameOverMenu.SetActive(true);
+        GameIsPaused = true;
+        SoundEffect.instance.pauseSound();  //Pause the sound
+    }
+
     public void OnPause()
     {   //Pause the game
         Time.timeScale = 0f;
@@ -54,6 +66,7 @@ public class PauseMenu : MonoBehaviour
     {   //Resume the game
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
         GameIsPaused = false;
         SoundEffect.instance.unPauseSound();    //Unpause the sound
     }
@@ -62,6 +75,7 @@ public class PauseMenu : MonoBehaviour
     {   //Restart the game
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
         GameIsPaused = false;
         SoundEffect.instance.unPauseSound();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);   //Load the current scene

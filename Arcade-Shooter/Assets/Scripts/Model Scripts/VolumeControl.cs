@@ -36,6 +36,10 @@ public class VolumeControl : MonoBehaviour
         mixer.SetFloat("MasterVolume", sliderValue);
         PlayerPrefs.SetFloat("MasterVolume", sliderValue);
     }
+
+    public float GetMasterVolume(){
+        return PlayerPrefs.GetFloat("MasterVolume", 0.75f);
+    }
      public void SetBackgroundVolume(float sliderValue)
     {
         mixer.SetFloat("BackgroundVolume", sliderValue);

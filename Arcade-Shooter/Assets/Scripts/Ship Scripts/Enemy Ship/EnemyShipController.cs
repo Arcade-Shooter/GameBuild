@@ -8,27 +8,15 @@ public class EnemyShipController : MonoBehaviour
     public GameObject Bullet;
     public float ProbabilityShoot = 0.6f;    //range: 0 - 1
     // Start is called before the first frame update
-
     private float shootTimer = 0f;
     private float shootInterval = 0.3f; // 发射间隔
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
         move();
-        // if (Random.Range(0, 1) <= ProbabilityShoot)
-        // {
-        //     //create new Bullet object at the postion where the ship is.
-        //     EnemyShoot();
-        // }
-
         //shoot timer
         shootTimer += Time.deltaTime;
-
         if (shootTimer >= shootInterval)    //if the timer is greater than the interval, shoot
         {
             if (Random.Range(0f, 1f) <= ProbabilityShoot)   //60% chance to shoot

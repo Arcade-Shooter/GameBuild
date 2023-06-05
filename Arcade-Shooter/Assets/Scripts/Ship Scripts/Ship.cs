@@ -135,18 +135,19 @@ public class Ship : MonoBehaviour
     {
         SoundEffect.instance.PlayExplosionSound();
         Destroy(gameObject);
+        PauseMenu.instance.OnGameOver();
     }
 
     private void MoveCursor()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         { //Horisontal
             if (CursorPositionX > 0)
             {
                 CursorPositionX--;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.L))
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (CursorPositionX < 2)
             {
@@ -154,14 +155,14 @@ public class Ship : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         { //Vertical
             if (CursorPositionY > 0)
             {
                 CursorPositionY--;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (CursorPositionY < 2)
             {
@@ -175,7 +176,7 @@ public class Ship : MonoBehaviour
 
     private void UseCursor()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (ModuleSnapPoints[CursorPositionX, CursorPositionY].GetOccupiedState()) //if the cursor position is occupied
             {
@@ -184,7 +185,7 @@ public class Ship : MonoBehaviour
                 Destroy(equipment.gameObject);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.U))
+        else if (Input.GetKeyDown(KeyCode.E))
         {
             Equipment equipment = InventorySlot.GetEquipment();
 
