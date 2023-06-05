@@ -3,9 +3,9 @@
   This is the repository for the acutal construction of the Arcade-Shooter Game
 
 ## Installations as a standalone file
-Navigate to the Main/Release branch.
-Download the zip by clicking the green code button and then clicking on download zip.
-Extract the Zip file.
+1. Navigate to the Main/Release branch.
+2. Download the zip by clicking the green code button and then clicking on download zip.
+3. Extract the Zip file.
 
 ### As an EXE
 Run the .exe file
