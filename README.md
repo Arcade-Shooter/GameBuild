@@ -11,10 +11,10 @@ Extract the Zip file.
 Run the .exe file
 
 ### In the Unity Editor
-Using [Unity](https://unity.com/releases/editor/qa/lts-releases) 2021.3.21f1.
-In the unity Hub open a project from disk.
-Navigate to the extracted folder.
-Add the 'Arcade-Shooter' folder as a project.
+1. Using [Unity](https://unity.com/releases/editor/qa/lts-releases) 2021.3.21f1.
+2. In the unity Hub open a project from disk.
+3. Navigate to the extracted folder.
+4. Add the 'Arcade-Shooter' folder as a project.
 
 ## Authors
 Project Owner: Yunsik
