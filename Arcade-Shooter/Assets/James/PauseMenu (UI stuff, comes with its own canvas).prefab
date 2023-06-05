@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 2929964218330520216}
   - component: {fileID: 2929964218330520219}
   m_Layer: 5
-  m_Name: PauseControllerUI
+  m_Name: PauseMenu (UI stuff, comes with its own canvas)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
