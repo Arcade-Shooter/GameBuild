@@ -217,7 +217,7 @@ AudioSource:
   m_GameObject: {fileID: 367532990}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8737411149792729359, guid: 564b3eafe8be62e49bdfff5ce0ca8849, type: 2}
   m_audioClip: {fileID: 8300000, guid: ad403fe5cb1141c4db962f01954ad170, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1597,6 +1597,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 4053669592718577144, guid: 9eacf5e6a2d76e2469bc7366dbc4f48f, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -7901840742710050468, guid: 564b3eafe8be62e49bdfff5ce0ca8849, type: 2}
     - target: {fileID: 4221955465134973805, guid: 9eacf5e6a2d76e2469bc7366dbc4f48f, type: 3}
       propertyPath: equipment
       value: 
