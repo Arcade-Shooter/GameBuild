@@ -139,14 +139,14 @@ public class Ship : MonoBehaviour
 
     private void MoveCursor()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.J))
         { //Horisontal
             if (CursorPositionX > 0)
             {
                 CursorPositionX--;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.L))
         {
             if (CursorPositionX < 2)
             {
@@ -154,14 +154,14 @@ public class Ship : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.I))
         { //Vertical
             if (CursorPositionY > 0)
             {
                 CursorPositionY--;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.K))
         {
             if (CursorPositionY < 2)
             {
@@ -175,7 +175,7 @@ public class Ship : MonoBehaviour
 
     private void UseCursor()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             if (ModuleSnapPoints[CursorPositionX, CursorPositionY].GetOccupiedState()) //if the cursor position is occupied
             {
@@ -184,7 +184,7 @@ public class Ship : MonoBehaviour
                 Destroy(equipment.gameObject);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.U))
         {
             Equipment equipment = InventorySlot.GetEquipment();
 
