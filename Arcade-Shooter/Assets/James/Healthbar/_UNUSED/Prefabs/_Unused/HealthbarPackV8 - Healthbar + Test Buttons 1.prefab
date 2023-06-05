@@ -185,7 +185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  health: 3
   healthSpriteRenderer: {fileID: 7424942376295325402}
 --- !u!111 &7424942376308284906
 Animation:
@@ -213,11 +212,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7424942376308284886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8746a2b6c938a54681e760147a17b5b, type: 3}
+  m_Script: {fileID: 11500000, guid: d79183058ab2ce2459582d4a13e632fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flashColor: {r: 1, g: 1, b: 1, a: 1}
-  interval: 1
+  interval: 0.2
+  healthSpriteRenderer2: {fileID: 0}
 --- !u!1 &7424942376827377252
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 7424942377874260123}
   - component: {fileID: 7424942377874260100}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas (Test Buttons)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -445,7 +445,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5228555322798666221, guid: d29408c885a6b684f8f1a9b2ac508c75, type: 3}
       propertyPath: m_Name
-      value: HealthTestButtons (Drag these onto a UI Canvas)
+      value: HealthTestButtons (may need to drag these onto a UI Canvas, but should
+        work if you leave here too)
       objectReference: {fileID: 0}
     - target: {fileID: 5861978461179357354, guid: d29408c885a6b684f8f1a9b2ac508c75, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
