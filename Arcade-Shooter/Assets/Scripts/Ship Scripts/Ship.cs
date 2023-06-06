@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ship : MonoBehaviour
 {
-
-
     private static Ship instance;
 
     [SerializeField] private int Health;
@@ -27,21 +26,24 @@ public class Ship : MonoBehaviour
 
     void Awake()
     {
+        //initialize the player ship
         if (instance == null)
         {
             instance = this;
         }
         this.MaxHealth = 3;
         this.Speed = 3;
-        this.Health = this.MaxHealth;
+        this.Health = 3;
 
+       
+        //Get all the snap points
         Snappable[] allSnapPoints = this.transform.GetComponentsInChildren<Snappable>();
 
-        this.snaps.AddRange(allSnapPoints);
+        this.snaps.AddRange(allSnapPoints); //Add all the snap points to the list
 
         int counter = 0;
         for (int i = 0; i < 3; i++)
-        {
+        {   //Loop through the 2D array and add the snap points to the array
             for (int n = 0; n < 3; n++)
             {
                 this.ModuleSnapPoints[n, i] = this.snaps[counter];
@@ -54,48 +56,25 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (shoot)
-        //{
-        //    FireWeapons();
-        //    //shoot = false;
-        //}
-
-        // if (getThrusters)
-        // {
-        //    DetectThrusters();
-        //    //getThrusters = false;
-        // }
+         if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            instance.enabled = true;
+            HealtheBar.instance.SetHealth(this.Health);
+        }else{
+            instance.enabled = false;
+        }
 
         Move();     //update ship position
+        Shoot();    //update if player shoot
         MoveCursor();
         UseCursor();
-        Shoot();    //update if player shoot
     }
-
-
-    //Goes through all the attached components and if it's a thruster, increments by 1
-    // private int DetectThrusters()
-    // {
-    //     int thrusters = 0;
-    //     foreach (Snappable snappable in ModuleSnapPoints)
-    //     {
-    //         Equipment equipment = snappable.GetEquipment();
-    //         if (equipment != null)
-    //         {
-    //             if (equipment.GetEquipmentType() == EquipmentType.Thruster)
-    //             {
-    //                 thrusters++;
-    //             }
-    //         }
-    //     }
-    //     Debug.Log("" + thrusters);
-    //     return thrusters;
-    // }
 
 
     //Collision controller for the ship
     private void OnTriggerEnter2D(Collider2D Collision)
     {
+
         if (Collision.tag == "EnemyBullet")
         {
             // int damage = Collision.gameObject.GetComponent<Projectile>().GetDamage();
@@ -125,6 +104,7 @@ public class Ship : MonoBehaviour
     private void TakeDamage(int damage)
     {
         this.Health -= damage;
+        HealtheBar.instance.SetHealth(this.Health);
         if (this.Health <= 0)
         {
             OnDestroy();
@@ -161,15 +141,9 @@ public class Ship : MonoBehaviour
     //play explosion animation and sound effect when player ship is destroyed  
     private void OnDestroy()
     {
-        // //import explosion animation and sound effect
-        // GameObject Explosion = Resources.Load<GameObject>("Prefabs/Explosion");
-        // AudioClip ExplosionSound = Resources.Load<AudioClip>("Sounds/Explosion");
-        //play explosion animation
-        // Instantiate(Explosion, transform.position, Quaternion.identity);
-        // play explosion sound effect
-        // AudioSource.PlayClipAtPoint(ExplosionSound, transform.position);
+        SoundEffect.instance.PlayExplosionSound();
         Destroy(gameObject);
-      
+        StateManager.instance.OnGameOver();
     }
 
     private void MoveCursor()
@@ -221,10 +195,12 @@ public class Ship : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
+            Equipment equipment = InventorySlot.GetEquipment();
             Snappable snapPoint = ModuleSnapPoints[CursorPositionX, CursorPositionY];
+
             if (snapPoint.GetOccupiedState() == false && snapPoint.GetDisabledState() == false && InventorySlot.GetOccupiedState() == true) //if the cursor position is unocupied and there's one in the inventory
             {
-                Equipment equipment = InventorySlot.GetEquipment();
+
                 InventorySlot.Vacate();
                 ModuleSnapPoints[CursorPositionX, CursorPositionY].Occupy(equipment);
             }
@@ -237,27 +213,10 @@ public class Ship : MonoBehaviour
         //check if the "Space" has been pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //play shoot sound effect
+            SoundEffect.instance.PlayShootSound();
+            //Instantiate a new Bullet object
             Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));   //create new Bullet object at the postion where the ship is.
-            //print("Space key has been pressed");
-            //shoot = true;
-
         }
-    }
-
-    //Module Change callback method
-    //This is called by the SnapController when a change has occured with the draggable modules
-    public void ModuleChange()
-    {
-        // ThrusterBoost = DetectThrusters(); //When modules change check if the number of thrusters has changed
-    }
-
-    public static Ship GetInstance()
-    {
-        return instance;
-    }
-
-    private static void SetInstance(Ship ship)
-    {
-        instance = ship;
     }
 }

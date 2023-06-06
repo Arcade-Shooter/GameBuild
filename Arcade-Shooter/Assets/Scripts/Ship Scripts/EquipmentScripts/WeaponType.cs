@@ -33,8 +33,8 @@ public abstract class WeaponType : Equipment
 
     }
 
-    protected void Start()
-    {
+    protected new void Start()
+    {   base.Start();
         StartCoroutine(FireWithRate(FireRate));
     }
 

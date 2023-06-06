@@ -9,13 +9,12 @@ public abstract class Equipment : MonoBehaviour
     protected bool Paused;  //not use yet
     [Header("All the attribute should initialize it in inherited class ")]
     [Header("this for test only!")]
-    [SerializeField] protected int Health;
-    [SerializeField] protected int MaxHealth;
+    [SerializeField] protected int Health;      //the health of the equipment
+    [SerializeField] protected int MaxHealth;   //the max health of the equipment
     [SerializeField] protected string Name;     //nme of the item
     [SerializeField] protected int Rarity;    //the probability of the item drop
-    [SerializeField] protected bool Equipped;
-    [SerializeField] private float spawnTime;
-    [SerializeField] private const float lifetime = 10f;
+    [SerializeField] protected bool Equipped;   //the probability of the item drop
+    [SerializeField] private float spawnTime;   //the time when the equipment is spawned
     [SerializeField, TextArea] protected string Description; // description of the item
 
     protected Equipment()
@@ -33,7 +32,7 @@ public abstract class Equipment : MonoBehaviour
     {
         while (true)
         {
-            if (Time.time - spawnTime > lifetime && !Equipped)
+            if (Time.time - spawnTime > 15 && !Equipped)
             {
                 Destroy(gameObject); //destroy the equipment if it is not equipped for 1 minute
                 yield break;
@@ -46,12 +45,14 @@ public abstract class Equipment : MonoBehaviour
     public void Equip()
     {
         this.Equipped = true;
+        SoundEffect.instance.PlayEquipSound();
         Debug.Log(Name + " is Equipped.");
 
     }
     public void Unequip()
     {
         this.Equipped = false;
+        SoundEffect.instance.PlayUnequipSound();
         Debug.Log(Name + " is Unequipped.");
 
     }
@@ -74,30 +75,31 @@ public abstract class Equipment : MonoBehaviour
         }
         else
         {
+            SoundEffect.instance.PlayExplosionSound();
             Destroy(this);
         }
     }
 
-    //destroy the equipment if it is not equipped for 1 minute
     public void DestroyEquipment()
     {
-    
+
     }
 
     private void OnTriggerEnter2D(Collider2D Collsion)
     {
-        if(this.Equipped){
+        if (this.Equipped)
+        {
             if (Collsion.tag == "EnemyBullet")
-        {
-            // int damage = Collsion.gameObject.GetComponent<Projectile>().GetDamage();
-            this.TakeDamage(1);
-            Destroy(Collsion.gameObject);
-        }
-        else if (Collsion.tag == "Enemy")
-        {
-            this.TakeDamage(1);
-            Destroy(Collsion.gameObject);
-        }
+            {
+                // int damage = Collsion.gameObject.GetComponent<Projectile>().GetDamage();
+                this.TakeDamage(1);
+                Destroy(Collsion.gameObject);
+            }
+            else if (Collsion.tag == "Enemy")
+            {
+                this.TakeDamage(1);
+                Destroy(Collsion.gameObject);
+            }
         }
     }
 
