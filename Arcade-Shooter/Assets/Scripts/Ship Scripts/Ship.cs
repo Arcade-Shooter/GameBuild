@@ -35,13 +35,7 @@ public class Ship : MonoBehaviour
         this.Speed = 3;
         this.Health = 3;
 
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            instance.enabled = true;
-            HealtheBar.instance.SetHealth(this.Health);
-        }else{
-            instance.enabled = false;
-        }
+       
         //Get all the snap points
         Snappable[] allSnapPoints = this.transform.GetComponentsInChildren<Snappable>();
 
@@ -62,6 +56,13 @@ public class Ship : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            instance.enabled = true;
+            HealtheBar.instance.SetHealth(this.Health);
+        }else{
+            instance.enabled = false;
+        }
 
         Move();     //update ship position
         Shoot();    //update if player shoot
