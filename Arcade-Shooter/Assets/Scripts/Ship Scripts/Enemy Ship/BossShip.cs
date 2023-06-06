@@ -30,17 +30,20 @@ public class BossShip : MonoBehaviour
 
     void Update()
     {
-        //randomly generate the direction of the boss ship in every 2 seconds
-        if (Time.frameCount % 120 == 0)
+        if (!StateManager.instance.getState())    //check if game is paused
         {
-            direction = Random.Range(0, 99);
-        }
-        Move();
+            //randomly generate the direction of the boss ship in every 2 seconds
+            if (Time.frameCount % 120 == 0)
+            {
+                direction = Random.Range(0, 99);
+            }
+            Move();
 
-        //call fire function every seconds
-        if (Time.frameCount % 30 == 0)
-        {
-            Fire();
+            //call fire function every seconds
+            if (Time.frameCount % 50 == 0)
+            {
+                Fire();
+            }
         }
     }
 
@@ -73,12 +76,14 @@ public class BossShip : MonoBehaviour
     //boss ship can fire 5 bullets at the same time
     public void Fire()
     {
-        //create new Bullet object at the postion where the ship is, and bullet direction is spreaded
-        Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 10));
-        Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -10));
-        Instantiate(Bullet, transform.position, Quaternion.identity);
-        Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 20));
-        Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -20));
+            //play boss ship shoot sound effect
+            SoundEffect.instance.PlayBossShootSound();
+            //create new Bullet object at the postion where the ship is, and bullet direction is spreaded
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 10));
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -10));
+            Instantiate(Bullet, transform.position, Quaternion.identity);
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, 20));
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, -20));
     }
 
     //boss ship take damage function
@@ -94,6 +99,8 @@ public class BossShip : MonoBehaviour
 
     private void OnDestroy()
     {
+        //play explosion sound effect when boss ship is destroyed
+        SoundEffect.instance.PlayExplosionSound();
         //drop equipment when boss ship is destroyed
         GameObject randomEquipment = EquipmentPrefabsList.GetRandomEquipment();
         Instantiate(randomEquipment, this.transform.position, Quaternion.identity);  //drop the equipment on the boss ship's position

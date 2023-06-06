@@ -8,7 +8,6 @@ public class Snappable : MonoBehaviour
 
     [SerializeField] private bool IsDisabled;
     [SerializeField] private bool IsOccupied;
-
     [SerializeField] private bool IsInventoryPoint;
     [SerializeField] private Equipment equipment = null;
 

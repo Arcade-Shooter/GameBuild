@@ -11,35 +11,14 @@ public static class EquipmentPrefabsList
     public static readonly List<GameObject> EquipmentPrefabs = new List<GameObject>();
 
     //initialize the list
+    #if UNITY_EDITOR    //only run this code in the editor
     static EquipmentPrefabsList()
     {
         string folderPath = "Assets/Prefabs/Equipment"; //path to the folder containing the prefabs
-        EquipmentPrefabs.AddRange(LoadPrefabsFromFolder(folderPath));   //load all prefabs from the folder
+        EquipmentPrefabs.AddRange(ResourceManagement.LoadPrefabsFromFolder(folderPath));   //load all prefabs from the folder
     }
+    #endif
 
-
-    private static List<GameObject> LoadPrefabsFromFolder(string folderPath)
-    {
-        List<GameObject> prefabsList = new List<GameObject>();
-
-        //get all files in the folder
-        string[] files = Directory.GetFiles(folderPath);
-
-        //loop through all files in the folder
-        foreach (string file in files)
-        {
-            if (Path.GetExtension(file) == ".prefab")   //if the file is a prefab
-            {
-                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(file);    //load the prefab
-                if (prefab != null)
-                {
-                    prefabsList.Add(prefab);
-                }
-            }
-        }
-
-        return prefabsList;
-    }
 
     //get a random equipment from the list
     public static GameObject GetRandomEquipment()

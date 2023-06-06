@@ -8,27 +8,15 @@ public class EnemyShipController : MonoBehaviour
     public GameObject Bullet;
     public float ProbabilityShoot = 0.6f;    //range: 0 - 1
     // Start is called before the first frame update
-
     private float shootTimer = 0f;
     private float shootInterval = 0.3f; // 发射间隔
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
         move();
-        // if (Random.Range(0, 1) <= ProbabilityShoot)
-        // {
-        //     //create new Bullet object at the postion where the ship is.
-        //     EnemyShoot();
-        // }
-
         //shoot timer
         shootTimer += Time.deltaTime;
-
         if (shootTimer >= shootInterval)    //if the timer is greater than the interval, shoot
         {
             if (Random.Range(0f, 1f) <= ProbabilityShoot)   //60% chance to shoot
@@ -58,24 +46,32 @@ public class EnemyShipController : MonoBehaviour
         if (collision.tag == "PlayerBullet")
         {
             Debug.Log("Enemy Hit");
-            if (Random.Range(0, 1) < 0.01f) //1% chance to drop equipment
-            {
-                //drop a random equipment on the enemy ship's position
-                GameObject randomEquipment = EquipmentPrefabsList.GetRandomEquipment();
-                Instantiate(randomEquipment, transform.position, Quaternion.Euler(0, 0, 0));
-            }
-            Destroy(gameObject);
+           
+            OnDestroy();
             Destroy(collision.gameObject);
         }
         if (collision.tag == "Player")
         {
-            Destroy(gameObject);
+            OnDestroy();
         }
     }
 
     public void EnemyShoot()
     {
+        SoundEffect.instance.PlayEnemyShootSound();
         Instantiate(Bullet, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0, 0, 0));
+    }
+
+    public void OnDestroy(){
+        Debug.Log("Enemy Destroyed");
+        SoundEffect.instance.PlayExplosionSound();
+         if (Random.Range(0, 10) < 0.01f) 
+            {
+                //drop a random equipment on the enemy ship's position
+                GameObject randomEquipment = EquipmentPrefabsList.GetRandomEquipment();
+                Instantiate(randomEquipment, transform.position, Quaternion.Euler(0, 0, 0));
+            }
+        Destroy(gameObject);
     }
 
 }
