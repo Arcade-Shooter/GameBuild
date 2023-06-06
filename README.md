@@ -11,19 +11,19 @@ Use the q key to remove a module from the gremlin is.
   
   This is the repository for the actual construction of the Arcade-Shooter Game
 
-### Installations as a standalone file  
+## Installations as a standalone file  
 This can either be downloaded as a zip, or through github desktop / client  
 
-#### As an EXE
+### As an EXE
 Run the .exe file  
 
-#### In the Unity Editor
+### In the Unity Editor
 Using [Unity](https://unity.com/releases/editor/qa/lts-releases) 2021.3.21f1  
 In the unity Hub open a project from disk  
 Navigate to the extracted folder  
 Add the 'Arcade-Shooter' folder as a project  
 
-### Authors
+## Authors
  Project Owner: Yunsik  
  Scrum Mananger: Matthew  
  Dev Team: William and James  
