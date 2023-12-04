@@ -3,6 +3,7 @@
 
 
   This is the repository for the acutal construction of the Arcade-Shooter Game
+![Screenshot](/Arcade-Shooter/SpaceWar.jpg)
 
 ## Installation
 This can either be downloaded as a zip, or through github desktop / client  
